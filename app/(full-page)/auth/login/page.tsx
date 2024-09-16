@@ -26,7 +26,7 @@ const LoginPage = () => {
             const userData = await AuthenticationService.login(email, password)
 
             if (userData) {
-                setCookie('access_token', userData, 10)
+                setCookie('access_token', userData, 7)
                 // If login is successful, redirect to the homepage or handle accordingly
                 router.push('/')
             } else {
