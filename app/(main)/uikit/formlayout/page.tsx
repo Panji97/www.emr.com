@@ -1,18 +1,18 @@
-'use client';
+'use client'
 
-import React, { useState, useEffect, useMemo } from 'react';
-import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
-import { InputTextarea } from 'primereact/inputtextarea';
-import { Dropdown } from 'primereact/dropdown';
+import React, { useState, useEffect, useMemo } from 'react'
+import { InputText } from 'primereact/inputtext'
+import { Button } from 'primereact/button'
+import { InputTextarea } from 'primereact/inputtextarea'
+import { Dropdown } from 'primereact/dropdown'
 
 interface DropdownItem {
-    name: string;
-    code: string;
+    name: string
+    code: string
 }
 
 const FormLayoutDemo = () => {
-    const [dropdownItem, setDropdownItem] = useState<DropdownItem | null>(null);
+    const [dropdownItem, setDropdownItem] = useState<DropdownItem | null>(null)
     const dropdownItems: DropdownItem[] = useMemo(
         () => [
             { name: 'Option 1', code: 'Option 1' },
@@ -20,11 +20,11 @@ const FormLayoutDemo = () => {
             { name: 'Option 3', code: 'Option 3' }
         ],
         []
-    );
+    )
 
     useEffect(() => {
-        setDropdownItem(dropdownItems[0]);
-    }, [dropdownItems]);
+        setDropdownItem(dropdownItems[0])
+    }, [dropdownItems])
 
     return (
         <div className="grid">
@@ -132,7 +132,14 @@ const FormLayoutDemo = () => {
                         </div>
                         <div className="field col-12 md:col-3">
                             <label htmlFor="state">State</label>
-                            <Dropdown id="state" value={dropdownItem} onChange={(e) => setDropdownItem(e.value)} options={dropdownItems} optionLabel="name" placeholder="Select One"></Dropdown>
+                            <Dropdown
+                                id="state"
+                                value={dropdownItem}
+                                onChange={(e) => setDropdownItem(e.value)}
+                                options={dropdownItems}
+                                optionLabel="name"
+                                placeholder="Select One"
+                            ></Dropdown>
                         </div>
                         <div className="field col-12 md:col-3">
                             <label htmlFor="zip">Zip</label>
@@ -142,7 +149,7 @@ const FormLayoutDemo = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default FormLayoutDemo;
+export default FormLayoutDemo

@@ -1,70 +1,65 @@
-"use client";
-import type { Demo } from "@/types";
-import {
-    AutoComplete,
-    AutoCompleteCompleteEvent,
-} from "primereact/autocomplete";
-import { Calendar } from "primereact/calendar";
-import { Chips } from "primereact/chips";
-import { Dropdown } from "primereact/dropdown";
-import { InputMask } from "primereact/inputmask";
-import { InputNumber } from "primereact/inputnumber";
-import { InputText } from "primereact/inputtext";
-import { InputTextarea } from "primereact/inputtextarea";
-import { MultiSelect } from "primereact/multiselect";
-import { useEffect, useState } from "react";
-import { CountryService } from "../../../../demo/service/CountryService";
+'use client'
+import type { Demo } from '@/types'
+import { AutoComplete, AutoCompleteCompleteEvent } from 'primereact/autocomplete'
+import { Calendar } from 'primereact/calendar'
+import { Chips } from 'primereact/chips'
+import { Dropdown } from 'primereact/dropdown'
+import { InputMask } from 'primereact/inputmask'
+import { InputNumber } from 'primereact/inputnumber'
+import { InputText } from 'primereact/inputtext'
+import { InputTextarea } from 'primereact/inputtextarea'
+import { MultiSelect } from 'primereact/multiselect'
+import { useEffect, useState } from 'react'
+import { CountryService } from '../../../../demo/service/CountryService'
 
 const FloatLabelDemo = () => {
-    const [countries, setCountries] = useState<Demo.Country[]>([]);
-    const [filteredCountries, setFilteredCountries] = useState<Demo.Country[]>(
-        []
-    );
-    const [value1, setValue1] = useState("");
-    const [value2, setValue2] = useState(null);
-    const [value3, setValue3] = useState("");
-    const [value4, setValue4] = useState("");
-    const [value5, setValue5] = useState<any>(null);
-    const [value6, setValue6] = useState<any[]>([]);
-    const [value7, setValue7] = useState("");
-    const [value8, setValue8] = useState<number | null>(null);
-    const [value9, setValue9] = useState("");
-    const [value10, setValue10] = useState(null);
-    const [value11, setValue11] = useState(null);
-    const [value12, setValue12] = useState("");
+    const [countries, setCountries] = useState<Demo.Country[]>([])
+    const [filteredCountries, setFilteredCountries] = useState<Demo.Country[]>([])
+    const [value1, setValue1] = useState('')
+    const [value2, setValue2] = useState(null)
+    const [value3, setValue3] = useState('')
+    const [value4, setValue4] = useState('')
+    const [value5, setValue5] = useState<any>(null)
+    const [value6, setValue6] = useState<any[]>([])
+    const [value7, setValue7] = useState('')
+    const [value8, setValue8] = useState<number | null>(null)
+    const [value9, setValue9] = useState('')
+    const [value10, setValue10] = useState(null)
+    const [value11, setValue11] = useState(null)
+    const [value12, setValue12] = useState('')
 
     const cities = [
-        { name: "New York", code: "NY" },
-        { name: "Rome", code: "RM" },
-        { name: "London", code: "LDN" },
-        { name: "Istanbul", code: "IST" },
-        { name: "Paris", code: "PRS" },
-    ];
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ]
 
     useEffect(() => {
         CountryService.getCountries().then((countries) => {
-            setCountries(countries);
-        });
-    }, []);
+            setCountries(countries)
+        })
+    }, [])
 
     const searchCountry = (event: AutoCompleteCompleteEvent) => {
-        const filtered = [];
-        const query = event.query;
+        const filtered = []
+        const query = event.query
         for (let i = 0; i < countries.length; i++) {
-            const country = countries[i];
+            const country = countries[i]
             if (country.name.toLowerCase().indexOf(query.toLowerCase()) === 0) {
-                filtered.push(country);
+                filtered.push(country)
             }
         }
-        setFilteredCountries(filtered);
-    };
+        setFilteredCountries(filtered)
+    }
 
     return (
         <div className="card">
             <h5>Float Label</h5>
             <p>
-                All input text components support floating labels by adding (
-                <mark>.p-float-label</mark>) to wrapper class.
+                All input text components support floating labels by adding (<mark>.p-float-label</mark>) to wrapper
+                class.
             </p>
             <div className="grid p-fluid mt-3">
                 <div className="field col-12 md:col-4">
@@ -94,22 +89,14 @@ const FloatLabelDemo = () => {
                 <div className="field col-12 md:col-4">
                     <span className="p-float-label p-input-icon-left">
                         <i className="pi pi-search" />
-                        <InputText
-                            id="lefticon"
-                            value={value3}
-                            onChange={(e) => setValue3(e.target.value)}
-                        />
+                        <InputText id="lefticon" value={value3} onChange={(e) => setValue3(e.target.value)} />
                         <label htmlFor="lefticon">Left Icon</label>
                     </span>
                 </div>
                 <div className="field col-12 md:col-4">
                     <span className="p-float-label p-input-icon-right">
                         <i className="pi pi-spin pi-spinner" />
-                        <InputText
-                            id="righticon"
-                            value={value4}
-                            onChange={(e) => setValue4(e.target.value)}
-                        />
+                        <InputText id="righticon" value={value4} onChange={(e) => setValue4(e.target.value)} />
                         <label htmlFor="righticon">Right Icon</label>
                     </span>
                 </div>
@@ -118,18 +105,14 @@ const FloatLabelDemo = () => {
                         <Calendar
                             inputId="calendar"
                             value={value5}
-                            onChange={(e) => setValue5(e.value ?? "")}
+                            onChange={(e) => setValue5(e.value ?? '')}
                         ></Calendar>
                         <label htmlFor="calendar">Calendar</label>
                     </span>
                 </div>
                 <div className="field col-12 md:col-4">
                     <span className="p-float-label">
-                        <Chips
-                            inputId="chips"
-                            value={value6}
-                            onChange={(e) => setValue6(e.value ?? [])}
-                        ></Chips>
+                        <Chips inputId="chips" value={value6} onChange={(e) => setValue6(e.value ?? [])}></Chips>
                         <label htmlFor="chips">Chips</label>
                     </span>
                 </div>
@@ -139,7 +122,7 @@ const FloatLabelDemo = () => {
                             id="inputmask"
                             mask="99/99/9999"
                             value={value7}
-                            onChange={(e) => setValue7(e.value ?? "")}
+                            onChange={(e) => setValue7(e.value ?? '')}
                         ></InputMask>
                         <label htmlFor="inputmask">InputMask</label>
                     </span>
@@ -149,9 +132,7 @@ const FloatLabelDemo = () => {
                         <InputNumber
                             id="inputnumber"
                             value={value8}
-                            onValueChange={(e) =>
-                                setValue8(e.target.value ?? null)
-                            }
+                            onValueChange={(e) => setValue8(e.target.value ?? null)}
                         ></InputNumber>
                         <label htmlFor="inputnumber">InputNumber</label>
                     </span>
@@ -209,7 +190,7 @@ const FloatLabelDemo = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default FloatLabelDemo;
+export default FloatLabelDemo

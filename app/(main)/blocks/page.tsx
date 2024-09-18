@@ -1,14 +1,14 @@
-'use client';
-import React, { useState } from 'react';
+'use client'
+import React, { useState } from 'react'
 
-import { InputText } from 'primereact/inputtext';
-import { Chip } from 'primereact/chip';
-import { Checkbox } from 'primereact/checkbox';
-import { Button } from 'primereact/button';
-import BlockViewer from '../../../demo/components/BlockViewer';
+import { InputText } from 'primereact/inputtext'
+import { Chip } from 'primereact/chip'
+import { Checkbox } from 'primereact/checkbox'
+import { Button } from 'primereact/button'
+import BlockViewer from '../../../demo/components/BlockViewer'
 
 const Free = () => {
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(false)
 
     const block1 = `
 <div className="grid grid-nogutter surface-0 text-800">
@@ -26,7 +26,7 @@ const Free = () => {
         <img src="/demo/images/blocks/hero/hero-1.png" alt="hero-1" className="md:ml-auto block md:h-full" style={{ clipPath: 'polygon(8% 0, 100% 0%, 100% 100%, 0 100%)' }} />
     </div>
 </div>
-    `;
+    `
 
     const block2 = `
 <div className="surface-0 text-center">
@@ -80,7 +80,7 @@ const Free = () => {
         </div>
     </div>
 </div>
-    `;
+    `
 
     const block3 = `
 <div className="surface-0">
@@ -198,7 +198,7 @@ const Free = () => {
         </div>
     </div>
 </div>
-    `;
+    `
 
     const block4 = `
 <div className="surface-0 text-700 text-center">
@@ -207,7 +207,7 @@ const Free = () => {
     <div className="text-700 text-2xl mb-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit numquam eligendi quos.</div>
     <Button label="Join Now" icon="pi pi-discord" className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap" />
 </div>
-    `;
+    `
 
     const block5 = `
 <div className="bg-bluegray-900 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap">
@@ -222,7 +222,7 @@ const Free = () => {
         <i className="pi pi-times"></i>
     </a>
 </div>
-    `;
+    `
 
     const block6 = `
 <div className="surface-0">
@@ -261,7 +261,7 @@ const Free = () => {
         </div>
     </div>
 </div>
-    `;
+    `
 
     const block7 = `
 <div className="grid">
@@ -326,7 +326,7 @@ const Free = () => {
         </div>
     </div>
 </div>
-    `;
+    `
 
     const block8 = `
 <div className="flex align-items-center justify-content-center">
@@ -357,7 +357,7 @@ const Free = () => {
         </div>
     </div>
 </div>
-    `;
+    `
 
     const block9 = `
 <div className="surface-0">
@@ -407,7 +407,7 @@ const Free = () => {
         </li>
     </ul>
 </div>
-    `;
+    `
 
     const block10 = `
 <div className="surface-0 p-4 shadow-2 border-round">
@@ -415,7 +415,7 @@ const Free = () => {
     <div className="font-medium text-500 mb-3">Vivamus id nisl interdum, blandit augue sit amet, eleifend mi.</div>
     <div style={{ height: '150px' }} className="border-2 border-dashed border-300"></div>
 </div>
-    `;
+    `
 
     return (
         <>
@@ -425,14 +425,22 @@ const Free = () => {
                         <section>
                             <span className="block text-6xl font-bold mb-1">Create the screens</span>
                             <div className="text-6xl text-primary font-bold mb-3">your visitors deserve to see</div>
-                            <p className="mt-0 mb-4 text-700 line-height-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p className="mt-0 mb-4 text-700 line-height-3">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua.
+                            </p>
 
                             <Button label="Learn More" type="button" className="mr-3 p-button-raised" />
                             <Button label="Live Demo" type="button" className="p-button-outlined" />
                         </section>
                     </div>
                     <div className="col-12 md:col-6 overflow-hidden">
-                        <img src="/demo/images/blocks/hero/hero-1.png" alt="hero-1" className="md:ml-auto block md:h-full" style={{ clipPath: 'polygon(8% 0, 100% 0%, 100% 100%, 0 100%)' }} />
+                        <img
+                            src="/demo/images/blocks/hero/hero-1.png"
+                            alt="hero-1"
+                            className="md:ml-auto block md:h-full"
+                            style={{ clipPath: 'polygon(8% 0, 100% 0%, 100% 100%, 0 100%)' }}
+                        />
                     </div>
                 </div>
             </BlockViewer>
@@ -443,49 +451,67 @@ const Free = () => {
                         <span className="text-900">One Product, </span>
                         <span className="text-blue-600">Many Solutions</span>
                     </div>
-                    <div className="text-700 mb-6">Ac turpis egestas maecenas pharetra convallis posuere morbi leo urna.</div>
+                    <div className="text-700 mb-6">
+                        Ac turpis egestas maecenas pharetra convallis posuere morbi leo urna.
+                    </div>
                     <div className="grid">
                         <div className="col-12 md:col-4 mb-4 px-5">
                             <span className="p-3 shadow-2 mb-3 inline-block" style={{ borderRadius: '10px' }}>
                                 <i className="pi pi-desktop text-4xl text-blue-500"></i>
                             </span>
                             <div className="text-900 text xl mb-3 font-medium">Built for Developers</div>
-                            <span className="text-700 line-height-3">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</span>
+                            <span className="text-700 line-height-3">
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                                nulla pariatur.
+                            </span>
                         </div>
                         <div className="col-12 md:col-4 mb-4 px-5">
                             <span className="p-3 shadow-2 mb-3 inline-block" style={{ borderRadius: '10px' }}>
                                 <i className="pi pi-lock text-4xl text-blue-500"></i>
                             </span>
                             <div className="text-900 text xl mb-3 font-medium">End-to-End Encryption</div>
-                            <span className="text-700 line-height-3">Risus nec feugiat in fermentum posuere urna nec. Posuere sollicitudin aliquam ultrices sagittis.</span>
+                            <span className="text-700 line-height-3">
+                                Risus nec feugiat in fermentum posuere urna nec. Posuere sollicitudin aliquam ultrices
+                                sagittis.
+                            </span>
                         </div>
                         <div className="col-12 md:col-4 mb-4 px-5">
                             <span className="p-3 shadow-2 mb-3 inline-block" style={{ borderRadius: '10px' }}>
                                 <i className="pi pi-check-circle text-4xl text-blue-500"></i>
                             </span>
                             <div className="text-900 text xl mb-3 font-medium">Easy to Use</div>
-                            <span className="text-700 line-height-3">Ornare suspendisse sed nisi lacus sed viverra tellus. Neque volutpat ac tincidunt vitae semper.</span>
+                            <span className="text-700 line-height-3">
+                                Ornare suspendisse sed nisi lacus sed viverra tellus. Neque volutpat ac tincidunt vitae
+                                semper.
+                            </span>
                         </div>
                         <div className="col-12 md:col-4 mb-4 px-5">
                             <span className="p-3 shadow-2 mb-3 inline-block" style={{ borderRadius: '10px' }}>
                                 <i className="pi pi-globe text-4xl text-blue-500"></i>
                             </span>
                             <div className="text-900 text xl mb-3 font-medium">Fast & Global Support</div>
-                            <span className="text-700 line-height-3">Fermentum et sollicitudin ac orci phasellus egestas tellus rutrum tellus.</span>
+                            <span className="text-700 line-height-3">
+                                Fermentum et sollicitudin ac orci phasellus egestas tellus rutrum tellus.
+                            </span>
                         </div>
                         <div className="col-12 md:col-4 mb-4 px-5">
                             <span className="p-3 shadow-2 mb-3 inline-block" style={{ borderRadius: '10px' }}>
                                 <i className="pi pi-github text-4xl text-blue-500"></i>
                             </span>
                             <div className="text-900 text xl mb-3 font-medium">Open Source</div>
-                            <span className="text-700 line-height-3">Nec tincidunt praesent semper feugiat. Sed adipiscing diam donec adipiscing tristique risus nec feugiat. </span>
+                            <span className="text-700 line-height-3">
+                                Nec tincidunt praesent semper feugiat. Sed adipiscing diam donec adipiscing tristique
+                                risus nec feugiat.{' '}
+                            </span>
                         </div>
                         <div className="col-12 md:col-4 md:mb-4 mb-0 px-3">
                             <span className="p-3 shadow-2 mb-3 inline-block" style={{ borderRadius: '10px' }}>
                                 <i className="pi pi-shield text-4xl text-blue-500"></i>
                             </span>
                             <div className="text-900 text xl mb-3 font-medium">Trusted Securitty</div>
-                            <span className="text-700 line-height-3">Mattis rhoncus urna neque viverra justo nec ultrices. Id cursus metus aliquam eleifend.</span>
+                            <span className="text-700 line-height-3">
+                                Mattis rhoncus urna neque viverra justo nec ultrices. Id cursus metus aliquam eleifend.
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -494,7 +520,9 @@ const Free = () => {
             <BlockViewer header="Pricing" code={block3} containerClassName="surface-0 px-4 py-8 md:px-6 lg:px-8" free>
                 <div className="surface-0">
                     <div className="text-900 font-bold text-6xl mb-4 text-center">Pricing Plans</div>
-                    <div className="text-700 text-xl mb-6 text-center line-height-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit numquam eligendi quos.</div>
+                    <div className="text-700 text-xl mb-6 text-center line-height-3">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit numquam eligendi quos.
+                    </div>
 
                     <div className="grid">
                         <div className="col-12 lg:col-4">
@@ -609,14 +637,25 @@ const Free = () => {
                 </div>
             </BlockViewer>
 
-            <BlockViewer header="Call to Action" code={block4} containerClassName="surface-0 px-4 py-8 md:px-6 lg:px-8" free>
+            <BlockViewer
+                header="Call to Action"
+                code={block4}
+                containerClassName="surface-0 px-4 py-8 md:px-6 lg:px-8"
+                free
+            >
                 <div className="surface-0 text-700 text-center">
                     <div className="text-blue-600 font-bold mb-3">
                         <i className="pi pi-discord"></i>&nbsp;POWERED BY DISCORD
                     </div>
                     <div className="text-900 font-bold text-5xl mb-3">Join Our Design Community</div>
-                    <div className="text-700 text-2xl mb-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit numquam eligendi quos.</div>
-                    <Button label="Join Now" icon="pi pi-discord" className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap" />
+                    <div className="text-700 text-2xl mb-5">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit numquam eligendi quos.
+                    </div>
+                    <Button
+                        label="Join Now"
+                        icon="pi pi-discord"
+                        className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap"
+                    />
                 </div>
             </BlockViewer>
 
@@ -624,18 +663,28 @@ const Free = () => {
                 <div className="bg-bluegray-900 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap">
                     <div className="font-bold mr-8">🔥 Hot Deals!</div>
                     <div className="align-items-center hidden lg:flex">
-                        <span className="line-height-3">Libero voluptatum atque exercitationem praesentium provident odit.</span>
+                        <span className="line-height-3">
+                            Libero voluptatum atque exercitationem praesentium provident odit.
+                        </span>
                     </div>
                     <a className="flex align-items-center ml-2 mr-8">
                         <span className="underline font-bold">Learn More</span>
                     </a>
-                    <a className="flex align-items-center no-underline justify-content-center border-circle text-100 hover:bg-bluegray-700 cursor-pointer transition-colors transition-duration-150" style={{ width: '2rem', height: '2rem' }}>
+                    <a
+                        className="flex align-items-center no-underline justify-content-center border-circle text-100 hover:bg-bluegray-700 cursor-pointer transition-colors transition-duration-150"
+                        style={{ width: '2rem', height: '2rem' }}
+                    >
                         <i className="pi pi-times"></i>
                     </a>
                 </div>
             </BlockViewer>
 
-            <BlockViewer header="Page Heading" code={block6} containerClassName="surface-0 px-4 py-5 md:px-6 lg:px-8" free>
+            <BlockViewer
+                header="Page Heading"
+                code={block6}
+                containerClassName="surface-0 px-4 py-5 md:px-6 lg:px-8"
+                free
+            >
                 <div className="surface-0">
                     <ul className="list-none p-0 m-0 flex align-items-center font-medium mb-3">
                         <li>
@@ -683,7 +732,10 @@ const Free = () => {
                                     <span className="block text-500 font-medium mb-3">Orders</span>
                                     <div className="text-900 font-medium text-xl">152</div>
                                 </div>
-                                <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                                <div
+                                    className="flex align-items-center justify-content-center bg-blue-100 border-round"
+                                    style={{ width: '2.5rem', height: '2.5rem' }}
+                                >
                                     <i className="pi pi-shopping-cart text-blue-500 text-xl"></i>
                                 </div>
                             </div>
@@ -698,7 +750,10 @@ const Free = () => {
                                     <span className="block text-500 font-medium mb-3">Revenue</span>
                                     <div className="text-900 font-medium text-xl">$2.100</div>
                                 </div>
-                                <div className="flex align-items-center justify-content-center bg-orange-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                                <div
+                                    className="flex align-items-center justify-content-center bg-orange-100 border-round"
+                                    style={{ width: '2.5rem', height: '2.5rem' }}
+                                >
                                     <i className="pi pi-map-marker text-orange-500 text-xl"></i>
                                 </div>
                             </div>
@@ -713,7 +768,10 @@ const Free = () => {
                                     <span className="block text-500 font-medium mb-3">Customers</span>
                                     <div className="text-900 font-medium text-xl">28441</div>
                                 </div>
-                                <div className="flex align-items-center justify-content-center bg-cyan-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                                <div
+                                    className="flex align-items-center justify-content-center bg-cyan-100 border-round"
+                                    style={{ width: '2.5rem', height: '2.5rem' }}
+                                >
                                     <i className="pi pi-inbox text-cyan-500 text-xl"></i>
                                 </div>
                             </div>
@@ -728,7 +786,10 @@ const Free = () => {
                                     <span className="block text-500 font-medium mb-3">Comments</span>
                                     <div className="text-900 font-medium text-xl">152 Unread</div>
                                 </div>
-                                <div className="flex align-items-center justify-content-center bg-purple-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                                <div
+                                    className="flex align-items-center justify-content-center bg-purple-100 border-round"
+                                    style={{ width: '2.5rem', height: '2.5rem' }}
+                                >
                                     <i className="pi pi-comment text-purple-500 text-xl"></i>
                                 </div>
                             </div>
@@ -762,10 +823,17 @@ const Free = () => {
 
                             <div className="flex align-items-center justify-content-between mb-6">
                                 <div className="flex align-items-center">
-                                    <Checkbox id="rememberme" onChange={(e) => setChecked(e.checked as boolean)} checked={checked} className="mr-2" />
+                                    <Checkbox
+                                        id="rememberme"
+                                        onChange={(e) => setChecked(e.checked as boolean)}
+                                        checked={checked}
+                                        className="mr-2"
+                                    />
                                     <label htmlFor="rememberme">Remember me</label>
                                 </div>
-                                <a className="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot your password?</a>
+                                <a className="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">
+                                    Forgot your password?
+                                </a>
                             </div>
 
                             <Button label="Sign In" icon="pi pi-user" className="w-full" />
@@ -774,10 +842,17 @@ const Free = () => {
                 </div>
             </BlockViewer>
 
-            <BlockViewer header="Description List" code={block9} containerClassName="surface-0 px-4 py-8 md:px-6 lg:px-8" free>
+            <BlockViewer
+                header="Description List"
+                code={block9}
+                containerClassName="surface-0 px-4 py-8 md:px-6 lg:px-8"
+                free
+            >
                 <div className="surface-0">
                     <div className="font-medium text-3xl text-900 mb-3">Movie Information</div>
-                    <div className="text-500 mb-5">Morbi tristique blandit turpis. In viverra ligula id nulla hendrerit rutrum.</div>
+                    <div className="text-500 mb-5">
+                        Morbi tristique blandit turpis. In viverra ligula id nulla hendrerit rutrum.
+                    </div>
                     <ul className="list-none p-0 m-0">
                         <li className="flex align-items-center py-3 px-2 border-top-1 border-300 flex-wrap">
                             <div className="text-500 w-6 md:w-2 font-medium">Title</div>
@@ -806,14 +881,19 @@ const Free = () => {
                         </li>
                         <li className="flex align-items-center py-3 px-2 border-top-1 border-300 flex-wrap">
                             <div className="text-500 w-6 md:w-2 font-medium">Actors</div>
-                            <div className="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">Robert De Niro, Al Pacino</div>
+                            <div className="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+                                Robert De Niro, Al Pacino
+                            </div>
                             <div className="w-6 md:w-2 flex justify-content-end">
                                 <Button label="Edit" icon="pi pi-pencil" className="p-button-text" />
                             </div>
                         </li>
                         <li className="flex align-items-center py-3 px-2 border-top-1 border-bottom-1 border-300 flex-wrap">
                             <div className="text-500 w-6 md:w-2 font-medium">Plot</div>
-                            <div className="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 line-height-3">A group of professional bank robbers start to feel the heat from police when they unknowingly leave a clue at their latest heist.</div>
+                            <div className="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 line-height-3">
+                                A group of professional bank robbers start to feel the heat from police when they
+                                unknowingly leave a clue at their latest heist.
+                            </div>
                             <div className="w-6 md:w-2 flex justify-content-end">
                                 <Button label="Edit" icon="pi pi-pencil" className="p-button-text" />
                             </div>
@@ -825,12 +905,14 @@ const Free = () => {
             <BlockViewer header="Card" code={block10} containerClassName="px-4 py-8 md:px-6 lg:px-8" free>
                 <div className="surface-0 p-4 shadow-2 border-round">
                     <div className="text-3xl font-medium text-900 mb-3">Card Title</div>
-                    <div className="font-medium text-500 mb-3">Vivamus id nisl interdum, blandit augue sit amet, eleifend mi.</div>
+                    <div className="font-medium text-500 mb-3">
+                        Vivamus id nisl interdum, blandit augue sit amet, eleifend mi.
+                    </div>
                     <div style={{ height: '150px' }} className="border-2 border-dashed border-300"></div>
                 </div>
             </BlockViewer>
         </>
-    );
-};
+    )
+}
 
-export default Free;
+export default Free

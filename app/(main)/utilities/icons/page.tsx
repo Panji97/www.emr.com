@@ -1,49 +1,57 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { IconService } from '../../../../demo/service/IconService';
-import { InputText } from 'primereact/inputtext';
-import type { Demo } from '@/types';
+'use client'
+import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { IconService } from '../../../../demo/service/IconService'
+import { InputText } from 'primereact/inputtext'
+import type { Demo } from '@/types'
 
 const IconsDemo = () => {
-    const [icons, setIcons] = useState<Demo.Icon[]>([]);
-    const [filteredIcons, setFilteredIcons] = useState<Demo.Icon[]>([]);
+    const [icons, setIcons] = useState<Demo.Icon[]>([])
+    const [filteredIcons, setFilteredIcons] = useState<Demo.Icon[]>([])
 
     useEffect(() => {
         IconService.getIcons().then((data) => {
             data.sort((icon1, icon2) => {
-                if (icon1.properties!.name < icon2.properties!.name) return -1;
-                else if (icon1.properties!.name < icon2.properties!.name) return 1;
-                else return 0;
-            });
+                if (icon1.properties!.name < icon2.properties!.name) return -1
+                else if (icon1.properties!.name < icon2.properties!.name) return 1
+                else return 0
+            })
 
-            setIcons(data);
-            setFilteredIcons(data);
-        });
-    }, []);
+            setIcons(data)
+            setFilteredIcons(data)
+        })
+    }, [])
 
     const onFilter = (event: React.FormEvent<HTMLInputElement>) => {
         if (!event.currentTarget.value) {
-            setFilteredIcons(icons);
+            setFilteredIcons(icons)
         } else {
             setFilteredIcons(
                 icons.filter((it) => {
-                    return it.icon && it.icon.tags && it.icon.tags[0].includes(event.currentTarget.value);
+                    return it.icon && it.icon.tags && it.icon.tags[0].includes(event.currentTarget.value)
                 })
-            );
+            )
         }
-    };
+    }
 
     return (
         <div className="card">
             <h2>Icons</h2>
             <p>
                 PrimeReact components internally use{' '}
-                <Link href="https://github.com/primefaces/primeicons" className="font-medium hover:underline text-primary" target={'_blank'}>
+                <Link
+                    href="https://github.com/primefaces/primeicons"
+                    className="font-medium hover:underline text-primary"
+                    target={'_blank'}
+                >
                     PrimeIcons
                 </Link>{' '}
                 library, the official icons suite from{' '}
-                <Link href="https://www.primetek.com.tr" className="font-medium hover:underline text-primary" target={'_blank'}>
+                <Link
+                    href="https://www.primetek.com.tr"
+                    className="font-medium hover:underline text-primary"
+                    target={'_blank'}
+                >
                     PrimeTek
                 </Link>
                 .
@@ -55,7 +63,8 @@ const IconsDemo = () => {
             </pre>
             <h4>Getting Started</h4>
             <p>
-                PrimeIcons use the <strong>pi pi-&#123;icon&#125;</strong> syntax such as <strong>pi pi-check</strong>. A standalone icon can be displayed using an element like <i>i</i> or <i>span</i>
+                PrimeIcons use the <strong>pi pi-&#123;icon&#125;</strong> syntax such as <strong>pi pi-check</strong>.
+                A standalone icon can be displayed using an element like <i>i</i> or <i>span</i>
             </p>
             <pre className="app-code">
                 <code>
@@ -91,18 +100,27 @@ const IconsDemo = () => {
             <h4>List of Icons</h4>
             <p>
                 Here is the current list of PrimeIcons, more icons are added periodically. You may also{' '}
-                <Link href="https://github.com/primefaces/primeicons/issues" className="font-medium hover:underline text-primary" target={'_blank'}>
+                <Link
+                    href="https://github.com/primefaces/primeicons/issues"
+                    className="font-medium hover:underline text-primary"
+                    target={'_blank'}
+                >
                     request new icons
                 </Link>{' '}
                 at the issue tracker.
             </p>
             <div>
-                <InputText type="text" className="w-full p-3 mt-3 mb-5" onInput={onFilter} placeholder="Search an icon" />
+                <InputText
+                    type="text"
+                    className="w-full p-3 mt-3 mb-5"
+                    onInput={onFilter}
+                    placeholder="Search an icon"
+                />
             </div>
             <div className="grid icons-list text-center">
                 {filteredIcons &&
                     filteredIcons.map((iconMeta) => {
-                        const { icon, properties } = iconMeta;
+                        const { icon, properties } = iconMeta
 
                         return (
                             icon?.tags?.indexOf('deprecate') === -1 && (
@@ -111,11 +129,11 @@ const IconsDemo = () => {
                                     <div>pi-{properties?.name}</div>
                                 </div>
                             )
-                        );
+                        )
                     })}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default IconsDemo;
+export default IconsDemo

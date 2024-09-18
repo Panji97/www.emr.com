@@ -18,7 +18,10 @@ const LoginPage = () => {
     const { layoutConfig } = useContext(LayoutContext)
 
     const router = useRouter()
-    const containerClassName = classNames('surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden', { 'p-input-filled': layoutConfig.inputStyle === 'filled' })
+    const containerClassName = classNames(
+        'surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden',
+        { 'p-input-filled': layoutConfig.inputStyle === 'filled' }
+    )
 
     const handleLogin = async () => {
         try {
@@ -42,7 +45,11 @@ const LoginPage = () => {
     return (
         <div className={containerClassName}>
             <div className="flex flex-column align-items-center justify-content-center">
-                <img src={`/layout/images/logo-${layoutConfig.colorScheme === 'light' ? 'dark' : 'white'}.svg`} alt="Sakai logo" className="mb-5 w-6rem flex-shrink-0" />
+                <img
+                    src={`/layout/images/logo-${layoutConfig.colorScheme === 'light' ? 'dark' : 'white'}.svg`}
+                    alt="Sakai logo"
+                    className="mb-5 w-6rem flex-shrink-0"
+                />
                 <div
                     style={{
                         borderRadius: '56px',
@@ -86,10 +93,18 @@ const LoginPage = () => {
 
                             <div className="flex align-items-center justify-content-between mb-5 gap-5">
                                 <div className="flex align-items-center">
-                                    <Checkbox inputId="rememberme1" checked={checked} onChange={(e) => setChecked(e.checked ?? false)} className="mr-2"></Checkbox>
+                                    <Checkbox
+                                        inputId="rememberme1"
+                                        checked={checked}
+                                        onChange={(e) => setChecked(e.checked ?? false)}
+                                        className="mr-2"
+                                    ></Checkbox>
                                     <label htmlFor="rememberme1">Remember me</label>
                                 </div>
-                                <a className="font-medium no-underline ml-2 text-right cursor-pointer" style={{ color: 'var(--primary-color)' }}>
+                                <a
+                                    className="font-medium no-underline ml-2 text-right cursor-pointer"
+                                    style={{ color: 'var(--primary-color)' }}
+                                >
                                     Forgot password?
                                 </a>
                             </div>

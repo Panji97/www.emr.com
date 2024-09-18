@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import React from 'react';
-import Menu from '../page';
+import React from 'react'
+import Menu from '../page'
 function SeatDemo() {
     return (
         <Menu>
@@ -10,7 +10,7 @@ function SeatDemo() {
                 <p className="m-0 text-lg">Seat Component Content via Child Route</p>
             </div>
         </Menu>
-    );
+    )
 }
 
-export default SeatDemo;
+export default SeatDemo

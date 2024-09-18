@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode } from 'react'
 import {
     Page,
     AppBreadcrumbProps,
@@ -22,12 +22,22 @@ import {
     MenuModelItem,
     AppMenuItemProps,
     AppMenuItem
-} from './layout';
-import { Demo, LayoutType, SortOrderType, CustomEvent, ChartDataState, ChartOptionsState, AppMailSidebarItem, AppMailReplyProps, AppMailProps } from './demo';
+} from './layout'
+import {
+    Demo,
+    LayoutType,
+    SortOrderType,
+    CustomEvent,
+    ChartDataState,
+    ChartOptionsState,
+    AppMailSidebarItem,
+    AppMailReplyProps,
+    AppMailProps
+} from './demo'
 
 type ChildContainerProps = {
-    children: ReactNode;
-};
+    children: ReactNode
+}
 
 export type {
     Page,
@@ -59,4 +69,4 @@ export type {
     AppMailReplyProps,
     AppMailProps,
     AppMenuItem
-};
+}

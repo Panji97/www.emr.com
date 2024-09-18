@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const EmptyPage = () => {
     return (
@@ -10,7 +10,7 @@ const EmptyPage = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default EmptyPage;
+export default EmptyPage

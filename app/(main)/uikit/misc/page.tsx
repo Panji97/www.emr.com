@@ -1,36 +1,36 @@
-'use client';
+'use client'
 
-import React, { useState, useEffect, useRef } from 'react';
-import { ProgressBar } from 'primereact/progressbar';
-import { Button } from 'primereact/button';
-import { Badge } from 'primereact/badge';
-import { Tag } from 'primereact/tag';
-import { Avatar } from 'primereact/avatar';
-import { AvatarGroup } from 'primereact/avatargroup';
-import { Chip } from 'primereact/chip';
-import { Skeleton } from 'primereact/skeleton';
-import { ScrollPanel } from 'primereact/scrollpanel';
-import { ScrollTop } from 'primereact/scrolltop';
+import React, { useState, useEffect, useRef } from 'react'
+import { ProgressBar } from 'primereact/progressbar'
+import { Button } from 'primereact/button'
+import { Badge } from 'primereact/badge'
+import { Tag } from 'primereact/tag'
+import { Avatar } from 'primereact/avatar'
+import { AvatarGroup } from 'primereact/avatargroup'
+import { Chip } from 'primereact/chip'
+import { Skeleton } from 'primereact/skeleton'
+import { ScrollPanel } from 'primereact/scrollpanel'
+import { ScrollTop } from 'primereact/scrolltop'
 
 const MiscDemo = () => {
-    const [value, setValue] = useState(0);
-    const intervalRef = useRef<NodeJS.Timeout | null>(null);
+    const [value, setValue] = useState(0)
+    const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
     useEffect(() => {
         const interval = setInterval(() => {
             setValue((prevValue) => {
-                const newVal = prevValue + Math.floor(Math.random() * 10) + 1;
-                return newVal >= 100 ? 100 : newVal;
-            });
-        }, 2000);
+                const newVal = prevValue + Math.floor(Math.random() * 10) + 1
+                return newVal >= 100 ? 100 : newVal
+            })
+        }, 2000)
 
-        intervalRef.current = interval;
+        intervalRef.current = interval
 
         return () => {
-            clearInterval(intervalRef.current as NodeJS.Timeout);
-            intervalRef.current = null;
-        };
-    }, []);
+            clearInterval(intervalRef.current as NodeJS.Timeout)
+            intervalRef.current = null
+        }
+    }, [])
 
     return (
         <div className="grid">
@@ -64,7 +64,10 @@ const MiscDemo = () => {
                         <i className="pi pi-bell mr-4 p-text-secondary p-overlay-badge" style={{ fontSize: '2rem' }}>
                             <Badge value="2"></Badge>
                         </i>
-                        <i className="pi pi-calendar mr-4 p-text-secondary p-overlay-badge" style={{ fontSize: '2rem' }}>
+                        <i
+                            className="pi pi-calendar mr-4 p-text-secondary p-overlay-badge"
+                            style={{ fontSize: '2rem' }}
+                        >
                             <Badge value="10+" severity="danger"></Badge>
                         </i>
                         <i className="pi pi-envelope p-text-secondary p-overlay-badge" style={{ fontSize: '2rem' }}>
@@ -98,14 +101,28 @@ const MiscDemo = () => {
                         <Avatar image={`/demo/images/avatar/onyamalimba.png`} size="large" shape="circle"></Avatar>
                         <Avatar image={`/demo/images/avatar/ionibowcher.png`} size="large" shape="circle"></Avatar>
                         <Avatar image={`/demo/images/avatar/xuxuefeng.png`} size="large" shape="circle"></Avatar>
-                        <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }}></Avatar>
+                        <Avatar
+                            label="+2"
+                            shape="circle"
+                            size="large"
+                            style={{ backgroundColor: '#9c27b0', color: '#ffffff' }}
+                        ></Avatar>
                     </AvatarGroup>
 
                     <h5>Label - Circle</h5>
                     <div className="flex flex-wrap gap-2 align-items-end">
                         <Avatar label="P" size="xlarge" shape="circle"></Avatar>
-                        <Avatar label="V" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle"></Avatar>
-                        <Avatar label="U" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle"></Avatar>
+                        <Avatar
+                            label="V"
+                            size="large"
+                            style={{ backgroundColor: '#2196F3', color: '#ffffff' }}
+                            shape="circle"
+                        ></Avatar>
+                        <Avatar
+                            label="U"
+                            style={{ backgroundColor: '#9c27b0', color: '#ffffff' }}
+                            shape="circle"
+                        ></Avatar>
                     </div>
 
                     <h5>Icon - Badge</h5>
@@ -118,13 +135,25 @@ const MiscDemo = () => {
                     <h4>ScrollTop</h4>
                     <ScrollPanel style={{ width: '250px', height: '200px' }}>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae et leo duis ut diam. Ultricies mi quis hendrerit dolor magna eget est lorem. Amet
-                            consectetur adipiscing elit ut. Nam libero justo laoreet sit amet. Pharetra massa massa ultricies mi quis hendrerit dolor magna. Est ultricies integer quis auctor elit sed vulputate. Consequat ac felis donec et. Tellus
-                            orci ac auctor augue mauris. Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus a. Tincidunt arcu non sodales neque sodales. Metus aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices. Sodales ut
-                            etiam sit amet nisl purus. Cursus sit amet dictum sit amet. Tristique senectus et netus et malesuada fames ac turpis egestas. Et tortor consequat id porta nibh venenatis cras sed. Diam maecenas ultricies mi eget mauris.
-                            Eget egestas purus viverra accumsan in nisl nisi. Suscipit adipiscing bibendum est ultricies integer. Mattis aliquam faucibus purus in massa tempor nec.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Vitae et leo duis ut diam. Ultricies mi quis hendrerit dolor
+                            magna eget est lorem. Amet consectetur adipiscing elit ut. Nam libero justo laoreet sit
+                            amet. Pharetra massa massa ultricies mi quis hendrerit dolor magna. Est ultricies integer
+                            quis auctor elit sed vulputate. Consequat ac felis donec et. Tellus orci ac auctor augue
+                            mauris. Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus a. Tincidunt arcu
+                            non sodales neque sodales. Metus aliquam eleifend mi in nulla posuere sollicitudin aliquam
+                            ultrices. Sodales ut etiam sit amet nisl purus. Cursus sit amet dictum sit amet. Tristique
+                            senectus et netus et malesuada fames ac turpis egestas. Et tortor consequat id porta nibh
+                            venenatis cras sed. Diam maecenas ultricies mi eget mauris. Eget egestas purus viverra
+                            accumsan in nisl nisi. Suscipit adipiscing bibendum est ultricies integer. Mattis aliquam
+                            faucibus purus in massa tempor nec.
                         </p>
-                        <ScrollTop target="parent" className="custom-scrolltop" threshold={100} icon="pi pi-arrow-up"></ScrollTop>
+                        <ScrollTop
+                            target="parent"
+                            className="custom-scrolltop"
+                            threshold={100}
+                            icon="pi pi-arrow-up"
+                        ></ScrollTop>
                     </ScrollPanel>
                 </div>
             </div>
@@ -214,7 +243,7 @@ const MiscDemo = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default MiscDemo;
+export default MiscDemo

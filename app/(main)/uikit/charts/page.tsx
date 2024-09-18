@@ -1,20 +1,20 @@
-'use client';
-import { ChartData, ChartOptions } from 'chart.js';
-import { Chart } from 'primereact/chart';
-import React, { useContext, useEffect, useState } from 'react';
-import { LayoutContext } from '../../../../layout/context/layoutcontext';
-import type { ChartDataState, ChartOptionsState } from '@/types';
+'use client'
+import { ChartData, ChartOptions } from 'chart.js'
+import { Chart } from 'primereact/chart'
+import React, { useContext, useEffect, useState } from 'react'
+import { LayoutContext } from '../../../../layout/context/layoutcontext'
+import type { ChartDataState, ChartOptionsState } from '@/types'
 
 const ChartDemo = () => {
-    const [options, setOptions] = useState<ChartOptionsState>({});
-    const [data, setChartData] = useState<ChartDataState>({});
-    const { layoutConfig } = useContext(LayoutContext);
+    const [options, setOptions] = useState<ChartOptionsState>({})
+    const [data, setChartData] = useState<ChartDataState>({})
+    const { layoutConfig } = useContext(LayoutContext)
 
     useEffect(() => {
-        const documentStyle = getComputedStyle(document.documentElement);
-        const textColor = documentStyle.getPropertyValue('--text-color') || '#495057';
-        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary') || '#6c757d';
-        const surfaceBorder = documentStyle.getPropertyValue('--surface-border') || '#dfe7ef';
+        const documentStyle = getComputedStyle(document.documentElement)
+        const textColor = documentStyle.getPropertyValue('--text-color') || '#495057'
+        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary') || '#6c757d'
+        const surfaceBorder = documentStyle.getPropertyValue('--surface-border') || '#dfe7ef'
         const barData: ChartData = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -31,7 +31,7 @@ const ChartDemo = () => {
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]
-        };
+        }
 
         const barOptions: ChartOptions = {
             plugins: {
@@ -68,18 +68,26 @@ const ChartDemo = () => {
                     }
                 }
             }
-        };
+        }
 
         const pieData: ChartData = {
             labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [540, 325, 702],
-                    backgroundColor: [documentStyle.getPropertyValue('--indigo-500') || '#6366f1', documentStyle.getPropertyValue('--purple-500') || '#a855f7', documentStyle.getPropertyValue('--teal-500') || '#14b8a6'],
-                    hoverBackgroundColor: [documentStyle.getPropertyValue('--indigo-400') || '#8183f4', documentStyle.getPropertyValue('--purple-400') || '#b975f9', documentStyle.getPropertyValue('--teal-400') || '#41c5b7']
+                    backgroundColor: [
+                        documentStyle.getPropertyValue('--indigo-500') || '#6366f1',
+                        documentStyle.getPropertyValue('--purple-500') || '#a855f7',
+                        documentStyle.getPropertyValue('--teal-500') || '#14b8a6'
+                    ],
+                    hoverBackgroundColor: [
+                        documentStyle.getPropertyValue('--indigo-400') || '#8183f4',
+                        documentStyle.getPropertyValue('--purple-400') || '#b975f9',
+                        documentStyle.getPropertyValue('--teal-400') || '#41c5b7'
+                    ]
                 }
             ]
-        };
+        }
 
         const pieOptions: ChartOptions = {
             plugins: {
@@ -90,7 +98,7 @@ const ChartDemo = () => {
                     }
                 }
             }
-        };
+        }
 
         const lineData: ChartData = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -112,7 +120,7 @@ const ChartDemo = () => {
                     tension: 0.4
                 }
             ]
-        };
+        }
 
         const lineOptions: ChartOptions = {
             plugins: {
@@ -146,7 +154,7 @@ const ChartDemo = () => {
                     }
                 }
             }
-        };
+        }
 
         const polarData: ChartData = {
             datasets: [
@@ -162,7 +170,7 @@ const ChartDemo = () => {
                 }
             ],
             labels: ['Indigo', 'Purple', 'Teal', 'Orange']
-        };
+        }
 
         const polarOptions: ChartOptions = {
             plugins: {
@@ -179,7 +187,7 @@ const ChartDemo = () => {
                     }
                 }
             }
-        };
+        }
 
         const radarData: ChartData = {
             labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
@@ -203,7 +211,7 @@ const ChartDemo = () => {
                     data: [28, 48, 40, 19, 96, 27, 100]
                 }
             ]
-        };
+        }
 
         const radarOptions: ChartOptions = {
             plugins: {
@@ -220,7 +228,7 @@ const ChartDemo = () => {
                     }
                 }
             }
-        };
+        }
 
         setOptions({
             barOptions,
@@ -228,15 +236,15 @@ const ChartDemo = () => {
             lineOptions,
             polarOptions,
             radarOptions
-        });
+        })
         setChartData({
             barData,
             pieData,
             lineData,
             polarData,
             radarData
-        });
-    }, [layoutConfig]);
+        })
+    }, [layoutConfig])
 
     return (
         <div className="grid p-fluid">
@@ -277,7 +285,7 @@ const ChartDemo = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default ChartDemo;
+export default ChartDemo

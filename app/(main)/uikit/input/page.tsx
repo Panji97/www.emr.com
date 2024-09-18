@@ -1,136 +1,121 @@
-"use client";
-import type { Demo, Page } from "@/types";
-import {
-    AutoComplete,
-    AutoCompleteCompleteEvent,
-} from "primereact/autocomplete";
-import { Button } from "primereact/button";
-import { Calendar } from "primereact/calendar";
-import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
-import { Chips } from "primereact/chips";
-import {
-    ColorPicker,
-    ColorPickerHSBType,
-    ColorPickerRGBType,
-} from "primereact/colorpicker";
-import { Dropdown } from "primereact/dropdown";
-import { InputNumber } from "primereact/inputnumber";
-import { InputSwitch } from "primereact/inputswitch";
-import { InputText } from "primereact/inputtext";
-import { InputTextarea } from "primereact/inputtextarea";
-import { Knob } from "primereact/knob";
-import { ListBox } from "primereact/listbox";
-import { MultiSelect } from "primereact/multiselect";
-import { RadioButton } from "primereact/radiobutton";
-import { Rating } from "primereact/rating";
-import { SelectButton } from "primereact/selectbutton";
-import { Slider } from "primereact/slider";
-import { ToggleButton } from "primereact/togglebutton";
-import { useEffect, useState } from "react";
-import { CountryService } from "../../../../demo/service/CountryService";
+'use client'
+import type { Demo, Page } from '@/types'
+import { AutoComplete, AutoCompleteCompleteEvent } from 'primereact/autocomplete'
+import { Button } from 'primereact/button'
+import { Calendar } from 'primereact/calendar'
+import { Checkbox, CheckboxChangeEvent } from 'primereact/checkbox'
+import { Chips } from 'primereact/chips'
+import { ColorPicker, ColorPickerHSBType, ColorPickerRGBType } from 'primereact/colorpicker'
+import { Dropdown } from 'primereact/dropdown'
+import { InputNumber } from 'primereact/inputnumber'
+import { InputSwitch } from 'primereact/inputswitch'
+import { InputText } from 'primereact/inputtext'
+import { InputTextarea } from 'primereact/inputtextarea'
+import { Knob } from 'primereact/knob'
+import { ListBox } from 'primereact/listbox'
+import { MultiSelect } from 'primereact/multiselect'
+import { RadioButton } from 'primereact/radiobutton'
+import { Rating } from 'primereact/rating'
+import { SelectButton } from 'primereact/selectbutton'
+import { Slider } from 'primereact/slider'
+import { ToggleButton } from 'primereact/togglebutton'
+import { useEffect, useState } from 'react'
+import { CountryService } from '../../../../demo/service/CountryService'
 
 interface InputValue {
-    name: string;
-    code: string;
+    name: string
+    code: string
 }
 
 const InputDemo: Page = () => {
-    const [floatValue, setFloatValue] = useState("");
-    const [autoValue, setAutoValue] = useState<Demo.Country[]>([]);
-    const [selectedAutoValue, setSelectedAutoValue] = useState(null);
-    const [autoFilteredValue, setAutoFilteredValue] = useState<Demo.Country[]>(
-        []
-    );
-    const [calendarValue, setCalendarValue] = useState<any>(null);
-    const [inputNumberValue, setInputNumberValue] = useState<number | null>(
-        null
-    );
-    const [chipsValue, setChipsValue] = useState<any[]>([]);
-    const [sliderValue, setSliderValue] = useState<number | string>("");
-    const [ratingValue, setRatingValue] = useState<number | null>(null);
-    const [colorValue, setColorValue] = useState<
-        string | ColorPickerRGBType | ColorPickerHSBType
-    >("1976D2");
-    const [knobValue, setKnobValue] = useState(20);
-    const [radioValue, setRadioValue] = useState(null);
-    const [checkboxValue, setCheckboxValue] = useState<string[]>([]);
-    const [switchValue, setSwitchValue] = useState(false);
-    const [listboxValue, setListboxValue] = useState(null);
-    const [dropdownValue, setDropdownValue] = useState(null);
-    const [multiselectValue, setMultiselectValue] = useState(null);
-    const [toggleValue, setToggleValue] = useState(false);
-    const [selectButtonValue1, setSelectButtonValue1] = useState(null);
-    const [selectButtonValue2, setSelectButtonValue2] = useState(null);
-    const [inputGroupValue, setInputGroupValue] = useState(false);
+    const [floatValue, setFloatValue] = useState('')
+    const [autoValue, setAutoValue] = useState<Demo.Country[]>([])
+    const [selectedAutoValue, setSelectedAutoValue] = useState(null)
+    const [autoFilteredValue, setAutoFilteredValue] = useState<Demo.Country[]>([])
+    const [calendarValue, setCalendarValue] = useState<any>(null)
+    const [inputNumberValue, setInputNumberValue] = useState<number | null>(null)
+    const [chipsValue, setChipsValue] = useState<any[]>([])
+    const [sliderValue, setSliderValue] = useState<number | string>('')
+    const [ratingValue, setRatingValue] = useState<number | null>(null)
+    const [colorValue, setColorValue] = useState<string | ColorPickerRGBType | ColorPickerHSBType>('1976D2')
+    const [knobValue, setKnobValue] = useState(20)
+    const [radioValue, setRadioValue] = useState(null)
+    const [checkboxValue, setCheckboxValue] = useState<string[]>([])
+    const [switchValue, setSwitchValue] = useState(false)
+    const [listboxValue, setListboxValue] = useState(null)
+    const [dropdownValue, setDropdownValue] = useState(null)
+    const [multiselectValue, setMultiselectValue] = useState(null)
+    const [toggleValue, setToggleValue] = useState(false)
+    const [selectButtonValue1, setSelectButtonValue1] = useState(null)
+    const [selectButtonValue2, setSelectButtonValue2] = useState(null)
+    const [inputGroupValue, setInputGroupValue] = useState(false)
 
     const listboxValues: InputValue[] = [
-        { name: "New York", code: "NY" },
-        { name: "Rome", code: "RM" },
-        { name: "London", code: "LDN" },
-        { name: "Istanbul", code: "IST" },
-        { name: "Paris", code: "PRS" },
-    ];
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ]
 
     const dropdownValues: InputValue[] = [
-        { name: "New York", code: "NY" },
-        { name: "Rome", code: "RM" },
-        { name: "London", code: "LDN" },
-        { name: "Istanbul", code: "IST" },
-        { name: "Paris", code: "PRS" },
-    ];
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ]
 
     const multiselectValues: InputValue[] = [
-        { name: "Australia", code: "AU" },
-        { name: "Brazil", code: "BR" },
-        { name: "China", code: "CN" },
-        { name: "Egypt", code: "EG" },
-        { name: "France", code: "FR" },
-        { name: "Germany", code: "DE" },
-        { name: "India", code: "IN" },
-        { name: "Japan", code: "JP" },
-        { name: "Spain", code: "ES" },
-        { name: "United States", code: "US" },
-    ];
+        { name: 'Australia', code: 'AU' },
+        { name: 'Brazil', code: 'BR' },
+        { name: 'China', code: 'CN' },
+        { name: 'Egypt', code: 'EG' },
+        { name: 'France', code: 'FR' },
+        { name: 'Germany', code: 'DE' },
+        { name: 'India', code: 'IN' },
+        { name: 'Japan', code: 'JP' },
+        { name: 'Spain', code: 'ES' },
+        { name: 'United States', code: 'US' }
+    ]
 
     const selectButtonValues1: InputValue[] = [
-        { name: "Option 1", code: "O1" },
-        { name: "Option 2", code: "O2" },
-        { name: "Option 3", code: "O3" },
-    ];
+        { name: 'Option 1', code: 'O1' },
+        { name: 'Option 2', code: 'O2' },
+        { name: 'Option 3', code: 'O3' }
+    ]
 
     const selectButtonValues2: InputValue[] = [
-        { name: "Option 1", code: "O1" },
-        { name: "Option 2", code: "O2" },
-        { name: "Option 3", code: "O3" },
-    ];
+        { name: 'Option 1', code: 'O1' },
+        { name: 'Option 2', code: 'O2' },
+        { name: 'Option 3', code: 'O3' }
+    ]
 
     useEffect(() => {
-        CountryService.getCountries().then((data) => setAutoValue(data));
-    }, []);
+        CountryService.getCountries().then((data) => setAutoValue(data))
+    }, [])
 
     const searchCountry = (event: AutoCompleteCompleteEvent) => {
         setTimeout(() => {
             if (!event.query.trim().length) {
-                setAutoFilteredValue([...autoValue]);
+                setAutoFilteredValue([...autoValue])
             } else {
                 setAutoFilteredValue(
                     autoValue.filter((country) => {
-                        return country.name
-                            .toLowerCase()
-                            .startsWith(event.query.toLowerCase());
+                        return country.name.toLowerCase().startsWith(event.query.toLowerCase())
                     })
-                );
+                )
             }
-        }, 250);
-    };
+        }, 250)
+    }
 
     const onCheckboxChange = (e: CheckboxChangeEvent) => {
-        let selectedValue = [...checkboxValue];
-        if (e.checked) selectedValue.push(e.value);
-        else selectedValue.splice(selectedValue.indexOf(e.value), 1);
+        let selectedValue = [...checkboxValue]
+        if (e.checked) selectedValue.push(e.value)
+        else selectedValue.splice(selectedValue.indexOf(e.value), 1)
 
-        setCheckboxValue(selectedValue);
-    };
+        setCheckboxValue(selectedValue)
+    }
 
     const itemTemplate = (option: InputValue) => {
         return (
@@ -139,16 +124,15 @@ const InputDemo: Page = () => {
                     alt={option.name}
                     src={`/demo/images/flag/flag_placeholder.png`}
                     onError={(e) =>
-                        (e.currentTarget.src =
-                            "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")
+                        (e.currentTarget.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')
                     }
                     className={`flag flag-${option.code.toLowerCase()}`}
-                    style={{ width: "21px" }}
+                    style={{ width: '21px' }}
                 />
                 <span className="ml-2">{option.name}</span>
             </div>
-        );
-    };
+        )
+    }
 
     return (
         <div className="grid p-fluid input-demo">
@@ -157,24 +141,13 @@ const InputDemo: Page = () => {
                     <h5>InputText</h5>
                     <div className="grid formgrid">
                         <div className="col-12 mb-2 lg:col-4 lg:mb-0">
-                            <InputText
-                                type="text"
-                                placeholder="Default"
-                            ></InputText>
+                            <InputText type="text" placeholder="Default"></InputText>
                         </div>
                         <div className="col-12 mb-2 lg:col-4 lg:mb-0">
-                            <InputText
-                                type="text"
-                                placeholder="Disabled"
-                                disabled
-                            ></InputText>
+                            <InputText type="text" placeholder="Disabled" disabled></InputText>
                         </div>
                         <div className="col-12 mb-2 lg:col-4 lg:mb-0">
-                            <InputText
-                                type="text"
-                                placeholder="Invalid"
-                                className="p-invalid"
-                            />
+                            <InputText type="text" placeholder="Invalid" className="p-invalid" />
                         </div>
                     </div>
 
@@ -213,11 +186,7 @@ const InputDemo: Page = () => {
                     </span>
 
                     <h5>Textarea</h5>
-                    <InputTextarea
-                        placeholder="Your Message"
-                        rows={5}
-                        cols={30}
-                    />
+                    <InputTextarea placeholder="Your Message" rows={5} cols={30} />
 
                     <h5>AutoComplete</h5>
                     <AutoComplete
@@ -243,18 +212,13 @@ const InputDemo: Page = () => {
                     <h5>InputNumber</h5>
                     <InputNumber
                         value={inputNumberValue}
-                        onValueChange={(e) =>
-                            setInputNumberValue(e.value ?? null)
-                        }
+                        onValueChange={(e) => setInputNumberValue(e.value ?? null)}
                         showButtons
                         mode="decimal"
                     ></InputNumber>
 
                     <h5>Chips</h5>
-                    <Chips
-                        value={chipsValue}
-                        onChange={(e) => setChipsValue(e.value ?? [])}
-                    />
+                    <Chips value={chipsValue} onChange={(e) => setChipsValue(e.value ?? [])} />
                 </div>
 
                 <div className="card">
@@ -263,37 +227,27 @@ const InputDemo: Page = () => {
                             <h5>Slider</h5>
                             <InputText
                                 value={sliderValue as string}
-                                onChange={(e) =>
-                                    setSliderValue(parseInt(e.target.value, 10))
-                                }
+                                onChange={(e) => setSliderValue(parseInt(e.target.value, 10))}
                             />
-                            <Slider
-                                value={sliderValue as number}
-                                onChange={(e) =>
-                                    setSliderValue(e.value as number)
-                                }
-                            />
+                            <Slider value={sliderValue as number} onChange={(e) => setSliderValue(e.value as number)} />
                         </div>
                         <div className="col-12 md:col-6">
                             <h5>Rating</h5>
-                            <Rating
-                                value={ratingValue as number}
-                                onChange={(e) => setRatingValue(e.value ?? 0)}
-                            />
+                            <Rating value={ratingValue as number} onChange={(e) => setRatingValue(e.value ?? 0)} />
                         </div>
                         <div className="col-12 md:col-6">
                             <h5>ColorPicker</h5>
                             <ColorPicker
                                 value={colorValue}
-                                onChange={(e) => setColorValue(e.value ?? "")}
-                                style={{ width: "2rem" }}
+                                onChange={(e) => setColorValue(e.value ?? '')}
+                                style={{ width: '2rem' }}
                             />
                         </div>
                         <div className="col-12">
                             <h5>Knob</h5>
                             <Knob
                                 value={knobValue}
-                                valueTemplate={"{value}%"}
+                                valueTemplate={'{value}%'}
                                 onChange={(e) => setKnobValue(e.value)}
                                 step={10}
                                 min={-50}
@@ -314,7 +268,7 @@ const InputDemo: Page = () => {
                                     inputId="option1"
                                     name="option"
                                     value="Chicago"
-                                    checked={radioValue === "Chicago"}
+                                    checked={radioValue === 'Chicago'}
                                     onChange={(e) => setRadioValue(e.value)}
                                 />
                                 <label htmlFor="option1">Chicago</label>
@@ -326,7 +280,7 @@ const InputDemo: Page = () => {
                                     inputId="option2"
                                     name="option"
                                     value="Los Angeles"
-                                    checked={radioValue === "Los Angeles"}
+                                    checked={radioValue === 'Los Angeles'}
                                     onChange={(e) => setRadioValue(e.value)}
                                 />
                                 <label htmlFor="option2">Los Angeles</label>
@@ -338,7 +292,7 @@ const InputDemo: Page = () => {
                                     inputId="option3"
                                     name="option"
                                     value="New York"
-                                    checked={radioValue === "New York"}
+                                    checked={radioValue === 'New York'}
                                     onChange={(e) => setRadioValue(e.value)}
                                 />
                                 <label htmlFor="option3">New York</label>
@@ -354,9 +308,7 @@ const InputDemo: Page = () => {
                                     inputId="checkOption1"
                                     name="option"
                                     value="Chicago"
-                                    checked={
-                                        checkboxValue.indexOf("Chicago") !== -1
-                                    }
+                                    checked={checkboxValue.indexOf('Chicago') !== -1}
                                     onChange={onCheckboxChange}
                                 />
                                 <label htmlFor="checkOption1">Chicago</label>
@@ -368,15 +320,10 @@ const InputDemo: Page = () => {
                                     inputId="checkOption2"
                                     name="option"
                                     value="Los Angeles"
-                                    checked={
-                                        checkboxValue.indexOf("Los Angeles") !==
-                                        -1
-                                    }
+                                    checked={checkboxValue.indexOf('Los Angeles') !== -1}
                                     onChange={onCheckboxChange}
                                 />
-                                <label htmlFor="checkOption2">
-                                    Los Angeles
-                                </label>
+                                <label htmlFor="checkOption2">Los Angeles</label>
                             </div>
                         </div>
                         <div className="col-12 md:col-4">
@@ -385,9 +332,7 @@ const InputDemo: Page = () => {
                                     inputId="checkOption3"
                                     name="option"
                                     value="New York"
-                                    checked={
-                                        checkboxValue.indexOf("New York") !== -1
-                                    }
+                                    checked={checkboxValue.indexOf('New York') !== -1}
                                     onChange={onCheckboxChange}
                                 />
                                 <label htmlFor="checkOption3">New York</label>
@@ -396,10 +341,7 @@ const InputDemo: Page = () => {
                     </div>
 
                     <h5>Input Switch</h5>
-                    <InputSwitch
-                        checked={switchValue}
-                        onChange={(e) => setSwitchValue(e.value ?? false)}
-                    />
+                    <InputSwitch checked={switchValue} onChange={(e) => setSwitchValue(e.value ?? false)} />
                 </div>
 
                 <div className="card">
@@ -502,11 +444,7 @@ const InputDemo: Page = () => {
                                 <span className="p-inputgroup-addon p-inputgroup-addon-checkbox">
                                     <Checkbox
                                         checked={inputGroupValue}
-                                        onChange={(e) =>
-                                            setInputGroupValue(
-                                                e.checked ?? false
-                                            )
-                                        }
+                                        onChange={(e) => setInputGroupValue(e.checked ?? false)}
                                     />
                                 </span>
                                 <InputText placeholder="Confirm" />
@@ -516,7 +454,7 @@ const InputDemo: Page = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default InputDemo;
+export default InputDemo

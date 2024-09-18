@@ -1,4 +1,4 @@
-import { TreeNode } from 'primereact/treenode';
+import { TreeNode } from 'primereact/treenode'
 
 export const NodeService = {
     getFiles() {
@@ -6,7 +6,7 @@ export const NodeService = {
             headers: { 'Cache-Control': 'no-cache' }
         })
             .then((res) => res.json())
-            .then((d) => d.data as TreeNode[]);
+            .then((d) => d.data as TreeNode[])
     },
 
     getLazyFiles() {
@@ -14,7 +14,7 @@ export const NodeService = {
             headers: { 'Cache-Control': 'no-cache' }
         })
             .then((res) => res.json())
-            .then((d) => d.data as TreeNode[]);
+            .then((d) => d.data as TreeNode[])
     },
 
     getFilesystem() {
@@ -22,7 +22,7 @@ export const NodeService = {
             headers: { 'Cache-Control': 'no-cache' }
         })
             .then((res) => res.json())
-            .then((d) => d.data as TreeNode[]);
+            .then((d) => d.data as TreeNode[])
     },
 
     getLazyFilesystem() {
@@ -30,6 +30,6 @@ export const NodeService = {
             headers: { 'Cache-Control': 'no-cache' }
         })
             .then((res) => res.json())
-            .then((d) => d.data as TreeNode[]);
+            .then((d) => d.data as TreeNode[])
     }
-};
+}

@@ -1,69 +1,64 @@
-"use client";
+'use client'
 
-import type { Demo } from "@/types";
-import {
-    AutoComplete,
-    AutoCompleteCompleteEvent,
-} from "primereact/autocomplete";
-import { Calendar } from "primereact/calendar";
-import { Chips } from "primereact/chips";
-import { Dropdown } from "primereact/dropdown";
-import { InputMask } from "primereact/inputmask";
-import { InputNumber } from "primereact/inputnumber";
-import { InputText } from "primereact/inputtext";
-import { InputTextarea } from "primereact/inputtextarea";
-import { MultiSelect } from "primereact/multiselect";
-import { Password } from "primereact/password";
-import { useEffect, useState } from "react";
-import { CountryService } from "../../../../demo/service/CountryService";
+import type { Demo } from '@/types'
+import { AutoComplete, AutoCompleteCompleteEvent } from 'primereact/autocomplete'
+import { Calendar } from 'primereact/calendar'
+import { Chips } from 'primereact/chips'
+import { Dropdown } from 'primereact/dropdown'
+import { InputMask } from 'primereact/inputmask'
+import { InputNumber } from 'primereact/inputnumber'
+import { InputText } from 'primereact/inputtext'
+import { InputTextarea } from 'primereact/inputtextarea'
+import { MultiSelect } from 'primereact/multiselect'
+import { Password } from 'primereact/password'
+import { useEffect, useState } from 'react'
+import { CountryService } from '../../../../demo/service/CountryService'
 
 const InvalidStateDemo = () => {
-    const [countries, setCountries] = useState<Demo.Country[]>([]);
-    const [filteredCountries, setFilteredCountries] = useState<Demo.Country[]>(
-        []
-    );
-    const [value1, setValue1] = useState("");
-    const [value2, setValue2] = useState(null);
-    const [value3, setValue3] = useState(null);
-    const [value4, setValue4] = useState<any[]>([]);
-    const [value5, setValue5] = useState("");
-    const [value6, setValue6] = useState("");
-    const [value7, setValue7] = useState(0);
-    const [value8, setValue8] = useState(null);
-    const [value9, setValue9] = useState(null);
-    const [value10, setValue10] = useState("");
+    const [countries, setCountries] = useState<Demo.Country[]>([])
+    const [filteredCountries, setFilteredCountries] = useState<Demo.Country[]>([])
+    const [value1, setValue1] = useState('')
+    const [value2, setValue2] = useState(null)
+    const [value3, setValue3] = useState(null)
+    const [value4, setValue4] = useState<any[]>([])
+    const [value5, setValue5] = useState('')
+    const [value6, setValue6] = useState('')
+    const [value7, setValue7] = useState(0)
+    const [value8, setValue8] = useState(null)
+    const [value9, setValue9] = useState(null)
+    const [value10, setValue10] = useState('')
 
     const cities = [
-        { name: "New York", code: "NY" },
-        { name: "Rome", code: "RM" },
-        { name: "London", code: "LDN" },
-        { name: "Istanbul", code: "IST" },
-        { name: "Paris", code: "PRS" },
-    ];
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ]
 
     useEffect(() => {
         CountryService.getCountries().then((countries) => {
-            setCountries(countries);
-        });
-    }, []);
+            setCountries(countries)
+        })
+    }, [])
 
     const searchCountry = (event: AutoCompleteCompleteEvent) => {
         // in a real application, make a request to a remote url with the query and
         // return filtered results, for demo we filter at client side
-        const filtered = [];
-        const query = event.query;
+        const filtered = []
+        const query = event.query
         for (let i = 0; i < countries.length; i++) {
-            const country = countries[i];
+            const country = countries[i]
             if (country.name.toLowerCase().indexOf(query.toLowerCase()) === 0) {
-                filtered.push(country);
+                filtered.push(country)
             }
         }
-        setFilteredCountries(filtered);
-    };
+        setFilteredCountries(filtered)
+    }
 
     const onCalendarChange = (e: any) => {
-        setValue3(e.value!);
-    };
+        setValue3(e.value!)
+    }
 
     return (
         <div className="card">
@@ -129,7 +124,7 @@ const InvalidStateDemo = () => {
                             id="inputmask"
                             mask="99/99/9999"
                             value={value6}
-                            onChange={(e) => setValue6(e.value ?? "")}
+                            onChange={(e) => setValue6(e.value ?? '')}
                             className="p-invalid"
                         />
                     </div>
@@ -138,9 +133,7 @@ const InvalidStateDemo = () => {
                         <InputNumber
                             id="inputnumber"
                             value={value7}
-                            onValueChange={(e) =>
-                                setValue7(e.target.value ?? 0)
-                            }
+                            onValueChange={(e) => setValue7(e.target.value ?? 0)}
                             className="p-invalid"
                         />
                     </div>
@@ -180,7 +173,7 @@ const InvalidStateDemo = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default InvalidStateDemo;
+export default InvalidStateDemo

@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-'use client';
+'use client'
 
-import React from 'react';
+import React from 'react'
 
-import { Button } from 'primereact/button';
-import { Card } from 'primereact/card';
-import { Timeline } from 'primereact/timeline';
-import { CustomEvent } from '@/types';
+import { Button } from 'primereact/button'
+import { Card } from 'primereact/card'
+import { Timeline } from 'primereact/timeline'
+import { CustomEvent } from '@/types'
 
 const TimelineDemo = () => {
     const customEvents: CustomEvent[] = [
@@ -35,30 +35,42 @@ const TimelineDemo = () => {
             icon: 'pi pi-check',
             color: '#607D8B'
         }
-    ];
+    ]
 
-    const horizontalEvents = ['2023', '2024', '2025', '2026'];
+    const horizontalEvents = ['2023', '2024', '2025', '2026']
 
     const customizedContent = (item: CustomEvent) => {
         return (
             <Card title={item.status} subTitle={item.date}>
-                {item.image && <img src={`/demo/images/product/${item.image}`} onError={(e) => (e.currentTarget.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={item.name} width={200} className="shadow-2 mb-3" />}
+                {item.image && (
+                    <img
+                        src={`/demo/images/product/${item.image}`}
+                        onError={(e) =>
+                            (e.currentTarget.src =
+                                'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')
+                        }
+                        alt={item.name}
+                        width={200}
+                        className="shadow-2 mb-3"
+                    />
+                )}
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-                    quas!
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error
+                    repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam
+                    perferendis esse, cupiditate neque quas!
                 </p>
                 <Button label="Read more" text></Button>
             </Card>
-        );
-    };
+        )
+    }
 
     const customizedMarker = (item: CustomEvent) => {
         return (
             <span className="custom-marker shadow-1" style={{ backgroundColor: item.color }}>
                 <i className={item.icon}></i>
             </span>
-        );
-    };
+        )
+    }
 
     return (
         <div>
@@ -85,14 +97,24 @@ const TimelineDemo = () => {
                 <div className="col-12 md:col-6">
                     <div className="card">
                         <h5>Opposite Content</h5>
-                        <Timeline value={customEvents} opposite={(item) => item.status} content={(item) => <small className="p-text-secondary">{item.date}</small>} />
+                        <Timeline
+                            value={customEvents}
+                            opposite={(item) => item.status}
+                            content={(item) => <small className="p-text-secondary">{item.date}</small>}
+                        />
                     </div>
                 </div>
 
                 <div className="col-12">
                     <div className="card timeline-demo">
                         <h5>Customized</h5>
-                        <Timeline value={customEvents} align="alternate" className="customized-timeline" marker={customizedMarker} content={customizedContent} />
+                        <Timeline
+                            value={customEvents}
+                            align="alternate"
+                            className="customized-timeline"
+                            marker={customizedMarker}
+                            content={customizedContent}
+                        />
                     </div>
                 </div>
                 <div className="col-12">
@@ -105,12 +127,18 @@ const TimelineDemo = () => {
                         <Timeline value={horizontalEvents} layout="horizontal" content={(item) => item} />
 
                         <h6>Alternate Align</h6>
-                        <Timeline value={horizontalEvents} layout="horizontal" align="alternate" content={(item) => item} opposite={<span>&nbsp;</span>} />
+                        <Timeline
+                            value={horizontalEvents}
+                            layout="horizontal"
+                            align="alternate"
+                            content={(item) => item}
+                            opposite={<span>&nbsp;</span>}
+                        />
                     </div>
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default TimelineDemo;
+export default TimelineDemo

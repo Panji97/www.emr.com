@@ -1,32 +1,32 @@
-'use client';
-import React, { useRef, useState } from 'react';
-import { Toast } from 'primereact/toast';
-import { Messages } from 'primereact/messages';
-import { Message } from 'primereact/message';
-import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
+'use client'
+import React, { useRef, useState } from 'react'
+import { Toast } from 'primereact/toast'
+import { Messages } from 'primereact/messages'
+import { Message } from 'primereact/message'
+import { InputText } from 'primereact/inputtext'
+import { Button } from 'primereact/button'
 
 const MessagesDemo = () => {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const toast = useRef<Toast>(null);
-    const message = useRef<Messages>(null);
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const toast = useRef<Toast>(null)
+    const message = useRef<Messages>(null)
 
     const addSuccessMessage = () => {
-        message.current?.show({ severity: 'success', content: 'Message Detail' });
-    };
+        message.current?.show({ severity: 'success', content: 'Message Detail' })
+    }
 
     const addInfoMessage = () => {
-        message.current?.show({ severity: 'info', content: 'Message Detail' });
-    };
+        message.current?.show({ severity: 'info', content: 'Message Detail' })
+    }
 
     const addWarnMessage = () => {
-        message.current?.show({ severity: 'warn', content: 'Message Detail' });
-    };
+        message.current?.show({ severity: 'warn', content: 'Message Detail' })
+    }
 
     const addErrorMessage = () => {
-        message.current?.show({ severity: 'error', content: 'Message Detail' });
-    };
+        message.current?.show({ severity: 'error', content: 'Message Detail' })
+    }
 
     const showSuccess = () => {
         toast.current?.show({
@@ -34,8 +34,8 @@ const MessagesDemo = () => {
             summary: 'Success Message',
             detail: 'Message Detail',
             life: 3000
-        });
-    };
+        })
+    }
 
     const showInfo = () => {
         toast.current?.show({
@@ -43,8 +43,8 @@ const MessagesDemo = () => {
             summary: 'Info Message',
             detail: 'Message Detail',
             life: 3000
-        });
-    };
+        })
+    }
 
     const showWarn = () => {
         toast.current?.show({
@@ -52,8 +52,8 @@ const MessagesDemo = () => {
             summary: 'Warn Message',
             detail: 'Message Detail',
             life: 3000
-        });
-    };
+        })
+    }
 
     const showError = () => {
         toast.current?.show({
@@ -61,8 +61,8 @@ const MessagesDemo = () => {
             summary: 'Error Message',
             detail: 'Message Detail',
             life: 3000
-        });
-    };
+        })
+    }
 
     return (
         <div className="grid">
@@ -99,14 +99,26 @@ const MessagesDemo = () => {
                         <label htmlFor="username1" className="col-fixed w-9rem">
                             Username
                         </label>
-                        <InputText id="username1" value={username} onChange={(e) => setUsername(e.target.value)} required className="p-invalid" />
+                        <InputText
+                            id="username1"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                            className="p-invalid"
+                        />
                         <Message severity="error" text="Username is required" />
                     </div>
                     <div className="flex align-items-center flex-wrap gap-2">
                         <label htmlFor="email" className="col-fixed w-9rem">
                             Email
                         </label>
-                        <InputText id="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="p-invalid" />
+                        <InputText
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            className="p-invalid"
+                        />
                         <Message severity="error" />
                     </div>
                 </div>
@@ -125,7 +137,7 @@ const MessagesDemo = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default MessagesDemo;
+export default MessagesDemo

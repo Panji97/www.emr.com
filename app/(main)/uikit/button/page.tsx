@@ -1,47 +1,47 @@
-'use client';
-import React, { useState } from 'react';
-import { SplitButton } from 'primereact/splitbutton';
-import { Button } from 'primereact/button';
-import styles from './index.module.scss';
-import { classNames } from 'primereact/utils';
+'use client'
+import React, { useState } from 'react'
+import { SplitButton } from 'primereact/splitbutton'
+import { Button } from 'primereact/button'
+import styles from './index.module.scss'
+import { classNames } from 'primereact/utils'
 
 const ButtonDemo = () => {
-    const [loading1, setLoading1] = useState(false);
-    const [loading2, setLoading2] = useState(false);
-    const [loading3, setLoading3] = useState(false);
-    const [loading4, setLoading4] = useState(false);
+    const [loading1, setLoading1] = useState(false)
+    const [loading2, setLoading2] = useState(false)
+    const [loading3, setLoading3] = useState(false)
+    const [loading4, setLoading4] = useState(false)
 
     const onLoadingClick1 = () => {
-        setLoading1(true);
+        setLoading1(true)
 
         setTimeout(() => {
-            setLoading1(false);
-        }, 2000);
-    };
+            setLoading1(false)
+        }, 2000)
+    }
 
     const onLoadingClick2 = () => {
-        setLoading2(true);
+        setLoading2(true)
 
         setTimeout(() => {
-            setLoading2(false);
-        }, 2000);
-    };
+            setLoading2(false)
+        }, 2000)
+    }
 
     const onLoadingClick3 = () => {
-        setLoading3(true);
+        setLoading3(true)
 
         setTimeout(() => {
-            setLoading3(false);
-        }, 2000);
-    };
+            setLoading3(false)
+        }, 2000)
+    }
 
     const onLoadingClick4 = () => {
-        setLoading4(true);
+        setLoading4(true)
 
         setTimeout(() => {
-            setLoading4(false);
-        }, 2000);
-    };
+            setLoading4(false)
+        }, 2000)
+    }
 
     const items = [
         {
@@ -56,7 +56,7 @@ const ButtonDemo = () => {
             label: 'Home',
             icon: 'pi pi-home'
         }
-    ];
+    ]
 
     return (
         <div className="grid">
@@ -235,14 +235,20 @@ const ButtonDemo = () => {
                     <h5>Loading</h5>
                     <div className="flex flex-wrap gap-2">
                         <Button label="Search" icon="pi pi-search" loading={loading1} onClick={onLoadingClick1} />
-                        <Button label="Search" icon="pi pi-search" iconPos="right" loading={loading2} onClick={onLoadingClick2} />
+                        <Button
+                            label="Search"
+                            icon="pi pi-search"
+                            iconPos="right"
+                            loading={loading2}
+                            onClick={onLoadingClick2}
+                        />
                         <Button icon="pi pi-search" loading={loading3} onClick={onLoadingClick3} />
                         <Button label="Search" loading={loading4} onClick={onLoadingClick4} />
                     </div>
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default ButtonDemo;
+export default ButtonDemo
