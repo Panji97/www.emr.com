@@ -57,22 +57,6 @@ function UsersDemo() {
         setGlobalFilterValue1(value)
     }
 
-    const renderHeader1 = () => {
-        return (
-            <div className="flex justify-content-between">
-                <Button type="button" icon="pi pi-filter-slash" label="Clear" outlined onClick={clearFilter1} />
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
-                    <InputText
-                        value={globalFilterValue1}
-                        onChange={onGlobalFilterChange1}
-                        placeholder="Keyword Search"
-                    />
-                </span>
-            </div>
-        )
-    }
-
     useEffect(() => {
         CustomerService.getCustomersLarge().then((data) => {
             setCustomers1(getCustomers(data))
@@ -305,103 +289,128 @@ function UsersDemo() {
         return <TriStateCheckbox value={options.value} onChange={(e) => options.filterCallback(e.value)} />
     }
 
+    const renderHeader1 = () => {
+        return (
+            <div className="grid align-items-center" style={{ width: '100%' }}>
+                <div className="col-12 md:col-4 lg:col-2 flex justify-content-start mb-2 md:mb-0">
+                    <Button
+                        type="button"
+                        icon="pi pi-filter-slash"
+                        label="Clear"
+                        outlined
+                        onClick={clearFilter1}
+                        className="w-full md:w-auto"
+                    />
+                </div>
+                <div className="col-12 md:col-8 lg:col-10 flex justify-content-end">
+                    <span className="p-input-icon-left w-full md:w-auto" style={{ maxWidth: '400px' }}>
+                        <i className="pi pi-search" />
+                        <InputText
+                            value={globalFilterValue1}
+                            onChange={onGlobalFilterChange1}
+                            placeholder="Keyword Search"
+                            className="w-full"
+                        />
+                    </span>
+                </div>
+            </div>
+        )
+    }
+
     const header1 = renderHeader1()
 
     return (
         <Menu>
             <div className="grid mt-2">
                 <div className="col-12">
-                    <div className="card">
-                        <h5>Filter Menu</h5>
-                        <DataTable
-                            value={customers1}
-                            paginator
-                            className="p-datatable-gridlines"
-                            showGridlines
-                            rows={10}
-                            dataKey="id"
-                            filters={filters1}
-                            filterDisplay="menu"
-                            loading={loading1}
-                            responsiveLayout="scroll"
-                            emptyMessage="No customers found."
-                            header={header1}
-                        >
-                            <Column
-                                field="name"
-                                header="Name"
-                                filter
-                                filterPlaceholder="Search by name"
-                                style={{ minWidth: '12rem' }}
-                            />
-                            <Column
-                                header="Country"
-                                filterField="country.name"
-                                style={{ minWidth: '12rem' }}
-                                body={countryBodyTemplate}
-                                filter
-                                filterPlaceholder="Search by country"
-                                filterClear={filterClearTemplate}
-                                filterApply={filterApplyTemplate}
-                            />
-                            <Column
-                                header="Agent"
-                                filterField="representative"
-                                showFilterMatchModes={false}
-                                filterMenuStyle={{ width: '14rem' }}
-                                style={{ minWidth: '14rem' }}
-                                body={representativeBodyTemplate}
-                                filter
-                                filterElement={representativeFilterTemplate}
-                            />
-                            <Column
-                                header="Date"
-                                filterField="date"
-                                dataType="date"
-                                style={{ minWidth: '10rem' }}
-                                body={dateBodyTemplate}
-                                filter
-                                filterElement={dateFilterTemplate}
-                            />
-                            <Column
-                                header="Balance"
-                                filterField="balance"
-                                dataType="numeric"
-                                style={{ minWidth: '10rem' }}
-                                body={balanceBodyTemplate}
-                                filter
-                                filterElement={balanceFilterTemplate}
-                            />
-                            <Column
-                                field="status"
-                                header="Status"
-                                filterMenuStyle={{ width: '14rem' }}
-                                style={{ minWidth: '12rem' }}
-                                body={statusBodyTemplate}
-                                filter
-                                filterElement={statusFilterTemplate}
-                            />
-                            <Column
-                                field="activity"
-                                header="Activity"
-                                showFilterMatchModes={false}
-                                style={{ minWidth: '12rem' }}
-                                body={activityBodyTemplate}
-                                filter
-                                filterElement={activityFilterTemplate}
-                            />
-                            <Column
-                                field="verified"
-                                header="Verified"
-                                dataType="boolean"
-                                bodyClassName="text-center"
-                                style={{ minWidth: '8rem' }}
-                                body={verifiedBodyTemplate}
-                                filter
-                                filterElement={verifiedFilterTemplate}
-                            />
-                        </DataTable>
-                    </div>
+                    <DataTable
+                        value={customers1}
+                        paginator
+                        className="p-datatable-gridlines"
+                        showGridlines
+                        rows={10}
+                        dataKey="id"
+                        filters={filters1}
+                        filterDisplay="menu"
+                        loading={loading1}
+                        responsiveLayout="scroll"
+                        emptyMessage="No customers found."
+                        header={header1}
+                    >
+                        <Column
+                            field="name"
+                            header="Name"
+                            filter
+                            filterPlaceholder="Search by name"
+                            style={{ minWidth: '12rem' }}
+                        />
+                        <Column
+                            header="Country"
+                            filterField="country.name"
+                            style={{ minWidth: '12rem' }}
+                            body={countryBodyTemplate}
+                            filter
+                            filterPlaceholder="Search by country"
+                            filterClear={filterClearTemplate}
+                            filterApply={filterApplyTemplate}
+                        />
+                        <Column
+                            header="Agent"
+                            filterField="representative"
+                            showFilterMatchModes={false}
+                            filterMenuStyle={{ width: '14rem' }}
+                            style={{ minWidth: '14rem' }}
+                            body={representativeBodyTemplate}
+                            filter
+                            filterElement={representativeFilterTemplate}
+                        />
+                        <Column
+                            header="Date"
+                            filterField="date"
+                            dataType="date"
+                            style={{ minWidth: '10rem' }}
+                            body={dateBodyTemplate}
+                            filter
+                            filterElement={dateFilterTemplate}
+                        />
+                        <Column
+                            header="Balance"
+                            filterField="balance"
+                            dataType="numeric"
+                            style={{ minWidth: '10rem' }}
+                            body={balanceBodyTemplate}
+                            filter
+                            filterElement={balanceFilterTemplate}
+                        />
+                        <Column
+                            field="status"
+                            header="Status"
+                            filterMenuStyle={{ width: '14rem' }}
+                            style={{ minWidth: '12rem' }}
+                            body={statusBodyTemplate}
+                            filter
+                            filterElement={statusFilterTemplate}
+                        />
+                        <Column
+                            field="verified"
+                            header="Verified"
+                            dataType="boolean"
+                            bodyClassName="text-center"
+                            style={{ minWidth: '8rem' }}
+                            body={verifiedBodyTemplate}
+                            filter
+                            filterElement={verifiedFilterTemplate}
+                        />
+                        <Column
+                            // field="activity"
+                            // header="Activity"
+                            showFilterMatchModes={false}
+                            style={{ minWidth: '12rem' }}
+                            body={activityBodyTemplate}
+                            // filter
+                            // filterElement={activityFilterTemplate}
+                        />
+                    </DataTable>
                 </div>
             </div>
         </Menu>
