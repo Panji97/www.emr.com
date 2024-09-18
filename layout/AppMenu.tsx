@@ -1,14 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 
-import React, { useContext } from 'react';
-import AppMenuitem from './AppMenuitem';
-import { LayoutContext } from './context/layoutcontext';
-import { MenuProvider } from './context/menucontext';
-import Link from 'next/link';
-import { AppMenuItem } from '@/types';
+import React, { useContext } from 'react'
+import AppMenuitem from './AppMenuitem'
+import { LayoutContext } from './context/layoutcontext'
+import { MenuProvider } from './context/menucontext'
+import Link from 'next/link'
+import { AppMenuItem } from '@/types'
 
 const AppMenu = () => {
-    const { layoutConfig } = useContext(LayoutContext);
+    const { layoutConfig } = useContext(LayoutContext)
 
     const model: AppMenuItem[] = [
         {
@@ -29,7 +29,7 @@ const AppMenu = () => {
                 { label: 'Panel', icon: 'pi pi-fw pi-tablet', to: '/uikit/panel' },
                 { label: 'Overlay', icon: 'pi pi-fw pi-clone', to: '/uikit/overlay' },
                 { label: 'Media', icon: 'pi pi-fw pi-image', to: '/uikit/media' },
-                { label: 'Menu', icon: 'pi pi-fw pi-bars', to: '/uikit/menu', preventExact: true },
+                { label: 'Menu', icon: 'pi pi-fw pi-bars', to: '/uikit/menu/users', preventExact: true },
                 { label: 'Message', icon: 'pi pi-fw pi-comment', to: '/uikit/message' },
                 { label: 'File', icon: 'pi pi-fw pi-file', to: '/uikit/file' },
                 { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', to: '/uikit/charts' },
@@ -40,7 +40,12 @@ const AppMenu = () => {
             label: 'Prime Blocks',
             items: [
                 { label: 'Free Blocks', icon: 'pi pi-fw pi-eye', to: '/blocks', badge: 'NEW' },
-                { label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: 'https://blocks.primereact.org', target: '_blank' }
+                {
+                    label: 'All Blocks',
+                    icon: 'pi pi-fw pi-globe',
+                    url: 'https://blocks.primereact.org',
+                    target: '_blank'
+                }
             ]
         },
         {
@@ -169,21 +174,31 @@ const AppMenu = () => {
                 }
             ]
         }
-    ];
+    ]
 
     return (
         <MenuProvider>
             <ul className="layout-menu">
                 {model.map((item, i) => {
-                    return !item?.seperator ? <AppMenuitem item={item} root={true} index={i} key={item.label} /> : <li className="menu-separator"></li>;
+                    return !item?.seperator ? (
+                        <AppMenuitem item={item} root={true} index={i} key={item.label} />
+                    ) : (
+                        <li className="menu-separator"></li>
+                    )
                 })}
 
                 <Link href="https://blocks.primereact.org" target="_blank" style={{ cursor: 'pointer' }}>
-                    <img alt="Prime Blocks" className="w-full mt-3" src={`/layout/images/banner-primeblocks${layoutConfig.colorScheme === 'light' ? '' : '-dark'}.png`} />
+                    <img
+                        alt="Prime Blocks"
+                        className="w-full mt-3"
+                        src={`/layout/images/banner-primeblocks${
+                            layoutConfig.colorScheme === 'light' ? '' : '-dark'
+                        }.png`}
+                    />
                 </Link>
             </ul>
         </MenuProvider>
-    );
-};
+    )
+}
 
-export default AppMenu;
+export default AppMenu
