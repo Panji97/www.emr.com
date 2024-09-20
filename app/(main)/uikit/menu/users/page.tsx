@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import Menu from '../page'
 import { CustomerService } from '../../../../../demo/service/CustomerService'
+import { ProductService } from '../../../../../demo/service/ProductService'
 import { FilterMatchMode, FilterOperator } from 'primereact/api'
 import { Button } from 'primereact/button'
 import { Calendar } from 'primereact/calendar'
@@ -58,7 +59,6 @@ function UsersDemo() {
 
     useEffect(() => {
         CustomerService.getCustomersLarge().then((data) => {
-            console.log(data)
             setCustomers1(getCustomers(data))
             setLoading1(false)
         })
@@ -81,12 +81,12 @@ function UsersDemo() {
         })
     }
 
-    // const formatCurrency = (value: number) => {
-    //     return value.toLocaleString('en-US', {
-    //         style: 'currency',
-    //         currency: 'USD'
-    //     })
-    // }
+    const formatCurrency = (value: number) => {
+        return value.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD'
+        })
+    }
 
     const initFilters1 = () => {
         setFilters1({
@@ -118,19 +118,19 @@ function UsersDemo() {
         setGlobalFilterValue1('')
     }
 
-    // const countryBodyTemplate = (rowData: Demo.Customer) => {
-    //     return (
-    //         <React.Fragment>
-    //             <img
-    //                 alt="flag"
-    //                 src={`/demo/images/flag/flag_placeholder.png`}
-    //                 className={`flag flag-${rowData.country.code}`}
-    //                 width={30}
-    //             />
-    //             <span style={{ marginLeft: '.5em', verticalAlign: 'middle' }}>{rowData.country.name}</span>
-    //         </React.Fragment>
-    //     )
-    // }
+    const countryBodyTemplate = (rowData: Demo.Customer) => {
+        return (
+            <React.Fragment>
+                <img
+                    alt="flag"
+                    src={`/demo/images/flag/flag_placeholder.png`}
+                    className={`flag flag-${rowData.country.code}`}
+                    width={30}
+                />
+                <span style={{ marginLeft: '.5em', verticalAlign: 'middle' }}>{rowData.country.name}</span>
+            </React.Fragment>
+        )
+    }
 
     const filterClearTemplate = (options: ColumnFilterClearTemplateOptions) => {
         return (
@@ -149,24 +149,24 @@ function UsersDemo() {
         )
     }
 
-    // const representativeBodyTemplate = (rowData: Demo.Customer) => {
-    //     const representative = rowData.representative
-    //     return (
-    //         <React.Fragment>
-    //             <img
-    //                 alt={representative.name}
-    //                 src={`/demo/images/avatar/${representative.image}`}
-    //                 onError={(e) =>
-    //                     ((e.target as HTMLImageElement).src =
-    //                         'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')
-    //                 }
-    //                 width={32}
-    //                 style={{ verticalAlign: 'middle' }}
-    //             />
-    //             <span style={{ marginLeft: '.5em', verticalAlign: 'middle' }}>{representative.name}</span>
-    //         </React.Fragment>
-    //     )
-    // }
+    const representativeBodyTemplate = (rowData: Demo.Customer) => {
+        const representative = rowData.representative
+        return (
+            <React.Fragment>
+                <img
+                    alt={representative.name}
+                    src={`/demo/images/avatar/${representative.image}`}
+                    onError={(e) =>
+                        ((e.target as HTMLImageElement).src =
+                            'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')
+                    }
+                    width={32}
+                    style={{ verticalAlign: 'middle' }}
+                />
+                <span style={{ marginLeft: '.5em', verticalAlign: 'middle' }}>{representative.name}</span>
+            </React.Fragment>
+        )
+    }
 
     const representativeFilterTemplate = (options: ColumnFilterElementTemplateOptions) => {
         return (
@@ -215,9 +215,9 @@ function UsersDemo() {
         )
     }
 
-    // const balanceBodyTemplate = (rowData: Demo.Customer) => {
-    //     return formatCurrency(rowData.balance as number)
-    // }
+    const balanceBodyTemplate = (rowData: Demo.Customer) => {
+        return formatCurrency(rowData.balance as number)
+    }
 
     const balanceFilterTemplate = (options: ColumnFilterElementTemplateOptions) => {
         return (
@@ -344,7 +344,7 @@ function UsersDemo() {
                             filterPlaceholder="Search by name"
                             style={{ minWidth: '12rem' }}
                         />
-                        {/* <Column
+                        <Column
                             header="Country"
                             filterField="country.name"
                             style={{ minWidth: '12rem' }}
@@ -353,8 +353,8 @@ function UsersDemo() {
                             filterPlaceholder="Search by country"
                             filterClear={filterClearTemplate}
                             filterApply={filterApplyTemplate}
-                        /> */}
-                        {/* <Column
+                        />
+                        <Column
                             header="Agent"
                             filterField="representative"
                             showFilterMatchModes={false}
@@ -363,7 +363,7 @@ function UsersDemo() {
                             body={representativeBodyTemplate}
                             filter
                             filterElement={representativeFilterTemplate}
-                        /> */}
+                        />
                         <Column
                             header="Date"
                             filterField="date"
@@ -373,7 +373,7 @@ function UsersDemo() {
                             filter
                             filterElement={dateFilterTemplate}
                         />
-                        {/* <Column
+                        <Column
                             header="Balance"
                             filterField="balance"
                             dataType="numeric"
@@ -381,7 +381,7 @@ function UsersDemo() {
                             body={balanceBodyTemplate}
                             filter
                             filterElement={balanceFilterTemplate}
-                        /> */}
+                        />
                         <Column
                             field="status"
                             header="Status"
