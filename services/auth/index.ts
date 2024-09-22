@@ -58,32 +58,36 @@ export const useAuthService = () => {
     }
 
     const handleRegister = async () => {
-        const response = await fetch(`${BASE_AUTH}/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        })
-        const result = await response.json()
-
-        if (response.ok) {
-            toast.current?.show({
-                severity: 'success',
-                summary: result.message,
-                detail: result.detail,
-                life: 5000
+        try {
+            const response = await fetch(`${BASE_AUTH}/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
             })
+            const result = await response.json()
 
-            setInterval(() => {
-                router.push('/auth/login')
-            }, 2000)
-        } else {
+            if (result.data) {
+                toast.current?.show({
+                    severity: 'success',
+                    detail: result.message
+                })
+
+                setInterval(() => {
+                    window.location.reload()
+                    router.push('/auth/login')
+                }, 1000)
+            } else {
+                toast.current?.show({
+                    severity: 'error',
+                    detail: result.message
+                })
+            }
+        } catch (error: any) {
             toast.current?.show({
                 severity: 'error',
-                summary: result.error,
-                detail: result.message,
-                life: 5000
+                detail: error.message
             })
         }
     }

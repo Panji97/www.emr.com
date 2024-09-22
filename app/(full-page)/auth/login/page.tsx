@@ -94,6 +94,7 @@ const LoginPage = () => {
                                 <a
                                     className="font-medium no-underline ml-2 text-right cursor-pointer"
                                     style={{ color: 'var(--primary-color)' }}
+                                    onClick={() => router.push('/auth/forgot-password')}
                                 >
                                     Forgot password?
                                 </a>

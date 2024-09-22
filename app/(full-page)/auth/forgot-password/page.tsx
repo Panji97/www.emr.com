@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useContext, useState, useRef } from 'react'
+import React, { useContext } from 'react'
 import { Button } from 'primereact/button'
 import { Password } from 'primereact/password'
 import { LayoutContext } from '../../../../layout/context/layoutcontext'
@@ -9,7 +9,7 @@ import { classNames } from 'primereact/utils'
 import { Toast } from 'primereact/toast'
 import { useAuthService } from '@/services/auth'
 
-const RegisterPage = () => {
+const ForgotPasswordPage = () => {
     /**
      * use service
      */
@@ -40,7 +40,7 @@ const RegisterPage = () => {
                     <div className="w-full surface-card py-8 px-5 sm:px-8" style={{ borderRadius: '53px' }}>
                         <div className="text-center mb-5">
                             <img src="/demo/images/login/avatar.png" alt="Avatar" height="50" className="mb-3" />
-                            <div className="text-900 text-3xl font-medium mb-3">Register</div>
+                            <div className="text-900 text-3xl font-medium mb-3">Forgot Password</div>
                         </div>
                         <div>
                             <label htmlFor="email1" className="block text-900 text-xl font-medium mb-2">
@@ -57,32 +57,12 @@ const RegisterPage = () => {
                                 style={{ padding: '1rem' }}
                             />
 
-                            <label htmlFor="password1" className="block text-900 font-medium text-xl mb-2">
-                                Password
-                            </label>
-                            <Password
-                                inputId="password1"
-                                name="password"
-                                value={formData.password}
-                                feedback={false}
-                                onChange={handleChange}
-                                placeholder="Password"
-                                toggleMask
-                                className="w-full mb-5"
-                                inputClassName="w-full p-3 md:w-30rem"
-                            />
-
-                            <div className="flex align-items-center justify-content-between mb-5 gap-5">
-                                <div className="flex align-items-center"></div>
-                                <a
-                                    className="font-medium no-underline ml-2 text-right cursor-pointer"
-                                    style={{ color: 'var(--primary-color)' }}
-                                    onClick={() => router.push('/auth/forgot-password')}
-                                >
-                                    Forgot password?
-                                </a>
-                            </div>
-                            <Button label="Sign Up" className="w-full p-3 text-xl" onClick={handleRegister}></Button>
+                            <div className="flex align-items-center justify-content-between"></div>
+                            <Button
+                                label="Send Reset Password"
+                                className="w-full p-3 text-xl"
+                                onClick={handleRegister}
+                            ></Button>
                             <div className="flex justify-content-center mt-3">
                                 <span className="text-600 font-medium line-height-3">Already have an account?</span>
                                 <a
@@ -100,4 +80,4 @@ const RegisterPage = () => {
     )
 }
 
-export default RegisterPage
+export default ForgotPasswordPage
