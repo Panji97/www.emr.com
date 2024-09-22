@@ -91,16 +91,15 @@ export const useAuthService = () => {
     const handleLogout = async () => {
         toast.current?.show({
             severity: 'success',
-            summary: 'success',
-            detail: 'Success logout account',
-            life: 2000
+            detail: 'Success logout account'
         })
 
-        eraseCookie('token')
+        eraseCookie('access_token')
+
         setInterval(() => {
             window.location.reload()
             router.push('/auth/login')
-        }, 2000)
+        }, 1000)
     }
 
     const handleForgotPassword = async () => {
