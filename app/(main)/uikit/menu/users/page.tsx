@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react'
 import Menu from '../page'
 import { CustomerService } from '../../../../../demo/service/CustomerService'
-import { ProductService } from '../../../../../demo/service/ProductService'
 import { FilterMatchMode, FilterOperator } from 'primereact/api'
 import { Button } from 'primereact/button'
 import { Calendar } from 'primereact/calendar'
