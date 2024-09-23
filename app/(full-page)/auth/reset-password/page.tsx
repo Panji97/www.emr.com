@@ -1,18 +1,34 @@
 'use client'
-import React, { useContext, useState, useRef } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Button } from 'primereact/button'
 import { Password } from 'primereact/password'
 import { LayoutContext } from '../../../../layout/context/layoutcontext'
 import { classNames } from 'primereact/utils'
 import { Toast } from 'primereact/toast'
 import { useAuthService } from '@/services/auth'
+import { useSearchParams } from 'next/navigation'
 
 const ResetPasswordPage = () => {
+    const searchParams = useSearchParams()
+    const tokenresetpassword = searchParams.get('tokenresetpassword')
+    const email = searchParams.get('email')
+
     /**
      * use service
      */
-    const { toast, formData, handleChange, handleResetPassword } = useAuthService()
+    const { toast, formData, setFormData, handleChange, handleResetPassword } = useAuthService()
     const { layoutConfig } = useContext(LayoutContext)
+
+    // Set tokenresetpassword and email in formData on component mount
+    useEffect(() => {
+        if (tokenresetpassword && email) {
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                email,
+                tokenresetpassword
+            }))
+        }
+    }, [tokenresetpassword, email, setFormData])
 
     const containerClassName = classNames(
         'surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden',
@@ -58,7 +74,7 @@ const ResetPasswordPage = () => {
 
                             <div className="flex align-items-center justify-content-between mb-5 gap-5"></div>
                             <Button
-                                label="Sign Up"
+                                label="Reset Password"
                                 className="w-full p-3 text-xl"
                                 onClick={handleResetPassword}
                             ></Button>

@@ -10,8 +10,7 @@ export const useAuthService = () => {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
-        confirm_password: '',
-        token: ''
+        tokenresetpassword: ''
     })
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,75 +106,73 @@ export const useAuthService = () => {
     }
 
     const handleForgotPassword = async () => {
-        const response = await fetch(`${BASE_AUTH}/forgot-password`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        })
-
-        const result = await response.json()
-
-        if (response.ok) {
-            toast.current?.show({
-                severity: 'success',
-                summary: result.message,
-                detail: result.detail,
-                life: 2000
+        try {
+            const response = await fetch(`${BASE_AUTH}/forgot-password`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
             })
 
-            setInterval(() => {
-                router.push('/auth/login')
-            }, 2000)
-        } else {
+            const result = await response.json()
+
+            if (result.data) {
+                toast.current?.show({
+                    severity: 'success',
+                    detail: result.message
+                })
+
+                setInterval(() => {
+                    router.push('/auth/login')
+                }, 2000)
+            } else {
+                toast.current?.show({
+                    severity: 'error',
+                    detail: result.message
+                })
+            }
+        } catch (error: any) {
             toast.current?.show({
                 severity: 'error',
-                summary: result.error,
-                detail: result.message,
-                life: 5000
+                detail: error.message
             })
         }
     }
 
     const handleResetPassword = async () => {
-        if (formData.password !== formData.confirm_password) {
-            toast.current?.show({
-                severity: 'error',
-                summary: 'Error',
-                detail: 'Passwords do not match',
-                life: 5000
-            })
-            return
-        }
-
-        const response = await fetch(`${BASE_AUTH}/reset-password`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        })
-
-        const result = await response.json()
-
-        if (response.ok) {
-            toast.current?.show({
-                severity: 'success',
-                summary: result.message,
-                detail: result.detail,
-                life: 2000
+        try {
+            const response = await fetch(`${BASE_AUTH}/reset-password`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
             })
 
-            setInterval(() => {
-                router.push('/auth/login')
-            }, 2000)
-        } else {
+            const result = await response.json()
+
+            eraseCookie('access_token')
+
+            if (result.data) {
+                toast.current?.show({
+                    severity: 'success',
+                    detail: result.message
+                })
+
+                setInterval(() => {
+                    router.push('/auth/login')
+                }, 2000)
+            } else {
+                toast.current?.show({
+                    severity: 'error',
+                    detail: result.message
+                })
+            }
+        } catch (error: any) {
             toast.current?.show({
                 severity: 'error',
-                summary: result.error,
-                detail: result.message,
-                life: 5000
+                detail: error.message
             })
         }
     }
