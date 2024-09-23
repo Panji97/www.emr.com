@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import React, { useContext, useState } from 'react'
 import { Checkbox } from 'primereact/checkbox'
 import { Button } from 'primereact/button'
@@ -44,12 +45,12 @@ const LoginPage = () => {
                             <img src="/demo/images/login/avatar.png" alt="Image" height="50" className="mb-3" />
                             <div className="text-900 text-3xl font-medium mb-3">Login</div>
                             <span className="text-600 font-medium line-height-3">Don't have an account?</span>
-                            <a
+                            <Link
+                                href="/auth/register"
                                 className="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
-                                onClick={() => router.push('/auth/register')}
                             >
                                 Create today!
-                            </a>
+                            </Link>
                         </div>
                         <div>
                             <label htmlFor="email1" className="block text-900 text-xl font-medium mb-2">
@@ -91,13 +92,13 @@ const LoginPage = () => {
                                     ></Checkbox>
                                     <label htmlFor="rememberme1">Remember me</label>
                                 </div>
-                                <a
+                                <Link
+                                    href="/auth/forgot-password"
                                     className="font-medium no-underline ml-2 text-right cursor-pointer"
                                     style={{ color: 'var(--primary-color)' }}
-                                    onClick={() => router.push('/auth/forgot-password')}
                                 >
                                     Forgot password?
-                                </a>
+                                </Link>
                             </div>
                             <Button label="Sign In" className="w-full p-3 text-xl" onClick={handleLogin}></Button>
                         </div>

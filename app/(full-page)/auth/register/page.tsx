@@ -1,5 +1,5 @@
 'use client'
-
+import Link from 'next/link'
 import React, { useContext, useState, useRef } from 'react'
 import { Button } from 'primereact/button'
 import { Password } from 'primereact/password'
@@ -74,23 +74,23 @@ const RegisterPage = () => {
 
                             <div className="flex align-items-center justify-content-between mb-5 gap-5">
                                 <div className="flex align-items-center"></div>
-                                <a
+                                <Link
+                                    href="/auth/forgot-password"
                                     className="font-medium no-underline ml-2 text-right cursor-pointer"
                                     style={{ color: 'var(--primary-color)' }}
-                                    onClick={() => router.push('/auth/forgot-password')}
                                 >
                                     Forgot password?
-                                </a>
+                                </Link>
                             </div>
                             <Button label="Sign Up" className="w-full p-3 text-xl" onClick={handleRegister}></Button>
                             <div className="flex justify-content-center mt-3">
                                 <span className="text-600 font-medium line-height-3">Already have an account?</span>
-                                <a
+                                <Link
+                                    href="/auth/login"
                                     className="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
-                                    onClick={() => router.push('/auth/login')}
                                 >
                                     Sign in here!
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

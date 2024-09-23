@@ -1,5 +1,5 @@
 'use client'
-
+import Link from 'next/link'
 import React, { useContext } from 'react'
 import { Button } from 'primereact/button'
 import { Password } from 'primereact/password'
@@ -65,12 +65,12 @@ const ForgotPasswordPage = () => {
                             ></Button>
                             <div className="flex justify-content-center mt-3">
                                 <span className="text-600 font-medium line-height-3">Already have an account?</span>
-                                <a
+                                <Link
+                                    href="/auth/login"
                                     className="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
-                                    onClick={() => router.push('/auth/login')}
                                 >
                                     Sign in here!
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
