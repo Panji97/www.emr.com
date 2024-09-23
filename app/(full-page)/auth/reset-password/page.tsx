@@ -1,18 +1,17 @@
 'use client'
-import Link from 'next/link'
-import React, { useContext } from 'react'
+import React, { useContext, useState, useRef } from 'react'
 import { Button } from 'primereact/button'
+import { Password } from 'primereact/password'
 import { LayoutContext } from '../../../../layout/context/layoutcontext'
-import { InputText } from 'primereact/inputtext'
 import { classNames } from 'primereact/utils'
 import { Toast } from 'primereact/toast'
 import { useAuthService } from '@/services/auth'
 
-const ForgotPasswordPage = () => {
+const ResetPasswordPage = () => {
     /**
      * use service
      */
-    const { toast, router, formData, handleChange, handleForgotPassword } = useAuthService()
+    const { toast, formData, handleChange, handleResetPassword } = useAuthService()
     const { layoutConfig } = useContext(LayoutContext)
 
     const containerClassName = classNames(
@@ -39,38 +38,30 @@ const ForgotPasswordPage = () => {
                     <div className="w-full surface-card py-8 px-5 sm:px-8" style={{ borderRadius: '53px' }}>
                         <div className="text-center mb-5">
                             <img src="/demo/images/login/avatar.png" alt="Avatar" height="50" className="mb-3" />
-                            <div className="text-900 text-3xl font-medium mb-3">Forgot Password</div>
+                            <div className="text-900 text-3xl font-medium mb-3">Reset Password</div>
                         </div>
                         <div>
-                            <label htmlFor="email1" className="block text-900 text-xl font-medium mb-2">
-                                Email
+                            <label htmlFor="password1" className="block text-900 font-medium text-xl mb-2">
+                                New Password
                             </label>
-                            <InputText
-                                id="email1"
-                                type="text"
-                                name="email"
-                                value={formData.email}
+                            <Password
+                                inputId="password1"
+                                name="password"
+                                value={formData.password}
+                                feedback={false}
                                 onChange={handleChange}
-                                placeholder="Email address"
-                                className="w-full md:w-30rem mb-5"
-                                style={{ padding: '1rem' }}
+                                placeholder="Password"
+                                toggleMask
+                                className="w-full mb-5"
+                                inputClassName="w-full p-3 md:w-30rem"
                             />
 
-                            <div className="flex align-items-center justify-content-between"></div>
+                            <div className="flex align-items-center justify-content-between mb-5 gap-5"></div>
                             <Button
-                                label="Send Reset Password"
+                                label="Sign Up"
                                 className="w-full p-3 text-xl"
-                                onClick={handleForgotPassword}
+                                onClick={handleResetPassword}
                             ></Button>
-                            <div className="flex justify-content-center mt-3">
-                                <span className="text-600 font-medium line-height-3">Already have an account?</span>
-                                <Link
-                                    href="/auth/login"
-                                    className="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
-                                >
-                                    Sign in here!
-                                </Link>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -79,4 +70,4 @@ const ForgotPasswordPage = () => {
     )
 }
 
-export default ForgotPasswordPage
+export default ResetPasswordPage
