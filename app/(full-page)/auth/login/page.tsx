@@ -14,7 +14,7 @@ const LoginPage = () => {
     /**
      * use service
      */
-    const { toast, router, formData, handleChange, handleLogin } = useAuthService()
+    const { toast, formData, handleChange, handleLogin } = useAuthService()
 
     const [checked, setChecked] = useState(false)
     const { layoutConfig } = useContext(LayoutContext)

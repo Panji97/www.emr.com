@@ -21,8 +21,18 @@ import { Slider } from 'primereact/slider'
 import { TriStateCheckbox } from 'primereact/tristatecheckbox'
 import { classNames } from 'primereact/utils'
 import type { Demo } from '@/types'
+import { useUserService } from '@/services/master/users'
 
 function UsersDemo() {
+    /**
+     * use service
+     */
+    const { getAllUser } = useUserService()
+
+    useEffect(() => {
+        getAllUser()
+    }, [])
+
     const [customers1, setCustomers1] = useState<Demo.Customer[]>([])
     const [filters1, setFilters1] = useState<DataTableFilterMeta>({})
     const [loading1, setLoading1] = useState(true)
