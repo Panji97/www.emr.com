@@ -196,7 +196,7 @@ const Crud = () => {
     const leftToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <div className="my-2">
+                <div className="my-2 flex">
                     <Button label="New" icon="pi pi-plus" severity="success" className=" mr-2" onClick={openNew} />
                     <Button
                         label="Delete"
@@ -311,16 +311,18 @@ const Crud = () => {
     }
 
     const header = (
-        <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+        <div className="flex w-full flex-column md:flex-row md:justify-content-between md:align-items-center">
             <h5 className="m-0">Manage Products</h5>
-            <span className="block mt-2 md:mt-0 p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText
-                    type="search"
-                    onInput={(e) => setGlobalFilter(e.currentTarget.value)}
-                    placeholder="Search..."
-                />
-            </span>
+            <div className="text-right">
+                <span className="block mt-2 md:mt-0 p-input-icon-left">
+                    <i className="pi pi-search" />
+                    <InputText
+                        type="search"
+                        onInput={(e) => setGlobalFilter(e.currentTarget.value)}
+                        placeholder="Search..."
+                    />
+                </span>
+            </div>
         </div>
     )
 
@@ -345,7 +347,7 @@ const Crud = () => {
 
     return (
         <Menu>
-            <div className="grid crud-demo">
+            <div className="grid crud-demo mt-2">
                 <div className="col-12">
                     <div className="card">
                         <Toast ref={toast} />
