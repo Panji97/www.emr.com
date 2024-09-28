@@ -97,6 +97,7 @@ export const useAuthService = () => {
             detail: 'Success logout account'
         })
 
+        sessionStorage.clear()
         eraseCookie('access_token')
 
         setInterval(() => {
