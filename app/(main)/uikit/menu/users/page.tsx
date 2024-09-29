@@ -7,9 +7,14 @@ import { Column } from 'primereact/column'
 import { UserService } from '@/services/master/users'
 import { classNames } from 'primereact/utils'
 import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator'
+import { Button } from 'primereact/button'
+import { Dialog } from 'primereact/dialog'
+import { InputText } from 'primereact/inputtext'
 
 function Users() {
     const [user, setUser] = useState<any[]>([])
+    const [userDialog, setUserDialog] = useState(false)
+    const [submitted, setSubmitted] = useState(false)
     const [pagination, setPagination] = useState({
         total: 0,
         totalpage: 0,
@@ -64,6 +69,47 @@ function Users() {
         )
     }
 
+    const hideDialog = () => {
+        setSubmitted(false)
+        setUserDialog(false)
+    }
+
+    const editData = (data: any) => {
+        // setUser({ ...data })
+        setUserDialog(true)
+    }
+
+    const actionBody = (rowData: any) => {
+        return (
+            <>
+                <Button
+                    icon="pi pi-pencil"
+                    rounded
+                    severity="success"
+                    className="mr-2"
+                    onClick={() => editData(rowData)}
+                />
+                <Button
+                    icon="pi pi-trash"
+                    rounded
+                    severity="warning"
+                    // onClick={() => confirmDeleteProduct(rowData)}
+                />
+            </>
+        )
+    }
+    const dataDialogFooter = (
+        <>
+            <Button label="Cancel" icon="pi pi-times" text onClick={hideDialog} />
+            <Button
+                label="Save"
+                icon="pi pi-check"
+                text
+                // onClick={saveProduct}
+            />
+        </>
+    )
+
     return (
         <Menu>
             <div className="mt-2">
@@ -75,8 +121,34 @@ function Users() {
                         <Column field="username" header="Username" body={fieldUsername} />
                         <Column field="verify" header="Verify" body={fieldVerified} />
                         <Column field="rememberme" header="Rememberme" body={fieldRememberme} />
-                        <Column header="Action" />
+                        <Column body={actionBody} />
                     </DataTable>
+
+                    <Dialog
+                        header="Access Control List"
+                        style={{ width: '450px' }}
+                        modal
+                        className="p-fluid"
+                        visible={userDialog}
+                        onHide={hideDialog}
+                        footer={dataDialogFooter}
+                    >
+                        <div className="field">
+                            <label htmlFor="name">Name</label>
+                            <InputText
+                                id="email"
+                                // value={product.name}
+                                // onChange={(e) => onInputChange(e, 'name')}
+                                // required
+                                // autoFocus
+                                // className={classNames({
+                                //     'p-invalid': submitted && !product.name
+                                // })}
+                            />
+                            {/* {submitted && !product.name && <small className="p-invalid">Name is required.</small>} */}
+                        </div>
+                    </Dialog>
+
                     <Paginator
                         rows={pagination.limit}
                         totalRecords={pagination.total}
