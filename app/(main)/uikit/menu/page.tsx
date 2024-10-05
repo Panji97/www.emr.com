@@ -30,10 +30,7 @@ const MenuDemo = ({ children }: any) => {
 
     const wizardItems = [
         { label: 'Users', command: () => router.push('/uikit/menu/users') },
-        { label: 'Personal', command: () => router.push('/uikit/menu') },
-        { label: 'Seat', command: () => router.push('/uikit/menu/seat') },
-        { label: 'Payment', command: () => router.push('/uikit/menu/payment') },
-        { label: 'Confirmation', command: () => router.push('') }
+        { label: 'Menus', command: () => router.push('/uikit/menu/menus') }
     ]
 
     useEffect(() => {

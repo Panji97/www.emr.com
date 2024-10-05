@@ -10,10 +10,23 @@ import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator'
 import { Button } from 'primereact/button'
 import { Dialog } from 'primereact/dialog'
 import { InputText } from 'primereact/inputtext'
+import { Tree, TreeCheckboxSelectionKeys, TreeMultipleSelectionKeys } from 'primereact/tree'
+import { TreeNode } from 'primereact/treenode'
 
 function Users() {
-    const [user, setUser] = useState<any[]>([])
+    let emptyUser = {
+        email: '',
+        username: null,
+        rememberme: false,
+        verify: false,
+        id: ''
+    }
+
+    const [users, setUsers] = useState<any[]>([])
+    const [user, setUser] = useState(emptyUser)
     const [userDialog, setUserDialog] = useState(false)
+    const [menu, setMenus] = useState<TreeNode[]>([])
+    const [selectedMenu, setSelectedMenu] = useState<TreeMultipleSelectionKeys | TreeCheckboxSelectionKeys | null>(null)
     const [submitted, setSubmitted] = useState(false)
     const [pagination, setPagination] = useState({
         total: 0,
@@ -24,7 +37,7 @@ function Users() {
 
     const loadUsers = (page: number, limit: number) => {
         UserService.getAllUser(page, limit).then((data) => {
-            setUser(data.data)
+            setUsers(data.data)
             setPagination({
                 ...pagination,
                 total: data.pagination.total,
@@ -75,7 +88,7 @@ function Users() {
     }
 
     const editData = (data: any) => {
-        // setUser({ ...data })
+        setUser({ ...data })
         setUserDialog(true)
     }
 
@@ -114,7 +127,7 @@ function Users() {
         <Menu>
             <div className="mt-2">
                 <div className="card">
-                    <DataTable value={user} rowHover={true} tableStyle={{ minWidth: '50rem' }}>
+                    <DataTable value={users} rowHover={true} tableStyle={{ minWidth: '50rem' }}>
                         <Column field="index" body={fieldIndex} header="No" />
                         <Column field="email" header="Email" />
                         <Column field="id" header="Id" />
@@ -126,26 +139,19 @@ function Users() {
 
                     <Dialog
                         header="Access Control List"
-                        style={{ width: '450px' }}
+                        style={{ width: '50vw' }}
+                        breakpoints={{ '960px': '75vw', '641px': '100vw' }}
                         modal
                         className="p-fluid"
                         visible={userDialog}
                         onHide={hideDialog}
                         footer={dataDialogFooter}
+                        maximizable
                     >
                         <div className="field">
-                            <label htmlFor="name">Name</label>
-                            <InputText
-                                id="email"
-                                // value={product.name}
-                                // onChange={(e) => onInputChange(e, 'name')}
-                                // required
-                                // autoFocus
-                                // className={classNames({
-                                //     'p-invalid': submitted && !product.name
-                                // })}
-                            />
-                            {/* {submitted && !product.name && <small className="p-invalid">Name is required.</small>} */}
+                            <label htmlFor="email">Email</label>
+                            <InputText id="email" value={user.email} disabled />
+                            {/* <Tree value={menu} className="mt-2" selectionMode="checkbox" selectionKeys={selectedMenu} /> */}
                         </div>
                     </Dialog>
 

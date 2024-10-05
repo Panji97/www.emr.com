@@ -4,15 +4,16 @@ import { getCookie } from '@/helpers/cookies'
 const token = getCookie('access_token')
 
 export const UserService = {
-    async getAllUser(page: number, limit: number) {
-        const cacheKey = `users_page_${page}_limit_${limit}`
-        const cachedData = sessionStorage.getItem(cacheKey)
+    async getAllUser(page?: number, limit?: number) {
+        const queryParams = new URLSearchParams()
 
-        // Cek jika ada data di sessionStorage
-        if (cachedData) return JSON.parse(cachedData)
+        if (page !== undefined) queryParams.append('page', page.toString())
+        if (limit !== undefined) queryParams.append('limit', limit.toString())
 
-        // Jika tidak ada di cache, lakukan request ke server
-        const response = await fetch(`${BASE_MASTER}/users?page=${page}&limit=${limit}`, {
+        const queryString = queryParams.toString()
+        const url = `${BASE_MASTER}/users${queryString ? `?${queryString}` : ''}`
+
+        const response = await fetch(url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,9 +22,6 @@ export const UserService = {
         })
 
         const result = await response.json()
-
-        // Simpan data ke sessionStorage setelah berhasil melakukan fetch
-        sessionStorage.setItem(cacheKey, JSON.stringify(result))
 
         return result
     }
