@@ -24,5 +24,19 @@ export const UserService = {
         const result = await response.json()
 
         return result
+    },
+
+    async userHasMenus() {
+        const response = await fetch(`${BASE_MASTER}/users/menu`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+
+        const result = await response.json()
+
+        return result
     }
 }
