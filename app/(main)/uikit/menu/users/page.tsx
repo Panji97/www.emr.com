@@ -23,6 +23,7 @@ function Users() {
     }
 
     const [users, setUsers] = useState<any[]>([])
+    console.log('🚀 ~ Users ~ users:', users)
     const [user, setUser] = useState(emptyUser)
     const [userDialog, setUserDialog] = useState(false)
     const [menu, setMenus] = useState<any[]>([])
@@ -45,10 +46,6 @@ function Users() {
                 currentpage: data.pagination.currentpage,
                 limit: data.pagination.limit
             })
-        })
-
-        UserService.userHasMenus().then((data) => {
-            setMenus(data)
         })
     }
 
@@ -155,12 +152,7 @@ function Users() {
                         <div className="field">
                             <label htmlFor="email">Email</label>
                             <InputText id="email" value={user.email} disabled />
-                            <Tree
-                                value={menu.data}
-                                className="mt-2"
-                                selectionMode="checkbox"
-                                selectionKeys={selectedMenu}
-                            />
+                            <Tree className="mt-2" selectionMode="checkbox" selectionKeys={selectedMenu} />
                         </div>
                     </Dialog>
 

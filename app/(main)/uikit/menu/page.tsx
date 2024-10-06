@@ -28,10 +28,7 @@ const MenuDemo = ({ children }: any) => {
         }
     }, [pathname])
 
-    const wizardItems = [
-        { label: 'Users', command: () => router.push('/uikit/menu/users') },
-        { label: 'Menus', command: () => router.push('/uikit/menu/menus') }
-    ]
+    const wizardItems = [{ label: 'Users', command: () => router.push('/uikit/menu/users') }]
 
     useEffect(() => {
         checkActiveIndex()
