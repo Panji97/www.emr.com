@@ -37,7 +37,7 @@ const AppMenu = () => {
             ]
         },
         {
-            label: 'Prime Blocks',
+            label: 'Prime Blocks Bloks',
             items: [
                 { label: 'Free Blocks', icon: 'pi pi-fw pi-eye', to: '/blocks', badge: 'NEW' },
                 {
