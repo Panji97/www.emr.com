@@ -52,6 +52,7 @@ const AppMenuitem = (props: AppMenuItemProps) => {
             in={props.root ? true : active}
             key={item!.label}
         >
+            {/* @ts-expect-error: Let's ignore a single compiler error like this unreachable code */}
             <ul>
                 {item!.items.map((child, i) => {
                     return (

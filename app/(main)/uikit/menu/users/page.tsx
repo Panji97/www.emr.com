@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import Menu from '../page'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
@@ -23,7 +23,6 @@ function Users() {
     }
 
     const [users, setUsers] = useState<any[]>([])
-    console.log('🚀 ~ Users ~ users:', users)
     const [user, setUser] = useState(emptyUser)
     const [userDialog, setUserDialog] = useState(false)
     const [menu, setMenus] = useState<any[]>([])
@@ -36,22 +35,27 @@ function Users() {
         limit: 10
     })
 
-    const loadUsers = (page: number, limit: number) => {
-        UserService.getAllUser(page, limit).then((data) => {
-            setUsers(data.data)
-            setPagination({
-                ...pagination,
-                total: data.pagination.total,
-                totalpage: data.pagination.totalpage,
-                currentpage: data.pagination.currentpage,
-                limit: data.pagination.limit
+    // Use useCallback to make loadUsers stable between renders
+    const loadUsers = useCallback(
+        (page: number, limit: number) => {
+            UserService.getAllUser(page, limit).then((data) => {
+                setUsers(data.data)
+                setPagination({
+                    ...pagination,
+                    total: data.pagination.total,
+                    totalpage: data.pagination.totalpage,
+                    currentpage: data.pagination.currentpage,
+                    limit: data.pagination.limit
+                })
             })
-        })
-    }
+        },
+        [pagination]
+    )
 
+    // useEffect with loadUsers as a dependency
     useEffect(() => {
         loadUsers(pagination.currentpage, pagination.limit)
-    }, [pagination.currentpage, pagination.limit])
+    }, [loadUsers, pagination.currentpage, pagination.limit])
 
     const onPageChange = (event: PaginatorPageChangeEvent) => {
         const newPage = event.page + 1
