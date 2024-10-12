@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import React from 'react'
-import Menu from '../page'
+import React from 'react';
+import Menu from '../page';
 function ConfirmationDemo() {
     return (
         <Menu>
@@ -10,7 +10,7 @@ function ConfirmationDemo() {
                 <p className="m-0 text-lg">Confirmation Component Content via Child Route</p>
             </div>
         </Menu>
-    )
+    );
 }
 
-export default ConfirmationDemo
+export default ConfirmationDemo;

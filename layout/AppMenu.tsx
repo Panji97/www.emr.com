@@ -12,6 +12,36 @@ const AppMenu = () => {
 
     const model: AppMenuItem[] = [
         {
+            label: 'Administration',
+            items: [
+                {
+                    label: 'Settings',
+                    icon: 'pi pi-spin pi-cog',
+                    items: [
+                        {
+                            label: 'Modules',
+                            icon: 'pi pi-fw pi-book',
+                            to: '/administration/settings/modules'
+                        },
+                        {
+                            label: 'Roles & Permissions',
+                            icon: 'pi pi-fw pi-key',
+                            to: '/administration/settings/roles&permission'
+                        },
+                        {
+                            label: 'Notifications',
+                            icon: 'pi pi-fw pi-bell'
+                        }
+                    ]
+                },
+                {
+                    label: 'Users',
+                    icon: 'pi pi-fw pi-users',
+                    to: '/administration/users'
+                }
+            ]
+        },
+        {
             label: 'Home',
             items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' }]
         },
@@ -29,7 +59,7 @@ const AppMenu = () => {
                 { label: 'Panel', icon: 'pi pi-fw pi-tablet', to: '/uikit/panel' },
                 { label: 'Overlay', icon: 'pi pi-fw pi-clone', to: '/uikit/overlay' },
                 { label: 'Media', icon: 'pi pi-fw pi-image', to: '/uikit/media' },
-                { label: 'Menu', icon: 'pi pi-fw pi-bars', to: '/uikit/menu/users', preventExact: true },
+                { label: 'Menu', icon: 'pi pi-fw pi-bars', to: '/uikit/menu', preventExact: true },
                 { label: 'Message', icon: 'pi pi-fw pi-comment', to: '/uikit/message' },
                 { label: 'File', icon: 'pi pi-fw pi-file', to: '/uikit/file' },
                 { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', to: '/uikit/charts' },

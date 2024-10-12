@@ -1,6 +1,6 @@
-'use client'
-import React from 'react'
-import Menu from '../page'
+'use client';
+import React from 'react';
+import Menu from '../page';
 function PaymentDemo() {
     return (
         <Menu>
@@ -9,7 +9,7 @@ function PaymentDemo() {
                 <p className="m-0 text-lg">Payment Component Content via Child Route</p>
             </div>
         </Menu>
-    )
+    );
 }
 
-export default PaymentDemo
+export default PaymentDemo;
