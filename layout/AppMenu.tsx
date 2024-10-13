@@ -48,9 +48,9 @@ const AppMenu = () => {
         {
             label: 'Main',
             items: [
-                { label: 'Registration', icon: 'pi pi-fw pi-user-plus', to: '/main/registration' },
-                { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' },
-                { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' }
+                { label: 'Registration', icon: 'pi pi-fw pi-user-plus', to: '/main/registration' }
+                // { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' },
+                // { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' }
             ]
         },
         {
