@@ -1,42 +1,48 @@
 'use client'
-import React, { useEffect, useState } from 'react'
-import { TreeTable } from 'primereact/treetable'
+import { MenusService } from '@/services/master/menus'
 import { Column } from 'primereact/column'
-import { Button } from 'primereact/button'
-import { InputText } from 'primereact/inputtext'
-import { NodeService } from '@/demo/service/NodeService'
+import { DataTable } from 'primereact/datatable'
+import React, { useEffect, useState } from 'react'
+
+interface Product {
+    id?: string
+    code?: string
+    name?: string
+    description?: string
+    image?: string
+    price?: number
+    category?: string
+    quantity?: number
+    inventoryStatus?: string
+    rating?: number
+}
 
 const Modules = () => {
-    const [nodes, setNodes] = useState([])
-
-    const renderHeader1 = () => {
-        return (
-            <div className="flex justify-content-between">
-                <Button label="New" icon="pi pi-plus" severity="success" className=" mr-2" />
-
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
-                    <InputText placeholder="Keyword Search" />
-                </span>
-            </div>
-        )
-    }
+    const [products, setProducts] = useState<Product[]>([])
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
 
     useEffect(() => {
-        NodeService.getFilesystem().then((data: any) => setNodes(data))
+        MenusService.getParent().then((data) => setProducts(data.data))
     }, [])
-
-    const header1 = renderHeader1()
-
     return (
-        <div className="grid">
-            <div className="col-12">
-                <div className="card">
-                    <TreeTable header={header1} value={nodes} tableStyle={{ minWidth: '50rem' }}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
+        <div className="card">
+            <div className="grid">
+                <div className="col-12 md:col-4">
+                    <div className="card">
+                        <DataTable
+                            value={products}
+                            selectionMode="single"
+                            selection={selectedProduct!}
+                            onSelectionChange={(e) => setSelectedProduct(e.value)}
+                            dataKey="id"
+                            tableStyle={{ minWidth: '50rem' }}
+                        >
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+                    </div>
                 </div>
             </div>
         </div>
