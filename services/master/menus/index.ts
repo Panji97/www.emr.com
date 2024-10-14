@@ -22,6 +22,27 @@ export const MenusService = {
         }
     },
 
+    async upsertParent(body: any) {
+        try {
+            const response = await fetch(`${BASE_MASTER}/menus/parent`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    ...body
+                })
+            })
+
+            const result = await response.json()
+
+            return result
+        } catch (error) {
+            console.error(error)
+        }
+    },
+
     async getMain(header_id: number) {
         try {
             const response = await fetch(`${BASE_MASTER}/menus/main/${header_id}`, {

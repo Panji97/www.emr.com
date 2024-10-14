@@ -24,14 +24,12 @@ const Modules = () => {
     const opMain = useRef<OverlayPanel>(null)
     const opChild = useRef<OverlayPanel>(null)
     const [parent, setParent] = useState<Parent[]>([])
-    const [valueParent, setValueParent] = useState('')
     const [main, setMain] = useState<Main[]>([])
-    const [valueMain, setValueMain] = useState('')
     const [child, setChild] = useState<Child[]>([])
-    const [valueChild, setValueChild] = useState('')
     const [selectedParent, setSelectedParent] = useState<Parent | null>(null)
     const [selectMain, setSelectMain] = useState<Main | null>(null)
     const [selectChild, setSelectChild] = useState<Child | null>(null)
+    const [formData, setFormData] = useState<Record<string, string>>({})
 
     useEffect(() => {
         MenusService.getParent().then((data) => setParent(data.data))
@@ -39,9 +37,23 @@ const Modules = () => {
         if (selectMain?.id) MenusService.getChild(Number(selectMain?.id)).then((data) => setChild(data.data))
     }, [selectedParent, selectMain])
 
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { id, value } = e.target
+        setFormData((prevFormData) => ({ ...prevFormData, [id]: value }))
+    }
+
+    const saveData = async () => {
+        await MenusService.upsertParent(formData)
+
+        setFormData({})
+    }
+
+    console.log(formData)
+
     return (
         <div className="card">
             <div className="grid">
+                {/* Parent Menu */}
                 <div className="col-12 md:col-4">
                     <div className="card">
                         <OverlayPanel ref={opParent}>
@@ -52,8 +64,8 @@ const Modules = () => {
                                         <InputText
                                             id="label"
                                             placeholder="example Home"
-                                            value={valueParent}
-                                            onChange={(e) => setValueParent(e.target.value)}
+                                            value={formData.label || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex flex-column gap-2">
@@ -61,8 +73,8 @@ const Modules = () => {
                                         <InputText
                                             id="icon"
                                             placeholder="example pi pi-plus"
-                                            value={valueParent}
-                                            onChange={(e) => setValueParent(e.target.value)}
+                                            value={formData.icon || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex flex-column gap-2">
@@ -70,13 +82,13 @@ const Modules = () => {
                                         <InputText
                                             placeholder="example /../.."
                                             id="path"
-                                            value={valueParent}
-                                            onChange={(e) => setValueParent(e.target.value)}
+                                            value={formData.path || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex justify-content-between gap-2 mt-2">
                                         <Button label="Cancel" icon="pi pi-times" size="small" />
-                                        <Button label="Save" icon="pi pi-check" size="small" />
+                                        <Button label="Save" icon="pi pi-check" size="small" onClick={saveData} />
                                     </div>
                                 </div>
                             </div>
@@ -106,18 +118,20 @@ const Modules = () => {
                         </DataTable>
                     </div>
                 </div>
+
+                {/* Main Menu */}
                 <div className="col-12 md:col-4">
                     <div className="card">
                         <OverlayPanel ref={opMain}>
                             <div className="flex justify-content-center">
                                 <div className="card flex flex-column justify-content-center gap-2">
                                     <div className="flex flex-column gap-3">
-                                        <label htmlFor="label">Header Id</label>
+                                        <label htmlFor="header_id">Header Id</label>
                                         <InputText
                                             id="header_id"
                                             placeholder="example 1"
-                                            value={valueMain}
-                                            onChange={(e) => setValueMain(e.target.value)}
+                                            value={formData.header_id || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex flex-column gap-3">
@@ -125,8 +139,8 @@ const Modules = () => {
                                         <InputText
                                             id="label"
                                             placeholder="example Home"
-                                            value={valueMain}
-                                            onChange={(e) => setValueMain(e.target.value)}
+                                            value={formData.label || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex flex-column gap-2">
@@ -134,8 +148,8 @@ const Modules = () => {
                                         <InputText
                                             id="icon"
                                             placeholder="example pi pi-plus"
-                                            value={valueMain}
-                                            onChange={(e) => setValueMain(e.target.value)}
+                                            value={formData.icon || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex flex-column gap-2">
@@ -143,8 +157,8 @@ const Modules = () => {
                                         <InputText
                                             placeholder="example /../.."
                                             id="path"
-                                            value={valueMain}
-                                            onChange={(e) => setValueMain(e.target.value)}
+                                            value={formData.path || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex flex-column gap-2">
@@ -152,8 +166,8 @@ const Modules = () => {
                                         <InputText
                                             placeholder="example https://github.com/"
                                             id="url"
-                                            value={valueMain}
-                                            onChange={(e) => setValueMain(e.target.value)}
+                                            value={formData.url || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex flex-column gap-2">
@@ -161,8 +175,8 @@ const Modules = () => {
                                         <InputText
                                             placeholder="example _blank"
                                             id="target"
-                                            value={valueMain}
-                                            onChange={(e) => setValueMain(e.target.value)}
+                                            value={formData.target || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex flex-column gap-2">
@@ -170,8 +184,8 @@ const Modules = () => {
                                         <InputText
                                             placeholder="example NEW"
                                             id="badge"
-                                            value={valueMain}
-                                            onChange={(e) => setValueMain(e.target.value)}
+                                            value={formData.badge || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex flex-column gap-2">
@@ -179,22 +193,22 @@ const Modules = () => {
                                         <InputText
                                             placeholder="example rotated-icon"
                                             id="class"
-                                            value={valueMain}
-                                            onChange={(e) => setValueMain(e.target.value)}
+                                            value={formData.class || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex flex-column gap-2">
-                                        <label htmlFor="preventexact">Preventexact</label>
+                                        <label htmlFor="preventexact">Prevent exact</label>
                                         <InputText
                                             placeholder="example true"
                                             id="preventexact"
-                                            value={valueMain}
-                                            onChange={(e) => setValueMain(e.target.value)}
+                                            value={formData.preventexact || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex justify-content-between gap-2 mt-2">
                                         <Button label="Cancel" icon="pi pi-times" size="small" />
-                                        <Button label="Save" icon="pi pi-check" size="small" />
+                                        <Button label="Save" icon="pi pi-check" size="small" onClick={saveData} />
                                     </div>
                                 </div>
                             </div>
@@ -224,6 +238,8 @@ const Modules = () => {
                         </DataTable>
                     </div>
                 </div>
+
+                {/* Child Menu */}
                 <div className="col-12 md:col-4">
                     <div className="card">
                         <OverlayPanel ref={opChild}>
@@ -234,8 +250,8 @@ const Modules = () => {
                                         <InputText
                                             id="menu_id"
                                             placeholder="example 1"
-                                            value={valueMain}
-                                            onChange={(e) => setValueMain(e.target.value)}
+                                            value={formData.menu_id || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex flex-column gap-3">
@@ -243,8 +259,8 @@ const Modules = () => {
                                         <InputText
                                             id="label"
                                             placeholder="example Home"
-                                            value={valueMain}
-                                            onChange={(e) => setValueMain(e.target.value)}
+                                            value={formData.label || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex flex-column gap-2">
@@ -252,8 +268,8 @@ const Modules = () => {
                                         <InputText
                                             id="icon"
                                             placeholder="example pi pi-plus"
-                                            value={valueMain}
-                                            onChange={(e) => setValueMain(e.target.value)}
+                                            value={formData.icon || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex flex-column gap-2">
@@ -261,8 +277,8 @@ const Modules = () => {
                                         <InputText
                                             placeholder="example /../.."
                                             id="path"
-                                            value={valueMain}
-                                            onChange={(e) => setValueMain(e.target.value)}
+                                            value={formData.path || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex flex-column gap-2">
@@ -270,8 +286,8 @@ const Modules = () => {
                                         <InputText
                                             placeholder="example https://github.com/"
                                             id="url"
-                                            value={valueMain}
-                                            onChange={(e) => setValueMain(e.target.value)}
+                                            value={formData.url || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex flex-column gap-2">
@@ -279,13 +295,40 @@ const Modules = () => {
                                         <InputText
                                             placeholder="example _blank"
                                             id="target"
-                                            value={valueMain}
-                                            onChange={(e) => setValueMain(e.target.value)}
+                                            value={formData.target || ''}
+                                            onChange={handleInputChange}
+                                        />
+                                    </div>
+                                    <div className="flex flex-column gap-2">
+                                        <label htmlFor="badge">Badge</label>
+                                        <InputText
+                                            placeholder="example NEW"
+                                            id="badge"
+                                            value={formData.badge || ''}
+                                            onChange={handleInputChange}
+                                        />
+                                    </div>
+                                    <div className="flex flex-column gap-2">
+                                        <label htmlFor="class">Class</label>
+                                        <InputText
+                                            placeholder="example rotated-icon"
+                                            id="class"
+                                            value={formData.class || ''}
+                                            onChange={handleInputChange}
+                                        />
+                                    </div>
+                                    <div className="flex flex-column gap-2">
+                                        <label htmlFor="preventexact">Prevent exact</label>
+                                        <InputText
+                                            placeholder="example true"
+                                            id="preventexact"
+                                            value={formData.preventexact || ''}
+                                            onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="flex justify-content-between gap-2 mt-2">
                                         <Button label="Cancel" icon="pi pi-times" size="small" />
-                                        <Button label="Save" icon="pi pi-check" size="small" />
+                                        <Button label="Save" icon="pi pi-check" size="small" onClick={saveData} />
                                     </div>
                                 </div>
                             </div>
