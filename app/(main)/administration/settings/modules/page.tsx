@@ -48,8 +48,6 @@ const Modules = () => {
         setFormData({})
     }
 
-    console.log(formData)
-
     return (
         <div className="card">
             <div className="grid">

@@ -1,84 +1,92 @@
 'use client'
-import { NodeService } from '@/demo/service/NodeService'
-import { ProductService } from '@/demo/service/ProductService'
+
+import React, { ChangeEvent } from 'react'
 import { Button } from 'primereact/button'
-import { Column } from 'primereact/column'
-import { DataTable } from 'primereact/datatable'
 import { InputText } from 'primereact/inputtext'
-import { ListBox } from 'primereact/listbox'
-import { TreeNode } from 'primereact/treenode'
-import { TreeTable, TreeTableSelectionEvent, TreeTableSelectionKeysType } from 'primereact/treetable'
-import React, { useEffect, useState } from 'react'
+import { RolesService } from '@/services/master/roles'
+import { OverlayPanel } from 'primereact/overlaypanel'
+import { Toast } from 'primereact/toast'
+import { DataTable } from 'primereact/datatable'
+import { Column, ColumnEditorOptions } from 'primereact/column'
 
 const RolesPermissions = () => {
-    const [products, setProducts] = useState([])
-    const [selectedCity, setSelectedCity] = useState(null)
-    const [nodes, setNodes] = useState<TreeNode[]>([])
-    const [selectedNodeKeys, setSelectedNodeKeys] = useState<TreeTableSelectionKeysType | null>(null)
-    const cities = [
-        { name: 'New York', code: 'NY' },
-        { name: 'Rome', code: 'RM' },
-        { name: 'London', code: 'LDN' },
-        { name: 'Istanbul', code: 'IST' },
-        { name: 'Paris', code: 'PRS' }
-    ]
+    const { toast, roles, opRoles, formData, selectRoles, setFormData, upsertRole, setSelectRoles, onRowEditComplete } =
+        RolesService()
 
-    useEffect(() => {
-        NodeService.getFilesystem().then((data) => setNodes(data))
-        ProductService.getProducts().then((data: any) => setProducts(data))
-    }, [])
     return (
         <div className="grid p-fluid">
+            <Toast ref={toast} />
             <div className="col-12 md:col-4">
                 <div className="card">
                     <div className="flex justify-content-between">
                         <div>
-                            <Button label="New" icon="pi pi-plus" className=" mr-2" />
-                        </div>
-
-                        <div>
-                            <span className="p-input-icon-left">
-                                <i className="pi pi-search" />
-                                <InputText placeholder="Keyword Search" />
-                            </span>
+                            <Button
+                                label="New"
+                                icon="pi pi-plus"
+                                className=" mr-2"
+                                onClick={(e) => opRoles.current?.toggle(e)}
+                            />
                         </div>
                     </div>
 
-                    <div className="mt-4">
-                        <ListBox
-                            value={selectedCity}
-                            onChange={(e) => setSelectedCity(e.value)}
-                            options={cities}
-                            optionLabel="name"
-                            className="w-full"
+                    <DataTable
+                        value={roles}
+                        selectionMode="single"
+                        selection={selectRoles}
+                        onSelectionChange={(e: any) => setSelectRoles(e.value)}
+                        dataKey="id"
+                        editMode="row"
+                        onRowEditComplete={onRowEditComplete}
+                    >
+                        <Column
+                            field="name"
+                            editor={(options: ColumnEditorOptions) => (
+                                <InputText
+                                    type="text"
+                                    value={options.value}
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                                        options.editorCallback!(e.target.value)
+                                    }
+                                />
+                            )}
                         />
-                    </div>
-                </div>
-            </div>
-
-            <div className="col-12 md:col-4">
-                <div className="card">
-                    <div className="flex justify-content-between">
-                        <h5>Module Access</h5>
-                    </div>
-                    <DataTable value={products} stripedRows>
-                        <Column field="code" header="Code"></Column>
-                        <Column field="name" header="Name"></Column>
+                        <Column rowEditor={true} />
                     </DataTable>
                 </div>
             </div>
 
-            <div className="col-12 md:col-4">
-                <div className="card">
-                    <div className="flex justify-content-between">
-                        <h5>Module Permission</h5>
+            <OverlayPanel ref={opRoles}>
+                <div className="flex justify-content-center">
+                    <div className="card flex flex-column justify-content-center gap-2">
+                        <div className="flex flex-column gap-3">
+                            <label htmlFor="role">Role Name</label>
+                            <InputText
+                                id="role"
+                                placeholder="input your text"
+                                value={formData.name}
+                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            />
+                        </div>
+                        <div className="flex justify-content-between gap-2 mt-2">
+                            <Button
+                                label="Cancel"
+                                icon="pi pi-times"
+                                size="small"
+                                onClick={(e) => opRoles.current?.toggle(e)}
+                            />
+                            <Button
+                                label="Save"
+                                icon="pi pi-check"
+                                size="small"
+                                onClick={(e) => {
+                                    upsertRole()
+                                    opRoles.current?.toggle(e)
+                                }}
+                            />
+                        </div>
                     </div>
-                    <DataTable value={products} stripedRows>
-                        <Column field="code" header="Code"></Column>
-                        <Column field="name" header="Name"></Column>
-                    </DataTable>
                 </div>
-            </div>
+            </OverlayPanel>
         </div>
     )
 }
