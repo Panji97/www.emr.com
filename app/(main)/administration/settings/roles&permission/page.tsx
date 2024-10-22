@@ -51,6 +51,7 @@ const RolesPermissions = () => {
                             )}
                         />
                         <Column rowEditor={true} />
+                        <Column />
                     </DataTable>
                 </div>
             </div>
