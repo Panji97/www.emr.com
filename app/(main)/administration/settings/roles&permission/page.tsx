@@ -9,6 +9,7 @@ import { Toast } from 'primereact/toast'
 import { DataTable } from 'primereact/datatable'
 import { Column, ColumnEditorOptions } from 'primereact/column'
 import { Dialog } from 'primereact/dialog'
+import { TreeTable } from 'primereact/treetable'
 
 const RolesPermissions = () => {
     const {
@@ -66,6 +67,12 @@ const RolesPermissions = () => {
                 </div>
             </div>
 
+            <div className="col-12 md:col-6">
+                <div className="card">
+                    <p></p>
+                </div>
+            </div>
+
             <Dialog
                 header="Add Roles Permission"
                 visible={visible}
@@ -84,7 +91,15 @@ const RolesPermissions = () => {
                             onClick={() => setVisible(false)}
                             className="p-button-text"
                         />
-                        <Button label="Save" icon="pi pi-check" onClick={() => setVisible(false)} autoFocus />
+                        <Button
+                            label="Save"
+                            icon="pi pi-check"
+                            onClick={() => {
+                                setVisible(false)
+                                upsertRole()
+                            }}
+                            autoFocus
+                        />
                     </div>
                 }
             >
@@ -96,41 +111,12 @@ const RolesPermissions = () => {
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     />
-                </div>
-            </Dialog>
 
-            {/* <OverlayPanel ref={opRoles}>
-                <div className="flex justify-content-center">
-                    <div className="card flex flex-column justify-content-center gap-2">
-                        <div className="flex flex-column gap-3">
-                            <label htmlFor="role">Role Name</label>
-                            <InputText
-                                id="role"
-                                placeholder="input your text"
-                                value={formData.name}
-                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            />
-                        </div>
-                        <div className="flex justify-content-between gap-2 mt-2">
-                            <Button
-                                label="Cancel"
-                                icon="pi pi-times"
-                                size="small"
-                                onClick={(e) => opRoles.current?.toggle(e)}
-                            />
-                            <Button
-                                label="Save"
-                                icon="pi pi-check"
-                                size="small"
-                                onClick={(e) => {
-                                    upsertRole()
-                                    opRoles.current?.toggle(e)
-                                }}
-                            />
-                        </div>
+                    <div>
+                        <TreeTable></TreeTable>
                     </div>
                 </div>
-            </OverlayPanel> */}
+            </Dialog>
         </div>
     )
 }
