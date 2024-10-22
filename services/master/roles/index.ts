@@ -12,6 +12,7 @@ export const RolesService = () => {
     const token = getCookie('access_token')
     const [roles, setRoles] = useState<Roles[]>()
     const [selectRoles, setSelectRoles] = useState<Roles | null>(null)
+    const [visible, setVisible] = useState<boolean>(false)
     const [formData, setFormData] = useState({
         name: ''
     })
@@ -116,10 +117,12 @@ export const RolesService = () => {
     return {
         toast,
         roles,
+        visible,
         opRoles,
         formData,
         selectRoles,
         setRoles,
+        setVisible,
         upsertRole,
         setFormData,
         getAllRoles,
