@@ -16,7 +16,6 @@ const RolesPermissions = () => {
         toast,
         roles,
         visible,
-        opRoles,
         formData,
         selectRoles,
         setFormData,
