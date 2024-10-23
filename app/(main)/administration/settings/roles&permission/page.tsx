@@ -120,10 +120,13 @@ const RolesPermissions = () => {
                             selectionMode="checkbox"
                             selectionKeys={selectedNode}
                             onSelectionChange={(e: TreeTableSelectionEvent) => setSelectedNode(e.value)}
+                            paginator
+                            rows={5}
+                            rowsPerPageOptions={[5, 10, 25]}
                         >
                             <Column expander></Column>
                             <Column field="name" header="Name"></Column>
-                            <Column field="size" header="Size"></Column>
+                            <Column field="path" header="Path"></Column>
                         </TreeTable>
                     </div>
                 </div>
