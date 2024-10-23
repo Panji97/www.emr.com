@@ -1,15 +1,15 @@
 'use client'
 
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
 import { RolesService } from '@/services/master/roles'
-import { OverlayPanel } from 'primereact/overlaypanel'
 import { Toast } from 'primereact/toast'
 import { DataTable } from 'primereact/datatable'
 import { Column, ColumnEditorOptions } from 'primereact/column'
 import { Dialog } from 'primereact/dialog'
-import { TreeTable } from 'primereact/treetable'
+import { TreeTable, TreeTableSelectionEvent } from 'primereact/treetable'
+import { PermissionService } from '@/services/master/permissions'
 
 const RolesPermissions = () => {
     const {
@@ -25,6 +25,8 @@ const RolesPermissions = () => {
         setSelectRoles,
         onRowEditComplete
     } = RolesService()
+
+    const { permission, selectedNode, setSelectedNode } = PermissionService()
 
     return (
         <div className="grid p-fluid">
@@ -113,7 +115,16 @@ const RolesPermissions = () => {
                     />
 
                     <div>
-                        <TreeTable></TreeTable>
+                        <TreeTable
+                            value={permission}
+                            selectionMode="checkbox"
+                            selectionKeys={selectedNode}
+                            onSelectionChange={(e: TreeTableSelectionEvent) => setSelectedNode(e.value)}
+                        >
+                            <Column expander></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="size" header="Size"></Column>
+                        </TreeTable>
                     </div>
                 </div>
             </Dialog>
