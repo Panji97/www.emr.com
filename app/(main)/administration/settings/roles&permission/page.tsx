@@ -26,6 +26,7 @@ const RolesPermissions = () => {
     } = RolesService()
 
     const { permission, selectedNode, setSelectedNode } = PermissionService()
+    console.log('🚀 ~ RolesPermissions ~ selectedNode:', selectedNode)
 
     return (
         <div className="grid p-fluid">
