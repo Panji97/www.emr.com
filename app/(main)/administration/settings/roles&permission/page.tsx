@@ -25,8 +25,7 @@ const RolesPermissions = () => {
         onRowEditComplete
     } = RolesService()
 
-    const { permission, selectedNode, setSelectedNode } = PermissionService()
-    console.log('🚀 ~ RolesPermissions ~ selectedNode:', selectedNode)
+    const { permission, selectedNode, setSelectedNode, upsertRoleHasPermission } = PermissionService()
 
     return (
         <div className="grid p-fluid">
@@ -98,7 +97,8 @@ const RolesPermissions = () => {
                             icon="pi pi-check"
                             onClick={() => {
                                 setVisible(false)
-                                upsertRole()
+                                // upsertRole()
+                                upsertRoleHasPermission()
                             }}
                             autoFocus
                         />

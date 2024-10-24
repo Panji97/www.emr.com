@@ -36,10 +36,39 @@ export const PermissionService = () => {
         getAllMenus()
     }, [])
 
+    let payloads = []
+    for (const key in selectedNode) {
+        const ids = key.split('-')
+        const mparentId = ids[0]
+
+        const payload = {
+            mparent_id: Number(mparentId)
+        }
+
+        payloads.push(payload)
+    }
+    const upsertRoleHasPermission = () => {
+        payloads.forEach(async (data) => {
+            const response = await fetch(`${BASE_MASTER}/roles`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(data)
+            })
+
+            const result = await response.json()
+
+            return result
+        })
+    }
+
     return {
         permission,
         selectedNode,
         setPermission,
-        setSelectedNode
+        setSelectedNode,
+        upsertRoleHasPermission
     }
 }
