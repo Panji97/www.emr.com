@@ -6,35 +6,6 @@ import { BASE_MASTER } from '@/ihaaay.json'
 import { getCookie } from '@/helpers/cookies'
 
 export const PermissionService = () => {
-    const data = [
-        {
-            key: '1',
-            data: {
-                name: 'Cloud',
-                size: '20kb',
-                type: 'Folder'
-            },
-            children: [
-                {
-                    key: '1-0',
-                    data: {
-                        name: 'backup-1.zip',
-                        size: '10kb',
-                        type: 'Zip'
-                    }
-                },
-                {
-                    key: '1-1',
-                    data: {
-                        name: 'backup-2.zip',
-                        size: '10kb',
-                        type: 'Zip'
-                    }
-                }
-            ]
-        }
-    ]
-
     const toast = useRef<Toast>(null)
     const token = getCookie('access_token')
     const [permission, setPermission] = useState<TreeNode[]>([])
@@ -66,7 +37,6 @@ export const PermissionService = () => {
     }, [])
 
     return {
-        data,
         permission,
         selectedNode,
         setPermission,

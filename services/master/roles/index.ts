@@ -75,6 +75,40 @@ export const RolesService = () => {
         }
     }
 
+    const upsertRolesHasPermission = async () => {
+        try {
+            const response = await fetch(`${BASE_MASTER}/roles/permission`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(formData)
+            })
+
+            const result = await response.json()
+
+            if (result.data) {
+                toast.current?.show({
+                    severity: 'success',
+                    detail: result.message
+                })
+
+                getAllRoles()
+            } else {
+                toast.current?.show({
+                    severity: 'error',
+                    detail: result.message
+                })
+            }
+        } catch (error: any) {
+            toast.current?.show({
+                severity: 'error',
+                detail: error.message
+            })
+        }
+    }
+
     const onRowEditComplete = async (e: DataTableRowEditCompleteEvent) => {
         let _roles: Roles[] = [...(roles || [])]
         let { newData, index } = e
@@ -127,6 +161,7 @@ export const RolesService = () => {
         setFormData,
         getAllRoles,
         setSelectRoles,
-        onRowEditComplete
+        onRowEditComplete,
+        upsertRolesHasPermission
     }
 }
