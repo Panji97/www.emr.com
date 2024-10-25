@@ -5,6 +5,8 @@ import { Toast } from 'primereact/toast'
 import { Roles } from './roles.interface'
 import { OverlayPanel } from 'primereact/overlaypanel'
 import { DataTableRowEditCompleteEvent } from 'primereact/datatable'
+import { TreeNode } from 'primereact/treenode'
+import { TreeTableSelectionKeysType } from 'primereact/treetable'
 
 export const RolesService = () => {
     const toast = useRef<Toast>(null)
@@ -12,6 +14,8 @@ export const RolesService = () => {
     const token = getCookie('access_token')
     const [roles, setRoles] = useState<Roles[]>()
     const [selectRoles, setSelectRoles] = useState<Roles | null>(null)
+    const [permission, setPermission] = useState<TreeNode[]>([])
+    const [selectedNode, setSelectedNode] = useState<TreeTableSelectionKeysType | null>(null)
     const [visible, setVisible] = useState<boolean>(false)
     const [formData, setFormData] = useState({
         name: ''
@@ -19,6 +23,7 @@ export const RolesService = () => {
 
     useEffect(() => {
         getAllRoles()
+        getAllMenus()
     }, [selectRoles])
 
     const getAllRoles = async () => {
@@ -114,19 +119,44 @@ export const RolesService = () => {
         }
     }
 
+    const getAllMenus = async () => {
+        try {
+            const response = await fetch(`${BASE_MASTER}/menus`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            const result = await response.json()
+
+            setPermission(result.data)
+        } catch (error: any) {
+            toast.current?.show({
+                severity: 'error',
+                detail: error.message
+            })
+        }
+    }
+
     return {
         toast,
         roles,
         visible,
         opRoles,
         formData,
+        permission,
         selectRoles,
+        selectedNode,
         setRoles,
-        setVisible,
         upsertRole,
+        setVisible,
+        getAllMenus,
         setFormData,
         getAllRoles,
         setSelectRoles,
+        setSelectedNode,
         onRowEditComplete
     }
 }

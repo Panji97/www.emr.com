@@ -1,6 +1,6 @@
 'use client'
 
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent } from 'react'
 import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
 import { RolesService } from '@/services/master/roles'
@@ -9,7 +9,6 @@ import { DataTable } from 'primereact/datatable'
 import { Column, ColumnEditorOptions } from 'primereact/column'
 import { Dialog } from 'primereact/dialog'
 import { TreeTable, TreeTableSelectionEvent } from 'primereact/treetable'
-import { PermissionService } from '@/services/master/permissions'
 
 const RolesPermissions = () => {
     const {
@@ -17,15 +16,17 @@ const RolesPermissions = () => {
         roles,
         visible,
         formData,
+        permission,
         selectRoles,
-        setFormData,
+        selectedNode,
         setVisible,
         upsertRole,
+        getAllMenus,
+        setFormData,
         setSelectRoles,
+        setSelectedNode,
         onRowEditComplete
     } = RolesService()
-
-    const { permission, selectedNode, setSelectedNode, upsertRoleHasPermission } = PermissionService()
 
     return (
         <div className="grid p-fluid">
@@ -98,7 +99,6 @@ const RolesPermissions = () => {
                             onClick={() => {
                                 setVisible(false)
                                 // upsertRole()
-                                upsertRoleHasPermission()
                             }}
                             autoFocus
                         />
