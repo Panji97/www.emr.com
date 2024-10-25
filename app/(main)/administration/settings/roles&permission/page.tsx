@@ -21,7 +21,6 @@ const RolesPermissions = () => {
         selectedNode,
         setVisible,
         upsertRole,
-        getAllMenus,
         setFormData,
         setSelectRoles,
         setSelectedNode,
@@ -34,7 +33,6 @@ const RolesPermissions = () => {
             <div className="col-12 md:col-6">
                 <div className="card">
                     <DataTable
-                        showGridlines
                         stripedRows
                         value={roles}
                         selectionMode="single"
@@ -43,6 +41,8 @@ const RolesPermissions = () => {
                         dataKey="id"
                         editMode="row"
                         onRowEditComplete={onRowEditComplete}
+                        scrollable
+                        scrollHeight="700px"
                         header={
                             <div className="flex flex-wrap align-items-center justify-content-between">
                                 <span className="text-xl text-900 font-bold">Roles</span>
@@ -64,7 +64,8 @@ const RolesPermissions = () => {
                             )}
                             style={{ width: '85%' }}
                         />
-                        <Column header="Action" rowEditor={true} style={{ width: '15%' }} />
+                        <Column rowEditor={true} align="right" style={{ width: '15%' }} />
+                        <Column align="left" style={{ width: '15%' }} />
                     </DataTable>
                 </div>
             </div>
@@ -98,7 +99,7 @@ const RolesPermissions = () => {
                             icon="pi pi-check"
                             onClick={() => {
                                 setVisible(false)
-                                // upsertRole()
+                                upsertRole()
                             }}
                             autoFocus
                         />

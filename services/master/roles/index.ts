@@ -54,12 +54,12 @@ export const RolesService = () => {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({ formData, selectedNode })
             })
 
             const result = await response.json()
 
-            if (result.data) {
+            if (response.ok) {
                 toast.current?.show({
                     severity: 'success',
                     detail: result.message
