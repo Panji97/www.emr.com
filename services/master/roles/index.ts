@@ -20,6 +20,7 @@ export const RolesService = () => {
     const [visible, setVisible] = useState<boolean>(false)
     const [visiblePermission, setVisiblePermission] = useState<boolean>(false)
     const [formData, setFormData] = useState({
+        id: '',
         name: ''
     })
 
@@ -73,6 +74,10 @@ export const RolesService = () => {
 
     const upsertRole = async () => {
         try {
+            if (selectRoles) {
+                formData.id = String(selectRoles.id)
+            }
+
             const response = await fetch(`${BASE_MASTER}/roles`, {
                 method: 'POST',
                 headers: {

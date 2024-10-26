@@ -9,7 +9,6 @@ import { DataTable } from 'primereact/datatable'
 import { Column, ColumnEditorOptions } from 'primereact/column'
 import { Dialog } from 'primereact/dialog'
 import { TreeTable, TreeTableSelectionEvent } from 'primereact/treetable'
-import { confirmDialog, ConfirmDialog } from 'primereact/confirmdialog'
 
 const RolesPermissions = () => {
     const {
@@ -67,7 +66,6 @@ const RolesPermissions = () => {
                                     }
                                 />
                             )}
-                            // style={{ width: '85%' }}
                         />
                     </DataTable>
                 </div>
@@ -78,6 +76,7 @@ const RolesPermissions = () => {
                     <TreeTable
                         value={rolePermission}
                         paginator
+                        // selectionMode="checkbox"
                         rows={5}
                         rowsPerPageOptions={[5, 10, 15]}
                         header={
@@ -94,7 +93,7 @@ const RolesPermissions = () => {
                             </div>
                         }
                     >
-                        <Column field="name" header="Name"></Column>
+                        <Column expander field="name" header="Name"></Column>
                         <Column field="path" header="Path"></Column>
                     </TreeTable>
                 </div>
@@ -187,6 +186,7 @@ const RolesPermissions = () => {
                             onClick={() => {
                                 setVisiblePermission(false)
                                 upsertRole()
+                                window.location.reload()
                             }}
                             autoFocus
                         />
@@ -197,9 +197,9 @@ const RolesPermissions = () => {
                     <label htmlFor="role">Role Name</label>
                     <InputText
                         id="role"
-                        value={selectRoles?.name}
+                        placeholder="input your text"
+                        value={formData.name || selectRoles?.name || ''}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        disabled
                     />
 
                     <div>
