@@ -18,6 +18,7 @@ export const RolesService = () => {
     const [rolePermission, setrolePermission] = useState<TreeNode[]>([])
     const [selectedNode, setSelectedNode] = useState<TreeTableSelectionKeysType | null>(null)
     const [visible, setVisible] = useState<boolean>(false)
+    const [visiblePermission, setVisiblePermission] = useState<boolean>(false)
     const [formData, setFormData] = useState({
         name: ''
     })
@@ -174,6 +175,7 @@ export const RolesService = () => {
         selectRoles,
         selectedNode,
         rolePermission,
+        visiblePermission,
         setRoles,
         upsertRole,
         setVisible,
@@ -182,6 +184,7 @@ export const RolesService = () => {
         getAllRoles,
         setSelectRoles,
         setSelectedNode,
-        onRowEditComplete
+        onRowEditComplete,
+        setVisiblePermission
     }
 }

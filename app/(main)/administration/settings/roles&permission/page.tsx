@@ -20,12 +20,14 @@ const RolesPermissions = () => {
         selectRoles,
         selectedNode,
         rolePermission,
+        visiblePermission,
         setVisible,
         upsertRole,
         setFormData,
         setSelectRoles,
         setSelectedNode,
-        onRowEditComplete
+        onRowEditComplete,
+        setVisiblePermission
     } = RolesService()
 
     return (
@@ -86,12 +88,12 @@ const RolesPermissions = () => {
                                     icon="pi pi-pencil"
                                     rounded
                                     raised
-                                    onClick={() => setVisible(true)}
+                                    onClick={() => setVisiblePermission(true)}
+                                    disabled={selectRoles ? false : true}
                                 />
                             </div>
                         }
                     >
-                        {/* <Column expander></Column> */}
                         <Column field="name" header="Name"></Column>
                         <Column field="path" header="Path"></Column>
                     </TreeTable>
@@ -135,6 +137,63 @@ const RolesPermissions = () => {
                         placeholder="input your text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    />
+
+                    <div>
+                        <TreeTable
+                            value={permission}
+                            selectionMode="checkbox"
+                            selectionKeys={selectedNode}
+                            onSelectionChange={(e: TreeTableSelectionEvent) => setSelectedNode(e.value)}
+                            paginator
+                            rows={5}
+                            rowsPerPageOptions={[5, 10, 25]}
+                        >
+                            <Column expander></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="path" header="Path"></Column>
+                        </TreeTable>
+                    </div>
+                </div>
+            </Dialog>
+
+            <Dialog
+                header="Edit Roles Permission"
+                visible={visiblePermission}
+                maximizable
+                style={{ width: '50vw' }}
+                onHide={() => {
+                    if (!visiblePermission) return
+                    setVisiblePermission(false)
+                }}
+                breakpoints={{ '960px': '75vw', '641px': '100vw' }}
+                footer={
+                    <div>
+                        <Button
+                            label="No"
+                            icon="pi pi-times"
+                            onClick={() => setVisiblePermission(false)}
+                            className="p-button-text"
+                        />
+                        <Button
+                            label="Save"
+                            icon="pi pi-check"
+                            onClick={() => {
+                                setVisiblePermission(false)
+                                upsertRole()
+                            }}
+                            autoFocus
+                        />
+                    </div>
+                }
+            >
+                <div className="flex flex-column gap-3">
+                    <label htmlFor="role">Role Name</label>
+                    <InputText
+                        id="role"
+                        value={selectRoles?.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        disabled
                     />
 
                     <div>
