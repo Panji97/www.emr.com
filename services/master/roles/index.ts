@@ -30,6 +30,12 @@ export const RolesService = () => {
         getAllPermission()
     }, [selectRoles])
 
+    useEffect(() => {
+        if (roles && roles.length > 0 && !selectRoles) {
+            setSelectRoles(roles[0])
+        }
+    }, [roles])
+
     const getAllRoles = async () => {
         try {
             const response = await fetch(`${BASE_MASTER}/roles`, {
@@ -76,6 +82,7 @@ export const RolesService = () => {
         try {
             if (selectRoles) {
                 formData.id = String(selectRoles.id)
+                formData.name = String(selectRoles.name) || formData.name
             }
 
             const response = await fetch(`${BASE_MASTER}/roles`, {

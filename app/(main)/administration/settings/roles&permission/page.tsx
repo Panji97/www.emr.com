@@ -9,6 +9,7 @@ import { DataTable } from 'primereact/datatable'
 import { Column, ColumnEditorOptions } from 'primereact/column'
 import { Dialog } from 'primereact/dialog'
 import { TreeTable, TreeTableSelectionEvent } from 'primereact/treetable'
+import { confirmPopup, ConfirmPopup } from 'primereact/confirmpopup'
 
 const RolesPermissions = () => {
     const {
@@ -76,7 +77,6 @@ const RolesPermissions = () => {
                     <TreeTable
                         value={rolePermission}
                         paginator
-                        // selectionMode="checkbox"
                         rows={5}
                         rowsPerPageOptions={[5, 10, 15]}
                         header={
@@ -169,14 +169,24 @@ const RolesPermissions = () => {
                 breakpoints={{ '960px': '75vw', '641px': '100vw' }}
                 footer={
                     <div className="flex justify-content-between">
+                        <Toast ref={toast} />
+                        <ConfirmPopup />
                         <Button
                             label="Delete"
                             icon="pi pi-trash"
                             severity="danger"
-                            onClick={() => {
-                                destroyPermission()
-                                setVisiblePermission(false)
-                                window.location.reload()
+                            onClick={(event) => {
+                                confirmPopup({
+                                    target: event.currentTarget,
+                                    message: 'Do you want to delete this record?',
+                                    icon: 'pi pi-info-circle',
+                                    acceptClassName: 'p-button-danger',
+                                    accept() {
+                                        destroyPermission()
+                                        setVisiblePermission(false)
+                                        window.location.reload()
+                                    }
+                                })
                             }}
                             className="p-button-text"
                         />
@@ -198,7 +208,7 @@ const RolesPermissions = () => {
                     <InputText
                         id="role"
                         placeholder="input your text"
-                        value={formData.name || selectRoles?.name || ''}
+                        value={formData.name || selectRoles?.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     />
 
