@@ -19,6 +19,7 @@ const RolesPermissions = () => {
         permission,
         selectRoles,
         selectedNode,
+        rolePermission,
         setVisible,
         upsertRole,
         setFormData,
@@ -72,7 +73,28 @@ const RolesPermissions = () => {
 
             <div className="col-12 md:col-6">
                 <div className="card">
-                    <p></p>
+                    <TreeTable
+                        value={rolePermission}
+                        paginator
+                        rows={5}
+                        rowsPerPageOptions={[5, 10, 15]}
+                        header={
+                            <div className="flex flex-wrap align-items-center justify-content-between">
+                                <span className="text-xl text-900 font-bold">Permission</span>
+                                <Button
+                                    severity="warning"
+                                    icon="pi pi-pencil"
+                                    rounded
+                                    raised
+                                    onClick={() => setVisible(true)}
+                                />
+                            </div>
+                        }
+                    >
+                        {/* <Column expander></Column> */}
+                        <Column field="name" header="Name"></Column>
+                        <Column field="path" header="Path"></Column>
+                    </TreeTable>
                 </div>
             </div>
 

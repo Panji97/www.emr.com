@@ -15,6 +15,7 @@ export const RolesService = () => {
     const [roles, setRoles] = useState<Roles[]>()
     const [selectRoles, setSelectRoles] = useState<Roles | null>(null)
     const [permission, setPermission] = useState<TreeNode[]>([])
+    const [rolePermission, setrolePermission] = useState<TreeNode[]>([])
     const [selectedNode, setSelectedNode] = useState<TreeTableSelectionKeysType | null>(null)
     const [visible, setVisible] = useState<boolean>(false)
     const [formData, setFormData] = useState({
@@ -24,6 +25,7 @@ export const RolesService = () => {
     useEffect(() => {
         getAllRoles()
         getAllMenus()
+        getAllPermission()
     }, [selectRoles])
 
     const getAllRoles = async () => {
@@ -38,6 +40,28 @@ export const RolesService = () => {
             const result = await response.json()
 
             setRoles(result.data)
+        } catch (error: any) {
+            toast.current?.show({
+                severity: 'error',
+                detail: error.message
+            })
+        }
+    }
+
+    const getAllPermission = async () => {
+        try {
+            if (selectRoles) {
+                const response = await fetch(`${BASE_MASTER}/roles/permission/${selectRoles?.id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+
+                const result = await response.json()
+                setrolePermission(result.data)
+            }
         } catch (error: any) {
             toast.current?.show({
                 severity: 'error',
@@ -149,6 +173,7 @@ export const RolesService = () => {
         permission,
         selectRoles,
         selectedNode,
+        rolePermission,
         setRoles,
         upsertRole,
         setVisible,
