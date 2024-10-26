@@ -124,6 +124,7 @@ const RolesPermissions = () => {
                             onClick={() => {
                                 setVisible(false)
                                 upsertRole()
+                                window.location.reload()
                             }}
                             autoFocus
                         />
@@ -176,6 +177,7 @@ const RolesPermissions = () => {
                             onClick={() => {
                                 destroyPermission()
                                 setVisiblePermission(false)
+                                window.location.reload()
                             }}
                             className="p-button-text"
                         />
