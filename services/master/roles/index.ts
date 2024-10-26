@@ -165,6 +165,39 @@ export const RolesService = () => {
         }
     }
 
+    const destroyPermission = async () => {
+        try {
+            const response = await fetch(`${BASE_MASTER}/roles/${selectRoles?.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            const result = await response.json()
+
+            if (response.ok) {
+                toast.current?.show({
+                    severity: 'success',
+                    detail: result.message
+                })
+
+                getAllRoles()
+            } else {
+                toast.current?.show({
+                    severity: 'error',
+                    detail: result.message
+                })
+            }
+        } catch (error: any) {
+            toast.current?.show({
+                severity: 'error',
+                detail: error.message
+            })
+        }
+    }
+
     return {
         toast,
         roles,
@@ -184,6 +217,7 @@ export const RolesService = () => {
         getAllRoles,
         setSelectRoles,
         setSelectedNode,
+        destroyPermission,
         onRowEditComplete,
         setVisiblePermission
     }

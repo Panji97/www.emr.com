@@ -9,6 +9,7 @@ import { DataTable } from 'primereact/datatable'
 import { Column, ColumnEditorOptions } from 'primereact/column'
 import { Dialog } from 'primereact/dialog'
 import { TreeTable, TreeTableSelectionEvent } from 'primereact/treetable'
+import { confirmDialog, ConfirmDialog } from 'primereact/confirmdialog'
 
 const RolesPermissions = () => {
     const {
@@ -26,6 +27,7 @@ const RolesPermissions = () => {
         setFormData,
         setSelectRoles,
         setSelectedNode,
+        destroyPermission,
         onRowEditComplete,
         setVisiblePermission
     } = RolesService()
@@ -36,7 +38,7 @@ const RolesPermissions = () => {
             <div className="col-12 md:col-6">
                 <div className="card">
                     <DataTable
-                        stripedRows
+                        rowHover
                         value={roles}
                         selectionMode="single"
                         selection={selectRoles}
@@ -65,10 +67,8 @@ const RolesPermissions = () => {
                                     }
                                 />
                             )}
-                            style={{ width: '85%' }}
+                            // style={{ width: '85%' }}
                         />
-                        <Column rowEditor={true} align="right" style={{ width: '15%' }} />
-                        <Column align="left" style={{ width: '15%' }} />
                     </DataTable>
                 </div>
             </div>
@@ -81,7 +81,7 @@ const RolesPermissions = () => {
                         rows={5}
                         rowsPerPageOptions={[5, 10, 15]}
                         header={
-                            <div className="flex flex-wrap align-items-center justify-content-between">
+                            <div className="flex justify-content-between">
                                 <span className="text-xl text-900 font-bold">Permission</span>
                                 <Button
                                     severity="warning"
@@ -168,11 +168,15 @@ const RolesPermissions = () => {
                 }}
                 breakpoints={{ '960px': '75vw', '641px': '100vw' }}
                 footer={
-                    <div>
+                    <div className="flex justify-content-between">
                         <Button
-                            label="No"
-                            icon="pi pi-times"
-                            onClick={() => setVisiblePermission(false)}
+                            label="Delete"
+                            icon="pi pi-trash"
+                            severity="danger"
+                            onClick={() => {
+                                destroyPermission()
+                                setVisiblePermission(false)
+                            }}
                             className="p-button-text"
                         />
                         <Button
