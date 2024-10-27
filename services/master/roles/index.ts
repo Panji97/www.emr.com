@@ -31,10 +31,14 @@ export const RolesService = () => {
     }, [selectRoles])
 
     useEffect(() => {
-        if (roles && roles.length > 0 && !selectRoles) {
-            setSelectRoles(roles[0])
+        if (roles && roles.length > 0) {
+            if (visible) {
+                setSelectRoles(null)
+            } else if (!selectRoles) {
+                setSelectRoles(roles[0])
+            }
         }
-    }, [roles])
+    }, [roles, visible, visiblePermission, selectRoles])
 
     const getAllRoles = async () => {
         try {
@@ -103,6 +107,11 @@ export const RolesService = () => {
                 })
 
                 getAllRoles()
+                setFormData({
+                    id: '',
+                    name: ''
+                })
+                setSelectedNode(null)
             } else {
                 toast.current?.show({
                     severity: 'error',

@@ -123,7 +123,6 @@ const RolesPermissions = () => {
                             onClick={() => {
                                 setVisible(false)
                                 upsertRole()
-                                window.location.reload()
                             }}
                             autoFocus
                         />
@@ -169,7 +168,6 @@ const RolesPermissions = () => {
                 breakpoints={{ '960px': '75vw', '641px': '100vw' }}
                 footer={
                     <div className="flex justify-content-between">
-                        <Toast ref={toast} />
                         <ConfirmPopup />
                         <Button
                             label="Delete"
@@ -184,7 +182,6 @@ const RolesPermissions = () => {
                                     accept() {
                                         destroyPermission()
                                         setVisiblePermission(false)
-                                        window.location.reload()
                                     }
                                 })
                             }}
@@ -196,7 +193,6 @@ const RolesPermissions = () => {
                             onClick={() => {
                                 setVisiblePermission(false)
                                 upsertRole()
-                                window.location.reload()
                             }}
                             autoFocus
                         />
