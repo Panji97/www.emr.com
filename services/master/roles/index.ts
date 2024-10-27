@@ -107,6 +107,8 @@ export const RolesService = () => {
                 })
 
                 getAllRoles()
+                getAllMenus()
+                getAllPermission()
                 setFormData({
                     id: '',
                     name: ''
