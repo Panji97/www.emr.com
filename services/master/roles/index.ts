@@ -207,6 +207,13 @@ export const RolesService = () => {
                 })
 
                 getAllRoles()
+                getAllMenus()
+                getAllPermission()
+                setFormData({
+                    id: '',
+                    name: ''
+                })
+                setSelectedNode(null)
             } else {
                 toast.current?.show({
                     severity: 'error',

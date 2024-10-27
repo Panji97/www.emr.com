@@ -1,19 +1,19 @@
 import { BASE_MASTER } from '@/ihaaay.json'
 import { getCookie } from '@/helpers/cookies'
+import { useEffect, useState } from 'react'
+import { AppMenuItem } from '@/types'
 
 const token = getCookie('access_token')
 
-export const UserService = {
-    async getAllUser(page?: number, limit?: number) {
-        const queryParams = new URLSearchParams()
+export const UserService = () => {
+    const [permission, setPermission] = useState<AppMenuItem[]>([])
 
-        if (page !== undefined) queryParams.append('page', page.toString())
-        if (limit !== undefined) queryParams.append('limit', limit.toString())
+    useEffect(() => {
+        getUserPermission()
+    }, [])
 
-        const queryString = queryParams.toString()
-        const url = `${BASE_MASTER}/users${queryString ? `?${queryString}` : ''}`
-
-        const response = await fetch(url, {
+    const getUserPermission = async () => {
+        const response = await fetch(`${BASE_MASTER}/users/roles`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,20 +23,10 @@ export const UserService = {
 
         const result = await response.json()
 
-        return result
-    },
+        setPermission(result)
+    }
 
-    async userHasMenus() {
-        const response = await fetch(`${BASE_MASTER}/users/menu`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
-            }
-        })
-
-        const result = await response.json()
-
-        return result
+    return {
+        permission
     }
 }
