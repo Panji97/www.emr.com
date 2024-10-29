@@ -144,6 +144,7 @@ const RolesPermissions = () => {
                 <div className="flex flex-column gap-3">
                     <label htmlFor="role">Role Name</label>
                     <InputText
+                        tooltip="Role name"
                         id="role"
                         placeholder="input your text"
                         value={formData.name}
