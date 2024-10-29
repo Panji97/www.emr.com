@@ -1,3 +1,5 @@
+import { Column } from 'primereact/column'
+import { DataTable } from 'primereact/datatable'
 import React from 'react'
 
 const Users = () => {
@@ -5,8 +7,11 @@ const Users = () => {
         <div className="grid">
             <div className="col-12">
                 <div className="card">
-                    <h5>Empty Page</h5>
-                    <p>Use this page to start from scratch and place your custom content.</p>
+                    <DataTable>
+                        <Column />
+                        <Column />
+                        <Column />
+                    </DataTable>
                 </div>
             </div>
         </div>
