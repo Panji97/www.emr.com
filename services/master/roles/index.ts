@@ -88,7 +88,7 @@ export const RolesService = () => {
             if (selectRoles) {
                 formData.id = String(selectRoles.id)
                 formData.name = String(selectRoles.name) || formData.name
-            } else return
+            }
 
             const response = await fetch(`${BASE_MASTER}/roles`, {
                 method: 'POST',
