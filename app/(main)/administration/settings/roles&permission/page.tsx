@@ -51,7 +51,19 @@ const RolesPermissions = () => {
                         header={
                             <div className="flex flex-wrap align-items-center justify-content-between">
                                 <span className="text-xl text-900 font-bold">Roles</span>
-                                <Button icon="pi pi-plus" rounded raised onClick={() => setVisible(true)} />
+                                <Button
+                                    icon="pi pi-plus"
+                                    rounded
+                                    raised
+                                    onClick={() => {
+                                        setVisible(true)
+                                        setFormData({
+                                            id: '',
+                                            name: ''
+                                        })
+                                        setSelectedNode(null)
+                                    }}
+                                />
                             </div>
                         }
                     >
