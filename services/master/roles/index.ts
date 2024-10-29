@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useRef, useState } from 'react'
 import { BASE_MASTER } from '@/ihaaay.json'
 import { getCookie } from '@/helpers/cookies'
