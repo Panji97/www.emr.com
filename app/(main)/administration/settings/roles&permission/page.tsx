@@ -35,7 +35,7 @@ const RolesPermissions = () => {
     return (
         <div className="grid p-fluid">
             <Toast ref={toast} />
-            <div className="col-12 md:col-6">
+            <div className="col-12 md:col-4">
                 <div className="card">
                     <DataTable
                         rowHover
@@ -84,7 +84,7 @@ const RolesPermissions = () => {
                 </div>
             </div>
 
-            <div className="col-12 md:col-6">
+            <div className="col-12 md:col-8">
                 <div className="card">
                     <TreeTable
                         value={rolePermission}

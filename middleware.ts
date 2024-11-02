@@ -12,12 +12,26 @@ export function middleware(request: NextRequest) {
     if (staticFileRegex.test(pathname)) return NextResponse.next()
 
     // Pengecekan untuk akses halaman otentikasi
-    if (token && (pathname.startsWith('/auth/login') || pathname.startsWith('/auth/register') || pathname.startsWith('/auth/forgot-password') || pathname.startsWith('/auth/reset-password'))) {
+    if (
+        token &&
+        (pathname.startsWith('/auth/login') ||
+            pathname.startsWith('/auth/register') ||
+            pathname.startsWith('/auth/forgot-password') ||
+            pathname.startsWith('/auth/reset-password'))
+    ) {
         return NextResponse.redirect(new URL('/', request.url))
     }
 
     // Redirect ke halaman login jika tidak ada token
-    if (!token && !(pathname.startsWith('/auth/login') || pathname.startsWith('/auth/register') || pathname.startsWith('/auth/forgot-password') || pathname.startsWith('/auth/reset-password'))) {
+    if (
+        !token &&
+        !(
+            pathname.startsWith('/auth/login') ||
+            pathname.startsWith('/auth/register') ||
+            pathname.startsWith('/auth/forgot-password') ||
+            pathname.startsWith('/auth/reset-password')
+        )
+    ) {
         return NextResponse.redirect(new URL('/auth/login', request.url))
     }
 

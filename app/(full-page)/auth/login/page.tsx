@@ -65,6 +65,10 @@ const LoginPage = () => {
                                 placeholder="Email address"
                                 className="w-full md:w-30rem mb-5"
                                 style={{ padding: '1rem' }}
+                                enterKeyHint="send"
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') handleLogin()
+                                }}
                             />
 
                             <label htmlFor="password1" className="block text-900 font-medium text-xl mb-2">
@@ -80,6 +84,9 @@ const LoginPage = () => {
                                 toggleMask
                                 className="w-full mb-5"
                                 inputClassName="w-full p-3 md:w-30rem"
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') handleLogin()
+                                }}
                             />
 
                             <div className="flex align-items-center justify-content-between mb-5 gap-5">
