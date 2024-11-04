@@ -5,13 +5,10 @@ const accessToken = (request: NextRequest) => {
 
     const token = request.cookies.get('access_token')
 
-    // Regex untuk file-file statis
     const staticFileRegex = /\.(css|js|jpg|jpeg|png|gif|ico|svg|ttf|woff|woff2)$/
 
-    // Penanganan file statis
     if (staticFileRegex.test(pathname)) return NextResponse.next()
 
-    // Pengecekan untuk akses halaman otentikasi
     if (
         token &&
         (pathname.startsWith('/auth/login') ||
@@ -22,7 +19,6 @@ const accessToken = (request: NextRequest) => {
         return NextResponse.redirect(new URL('/', request.url))
     }
 
-    // Redirect ke halaman login jika tidak ada token
     if (
         !token &&
         !(
@@ -43,43 +39,34 @@ const accessPermission = (request: NextRequest) => {
 
     const menu = menuCookie ? JSON.parse(menuCookie.value) : null
 
-    const allowedPaths = menu?.reduce(
-        (acc: string[], item: any) => {
-            if (item.items) {
-                item.items.forEach((subItem: any) => acc.push(subItem.to))
-            }
-            return acc
-        },
-        ['/auth/access']
-    )
+    const allowedPaths = menu?.reduce((acc: string[], item: any) => {
+        if (item.items) {
+            item.items.forEach((subItem: any) => acc.push(subItem.to))
+        }
+        return acc
+    }, [])
 
     let pathname = request.nextUrl.pathname
 
-    // Regex untuk file-file statis
     const staticFileRegex = /\.(css|jpg|jpeg|png|gif|ico|svg|ttf|woff|woff2)$/
 
-    // Penanganan file statis
     if (staticFileRegex.test(pathname)) return NextResponse.next()
 
-    // Filter path yang hanya mengandung prefix (main) dan (full-page)
-    const validPathRegex = /^\/\((main|full-page)\)\//
+    const validPathRegex = /\/\(main\)\//
 
-    // Abaikan jika path tidak mengandung prefix (main) atau (full-page)
-    if (!validPathRegex.test(pathname)) {
-        return NextResponse.next()
-    }
+    if (!validPathRegex.test(pathname)) return NextResponse.next()
 
-    // Abaikan path layout.js seperti /(main)/layout.js atau /(full-page)/layout.js
-    if (pathname.includes('/layout.js')) {
-        return NextResponse.next()
-    }
+    if (pathname.includes('/layout.js')) return NextResponse.next()
 
-    console.log(pathname)
+    let slicePathname = ''
+    if (pathname.includes('/(main)/')) slicePathname = pathname.slice(31)
+    else if (pathname.includes('/(full-page)/')) slicePathname = pathname.slice(36)
 
-    // pathname yang sampai pada logic ini hanya path yang mengandung (main) dan (full-page) saja
-    if (!allowedPaths.includes(pathname)) {
-        return NextResponse.redirect(new URL('/auth/access', request.url))
-    }
+    slicePathname = slicePathname.slice(0, slicePathname.lastIndexOf('/page.js'))
+
+    const isAllowed = allowedPaths?.some((path: any) => path === slicePathname)
+
+    if (!isAllowed) return NextResponse.redirect(new URL('/auth/access', request.url))
 
     return NextResponse.next()
 }
@@ -90,6 +77,8 @@ export function middleware(request: NextRequest) {
     if (response.status !== 200) return response
 
     accessPermission(request)
+
+    return response
 }
 
 export const config = {
