@@ -53,7 +53,7 @@ const accessPermission = (request: NextRequest) => {
 
     if (staticFileRegex.test(pathname)) return NextResponse.next()
 
-    const validPathRegex = /\/\(main\)\//
+    const validPathRegex = /\/\((main|full-page)\)\//
 
     if (!validPathRegex.test(pathname)) return NextResponse.next()
 
@@ -77,7 +77,7 @@ export function middleware(request: NextRequest) {
 
     if (response.status !== 200) return response
 
-    accessPermission(request)
+    response = accessPermission(request)
 
     return response
 }
