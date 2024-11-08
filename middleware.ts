@@ -49,7 +49,7 @@ const accessPermission = (request: NextRequest) => {
 
     let pathname = request.nextUrl.pathname
 
-    const staticFileRegex = /\.(css|jpg|jpeg|png|gif|ico|svg|ttf|woff|woff2)$/
+    const staticFileRegex = /\.(css|js|jpg|jpeg|png|gif|ico|svg|ttf|woff|woff2)$/
 
     if (staticFileRegex.test(pathname)) return NextResponse.next()
 
