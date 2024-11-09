@@ -4,24 +4,23 @@ import type { NextRequest } from 'next/server'
 export function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname
 
-    const token = request.cookies.get('access_token')
-
     const staticFileRegex = /\.(css|js|jpg|jpeg|png|gif|ico|svg|ttf|woff|woff2)$/
 
     if (staticFileRegex.test(pathname)) return NextResponse.next()
 
-    if (
-        !token &&
-        !(
-            pathname.startsWith('/auth/login') ||
-            pathname.startsWith('/auth/register') ||
-            pathname.startsWith('/auth/forgot-password') ||
-            pathname.startsWith('/auth/reset-password') ||
-            pathname.startsWith('/auth/access')
-        )
-    ) {
+    const token = request.cookies.get('access_token')
+
+    const isAuthPath =
+        pathname.startsWith('/auth/login') ||
+        pathname.startsWith('/auth/register') ||
+        pathname.startsWith('/auth/forgot-password') ||
+        pathname.startsWith('/auth/reset-password')
+
+    if (!token && !isAuthPath) {
         return NextResponse.redirect(new URL('/auth/login', request.url))
     }
+
+    if (pathname.startsWith('/auth/login')) return NextResponse.next()
 
     if (pathname.startsWith('/auth/access')) return NextResponse.next()
 
