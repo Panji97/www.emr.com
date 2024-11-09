@@ -8,8 +8,9 @@ import { Toast } from 'primereact/toast'
 import { DataTable } from 'primereact/datatable'
 import { Column, ColumnEditorOptions } from 'primereact/column'
 import { Dialog } from 'primereact/dialog'
-import { TreeTable, TreeTableSelectionEvent } from 'primereact/treetable'
+import { TreeTable, TreeTableSelectionEvent, TreeTableSelectionKeysType } from 'primereact/treetable'
 import { confirmPopup, ConfirmPopup } from 'primereact/confirmpopup'
+import { TreeNode } from 'primereact/treenode'
 
 const RolesPermissions = () => {
     const {
@@ -99,7 +100,36 @@ const RolesPermissions = () => {
                                     icon="pi pi-pencil"
                                     rounded
                                     raised
-                                    onClick={() => setVisiblePermission(true)}
+                                    onClick={() => {
+                                        setVisiblePermission(true)
+
+                                        // Fungsi untuk memetakan rolePermission ke selectedNode
+                                        const mapRolePermissionToSelectedNode = (
+                                            rolePermission: TreeNode[]
+                                        ): TreeTableSelectionKeysType => {
+                                            const selectedNodes: TreeTableSelectionKeysType = {}
+
+                                            const traverse = (node: TreeNode) => {
+                                                if (node.key) {
+                                                    selectedNodes[node.key] = {
+                                                        checked: true,
+                                                        partialChecked: false
+                                                    }
+                                                }
+
+                                                if (node.children && node.children.length > 0) {
+                                                    node.children.forEach(traverse)
+                                                }
+                                            }
+
+                                            rolePermission.forEach(traverse) // Menggunakan rolePermission
+                                            return selectedNodes
+                                        }
+
+                                        // Memetakan permission dari role terpilih ke selectedNode
+                                        const newSelectedNode = mapRolePermissionToSelectedNode(rolePermission) // Menggunakan rolePermission
+                                        setSelectedNode(newSelectedNode)
+                                    }}
                                     disabled={selectRoles ? false : true}
                                 />
                             </div>
