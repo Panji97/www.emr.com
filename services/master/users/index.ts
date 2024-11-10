@@ -12,6 +12,8 @@ export const UserService = () => {
     const [permission, setPermission] = useState<AppMenuItem[]>([])
     const [user, setUser] = useState()
 
+    console.log(user)
+
     useEffect(() => {
         getAllUser()
         getUserPermission()

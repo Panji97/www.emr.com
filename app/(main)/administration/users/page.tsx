@@ -3,6 +3,7 @@ import { Column } from 'primereact/column'
 import { DataTable } from 'primereact/datatable'
 import React from 'react'
 import { UserService } from '@/services/master/users'
+import { Button } from 'primereact/button'
 
 const Users = () => {
     const { user } = UserService()
@@ -16,6 +17,22 @@ const Users = () => {
                         <Column field="email" header="Email" />
                         <Column field="username" header="Username" />
                         <Column field="verify" header="Verified" />
+                        <Column field="user_has_role.role.name" header="Role" />
+                        <Column
+                            body={() => (
+                                <>
+                                    <Button
+                                        icon="pi pi-pencil"
+                                        rounded
+                                        raised
+                                        severity="warning"
+                                        className="mr-2"
+                                        onClick={() => {}}
+                                    />
+                                    <Button icon="pi pi-trash" rounded outlined severity="danger" />
+                                </>
+                            )}
+                        />
                         <Column />
                     </DataTable>
                 </div>
