@@ -11,12 +11,12 @@ export const UserService = () => {
     const toast = useRef<Toast>(null)
     const [permission, setPermission] = useState<AppMenuItem[]>([])
     const [user, setUser] = useState()
-
-    console.log(user)
+    const [roles, setRoles] = useState()
 
     useEffect(() => {
         getAllUser()
         getUserPermission()
+        getAllRoles()
     }, [])
 
     const getUserPermission = async () => {
@@ -46,6 +46,28 @@ export const UserService = () => {
             const result = await response.json()
 
             setUser(result.data)
+        } catch (error: any) {
+            toast.current?.show({
+                severity: 'error',
+                detail: error.message
+            })
+        }
+    }
+
+    const getAllRoles = async () => {
+        try {
+            const response = await fetch(`${BASE_MASTER}/roles`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            console.log('🚀 ~ getAllRoles ~ response:', response)
+
+            const result = await response.json()
+
+            setRoles(result.data)
         } catch (error: any) {
             toast.current?.show({
                 severity: 'error',
