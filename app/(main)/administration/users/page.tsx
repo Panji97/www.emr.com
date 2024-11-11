@@ -6,9 +6,7 @@ import { UserService } from '@/services/master/users'
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown'
 
 const Users = () => {
-    const [roles] = useState<string[]>(['SUPERADMIN', 'USER'])
-
-    const { user } = UserService()
+    const { user, roles } = UserService()
 
     const roleEditor = (options: ColumnEditorOptions) => {
         console.log(options.value)
