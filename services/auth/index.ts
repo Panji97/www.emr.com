@@ -50,6 +50,7 @@ export const useAuthService = () => {
             })
 
             const result = await response.json()
+            console.log('🚀 ~ handleLogin ~ result:', result)
 
             if (result.data) {
                 setCookie('access_token', result.data, 7)

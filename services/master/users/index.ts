@@ -123,6 +123,7 @@ export const UserService = () => {
     return {
         user,
         roles,
-        permission
+        permission,
+        onRowEditComplete
     }
 }

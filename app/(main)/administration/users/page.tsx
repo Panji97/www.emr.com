@@ -6,13 +6,19 @@ import { UserService } from '@/services/master/users'
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown'
 
 const Users = () => {
-    const { user, roles } = UserService()
+    const { user, roles, onRowEditComplete } = UserService()
 
     return (
         <div className="grid">
             <div className="col-12">
                 <div className="card">
-                    <DataTable header="User List" value={user} editMode="row" dataKey="id" onRowEditComplete={() => {}}>
+                    <DataTable
+                        header="User List"
+                        value={user}
+                        editMode="row"
+                        dataKey="id"
+                        onRowEditComplete={onRowEditComplete}
+                    >
                         <Column field="id" header="Id" />
                         <Column field="email" header="Email" />
                         <Column field="username" header="Username" />
@@ -21,6 +27,7 @@ const Users = () => {
                             field="user_has_role.role.name"
                             header="Role"
                             editor={(options: ColumnEditorOptions) => {
+                                console.log('🚀 ~ Users ~ options:', options)
                                 return (
                                     <Dropdown
                                         value={options.value}
