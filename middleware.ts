@@ -24,6 +24,8 @@ export function middleware(request: NextRequest) {
 
     if (pathname.startsWith('/auth/access')) return NextResponse.next()
 
+    if (isAuthPath) return NextResponse.next()
+
     const menuCookie = request.cookies.get('menu')
 
     if (menuCookie) {
