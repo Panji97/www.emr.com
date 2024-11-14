@@ -4,12 +4,14 @@ import { Column, ColumnEditorOptions } from 'primereact/column'
 import { DataTable } from 'primereact/datatable'
 import { UserService } from '@/services/master/users'
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown'
+import { Toast } from 'primereact/toast'
 
 const Users = () => {
-    const { user, roles, onRowEditComplete } = UserService()
+    const { user, toast, roles, setSelectRoles, onRowEditComplete } = UserService()
 
     return (
         <div className="grid">
+            <Toast ref={toast} />
             <div className="col-12">
                 <div className="card">
                     <DataTable
@@ -27,12 +29,14 @@ const Users = () => {
                             field="user_has_role.role.name"
                             header="Role"
                             editor={(options: ColumnEditorOptions) => {
-                                console.log('🚀 ~ Users ~ options:', options)
                                 return (
                                     <Dropdown
                                         value={options.value}
-                                        options={roles}
-                                        onChange={(e: DropdownChangeEvent) => options.editorCallback!(e.value)}
+                                        options={roles.map((e: any) => e.name)}
+                                        onChange={(e: DropdownChangeEvent) => {
+                                            setSelectRoles(e.value)
+                                            options.editorCallback!(e.value)
+                                        }}
                                     />
                                 )
                             }}

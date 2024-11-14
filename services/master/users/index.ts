@@ -13,6 +13,7 @@ export const UserService = () => {
     const [permission, setPermission] = useState<AppMenuItem[]>([])
     const [user, setUser] = useState()
     const [roles, setRoles] = useState([])
+    const [selectRoles, setSelectRoles] = useState()
 
     useEffect(() => {
         getAllUser()
@@ -67,12 +68,7 @@ export const UserService = () => {
 
             const result = await response.json()
 
-            let roleName: any = []
-            for (let item of result.data) {
-                roleName.push(item.name)
-            }
-
-            setRoles(roleName)
+            setRoles(result.data)
         } catch (error: any) {
             toast.current?.show({
                 severity: 'error',
@@ -82,12 +78,7 @@ export const UserService = () => {
     }
 
     const onRowEditComplete = async (e: DataTableRowEditCompleteEvent) => {
-        let _roles: any = [...(roles || [])]
-        let { newData, index } = e
-
-        _roles[index] = newData
-
-        setRoles(_roles)
+        const dataSelectRoles: any = roles.find((item: any) => item.name === selectRoles)
 
         try {
             const response = await fetch(`${BASE_MASTER}/users/roles`, {
@@ -96,7 +87,10 @@ export const UserService = () => {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`
                 },
-                body: JSON.stringify(newData)
+                body: JSON.stringify({
+                    user_id: e.data.id,
+                    role_id: dataSelectRoles.id
+                })
             })
 
             const result = await response.json()
@@ -122,8 +116,10 @@ export const UserService = () => {
 
     return {
         user,
+        toast,
         roles,
         permission,
+        setSelectRoles,
         onRowEditComplete
     }
 }
