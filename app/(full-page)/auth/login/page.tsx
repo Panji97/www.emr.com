@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Checkbox } from 'primereact/checkbox'
 import { Button } from 'primereact/button'
 import { Password } from 'primereact/password'
@@ -8,21 +8,46 @@ import { LayoutContext } from '../../../../layout/context/layoutcontext'
 import { InputText } from 'primereact/inputtext'
 import { classNames } from 'primereact/utils'
 import { Toast } from 'primereact/toast'
-import { useAuthService } from '@/services/auth'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/store'
+import { loginUser } from '@/services/authentication/auth.slice'
+import { useRouter } from 'next/navigation'
+import { setCookie } from '@/helpers/cookies'
 
 const LoginPage = () => {
-    /**
-     * use service
-     */
-    const { toast, formData, handleChange, handleLogin } = useAuthService()
+    const dispatch: AppDispatch = useDispatch()
+    const router = useRouter()
+    const { data, status, error } = useSelector((state: RootState) => state.login)
 
+    const [formData, setFormData] = useState({ email: '', password: '' })
     const [checked, setChecked] = useState(false)
     const { layoutConfig } = useContext(LayoutContext)
+    const toast = React.useRef<Toast>(null)
 
     const containerClassName = classNames(
         'surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden',
         { 'p-input-filled': layoutConfig.inputStyle === 'filled' }
     )
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target
+        setFormData({ ...formData, [name]: value })
+    }
+
+    const handleLogin = () => {
+        dispatch(loginUser({ email: formData.email, password: formData.password }))
+    }
+
+    useEffect(() => {
+        if (status === 'successed') {
+            toast.current?.show({ severity: 'success', summary: 'Login Successful', detail: 'Welcome back!' })
+            console.log(data)
+            setCookie('access_token', data.data, 7)
+            router.push('/')
+        } else if (status === 'failed') {
+            toast.current?.show({ severity: 'error', summary: 'Login Failed', detail: error })
+        }
+    }, [status, error])
 
     return (
         <div className={containerClassName}>
@@ -61,7 +86,7 @@ const LoginPage = () => {
                                 type="text"
                                 name="email"
                                 value={formData.email}
-                                onChange={handleChange}
+                                onChange={handleInputChange}
                                 placeholder="Email address"
                                 className="w-full md:w-30rem mb-5"
                                 style={{ padding: '1rem' }}
@@ -79,7 +104,7 @@ const LoginPage = () => {
                                 name="password"
                                 value={formData.password}
                                 feedback={false}
-                                onChange={handleChange}
+                                onChange={handleInputChange}
                                 placeholder="Password"
                                 toggleMask
                                 className="w-full mb-5"
@@ -107,7 +132,13 @@ const LoginPage = () => {
                                     Forgot password?
                                 </Link>
                             </div>
-                            <Button label="Sign In" className="w-full p-3 text-xl" onClick={handleLogin}></Button>
+
+                            <Button
+                                label="Sign In"
+                                className="w-full p-3 text-xl"
+                                onClick={handleLogin}
+                                loading={status === 'loading'}
+                            />
                         </div>
                     </div>
                 </div>

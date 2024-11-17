@@ -1,19 +1,54 @@
 'use client'
 import Link from 'next/link'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { Button } from 'primereact/button'
 import { LayoutContext } from '../../../../layout/context/layoutcontext'
 import { InputText } from 'primereact/inputtext'
 import { classNames } from 'primereact/utils'
 import { Toast } from 'primereact/toast'
-import { useAuthService } from '@/services/auth'
+import { useSelector, useDispatch } from 'react-redux'
+import { AppDispatch, RootState } from '@/store' // Pastikan kamu sudah mengatur store
+import { forgotPassword } from '@/services/authentication/auth.slice' // Pastikan path sesuai
 
 const ForgotPasswordPage = () => {
-    /**
-     * use service
-     */
-    const { toast, router, formData, handleChange, handleForgotPassword } = useAuthService()
+    const dispatch = useDispatch<AppDispatch>()
+    const toast = useRef<Toast>(null)
     const { layoutConfig } = useContext(LayoutContext)
+
+    // State lokal untuk email
+    const [email, setEmail] = React.useState('')
+
+    // Mengambil state dari Redux untuk forgot password
+    const { status, error, data } = useSelector((state: RootState) => state.forgorpassword)
+
+    // Fungsi untuk meng-handle perubahan input
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value)
+    }
+
+    // Meng-handle submit forgot password
+    const handleForgotPassword = () => {
+        if (email) {
+            dispatch(forgotPassword(email))
+        }
+    }
+
+    // Efek untuk menampilkan notifikasi berdasarkan status
+    useEffect(() => {
+        if (status === 'successed') {
+            toast.current?.show({
+                severity: 'success',
+                summary: 'Success',
+                detail: 'Reset password email sent successfully!'
+            })
+        } else if (status === 'failed') {
+            toast.current?.show({
+                severity: 'error',
+                summary: 'Error',
+                detail: error || 'Failed to send reset password email.'
+            })
+        }
+    }, [status, error])
 
     const containerClassName = classNames(
         'surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden',
@@ -49,7 +84,7 @@ const ForgotPasswordPage = () => {
                                 id="email1"
                                 type="text"
                                 name="email"
-                                value={formData.email}
+                                value={email}
                                 onChange={handleChange}
                                 placeholder="Email address"
                                 className="w-full md:w-30rem mb-5"
@@ -61,6 +96,7 @@ const ForgotPasswordPage = () => {
                                 label="Send Reset Password"
                                 className="w-full p-3 text-xl"
                                 onClick={handleForgotPassword}
+                                loading={status === 'loading'} // Menambahkan loading saat status "loading"
                             ></Button>
                             <div className="flex justify-content-center mt-3">
                                 <span className="text-600 font-medium line-height-3">Already have an account?</span>
