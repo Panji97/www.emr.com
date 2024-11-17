@@ -2,66 +2,18 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { BASE_AUTH } from '@/ihaaay.json'
 import { handlePending, handleFulfilled, handleRejected } from '@/helpers/state-handler'
 import { eraseCookie } from '@/helpers/cookies'
-
-export interface RegisterState {
-    data: any | null
-    status: 'idle' | 'loading' | 'successed' | 'failed'
-    error: string | null
-}
-
-export interface LoginState {
-    data: any | null
-    status: 'idle' | 'loading' | 'successed' | 'failed'
-    error: string | null
-}
-
-export const initialRegisterState: RegisterState = {
-    data: null,
-    status: 'idle',
-    error: null
-}
-
-export const initialLoginState: LoginState = {
-    data: null,
-    status: 'idle',
-    error: null
-}
-
-export interface ForgotPasswordState {
-    data: string | null
-    status: 'idle' | 'loading' | 'successed' | 'failed'
-    error: string | null
-}
-
-export const initialForgotPasswordState: ForgotPasswordState = {
-    data: null,
-    status: 'idle',
-    error: null
-}
-
-export interface ResetPasswordState {
-    status: 'idle' | 'loading' | 'successed' | 'failed'
-    data: string | null
-    error: string | null
-}
-
-export const initialResetPasswordState: ResetPasswordState = {
-    status: 'idle',
-    data: null,
-    error: null
-}
-
-export interface LogoutState {
-    status: 'idle' | 'loading' | 'successed' | 'failed'
-    data: string | null
-    error: string | null
-}
-
-export const initialLogoutState: LogoutState = {
-    status: 'idle',
-    data: null,
-    error: null
-}
+import {
+    initialRegisterState,
+    initialLoginState,
+    initialForgotPasswordState,
+    initialResetPasswordState,
+    initialLogoutState,
+    RegisterState,
+    LoginState,
+    ForgotPasswordState,
+    ResetPasswordState,
+    LogoutState
+} from './auth.state'
 
 export const registerUser = createAsyncThunk(
     'auth/registerUser',

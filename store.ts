@@ -6,6 +6,7 @@ import {
     registerReducer,
     resetPasswordReducer
 } from './services/authentication/auth.slice'
+import rolesReducer from './services/master/roles/roles.slice'
 
 const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
         register: registerReducer,
         forgorpassword: forgotPasswordReducer,
         resetpassword: resetPasswordReducer,
-        logout: logoutReducer
+        logout: logoutReducer,
+        roles: rolesReducer
     }
 })
 
