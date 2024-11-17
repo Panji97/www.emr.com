@@ -1,11 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { forgotPasswordReducer, loginReducer, registerReducer } from './services/authentication/auth.slice'
+import {
+    forgotPasswordReducer,
+    loginReducer,
+    logoutReducer,
+    registerReducer,
+    resetPasswordReducer
+} from './services/authentication/auth.slice'
 
 const store = configureStore({
     reducer: {
         login: loginReducer,
         register: registerReducer,
-        forgorpassword: forgotPasswordReducer
+        forgorpassword: forgotPasswordReducer,
+        resetpassword: resetPasswordReducer,
+        logout: logoutReducer
     }
 })
 

@@ -8,7 +8,7 @@ import { classNames } from 'primereact/utils'
 import { Toast } from 'primereact/toast'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppDispatch, RootState } from '@/store' // Pastikan kamu sudah mengatur store
-import { forgotPassword } from '@/services/authentication/auth.slice' // Pastikan path sesuai
+import { forgotPassword, resetStateForgotPassword } from '@/services/authentication/auth.slice' // Pastikan path sesuai
 
 const ForgotPasswordPage = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -41,6 +41,8 @@ const ForgotPasswordPage = () => {
                 summary: 'Success',
                 detail: 'Reset password email sent successfully!'
             })
+
+            dispatch(resetStateForgotPassword())
         } else if (status === 'failed') {
             toast.current?.show({
                 severity: 'error',

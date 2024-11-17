@@ -10,7 +10,7 @@ import { classNames } from 'primereact/utils'
 import { Toast } from 'primereact/toast'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store'
-import { registerUser, resetState } from '@/services/authentication/auth.slice'
+import { registerUser, resetStateRegister } from '@/services/authentication/auth.slice'
 import { useRouter } from 'next/navigation'
 
 const RegisterPage = () => {
@@ -55,7 +55,7 @@ const RegisterPage = () => {
 
             setTimeout(() => {
                 router.push('/auth/login')
-                dispatch(resetState())
+                dispatch(resetStateRegister())
             }, 3000)
         } else if (status === 'failed') {
             toast.current?.show({ severity: 'error', summary: 'Registration Failed', detail: error })

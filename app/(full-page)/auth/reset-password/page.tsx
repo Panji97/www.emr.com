@@ -5,18 +5,61 @@ import { Password } from 'primereact/password'
 import { LayoutContext } from '../../../../layout/context/layoutcontext'
 import { classNames } from 'primereact/utils'
 import { Toast } from 'primereact/toast'
-import { useAuthService } from '@/services/auth'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/store'
+import { resetPassword, resetStateResetPassword } from '@/services/authentication/auth.slice'
 
 const ResetPasswordPage = () => {
+    const router = useRouter()
+    const toast = React.useRef<Toast>(null)
+    const dispatch: AppDispatch = useDispatch()
+    const { status } = useSelector((state: RootState) => state.resetpassword)
+
     const searchParams = useSearchParams()
     const tokenresetpassword = searchParams.get('tokenresetpassword')
     const email = searchParams.get('email')
 
-    /**
-     * use service
-     */
-    const { toast, formData, setFormData, handleChange, handleResetPassword } = useAuthService()
+    const [formData, setFormData] = React.useState({
+        password: '',
+        tokenresetpassword: '',
+        email: ''
+    })
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target
+        setFormData({ ...formData, [name]: value })
+    }
+
+    useEffect(() => {
+        if (status === 'successed') {
+            toast.current?.show({
+                severity: 'success',
+                summary: 'Password Reset Successful',
+                detail: 'You can now login with your new password.'
+            })
+
+            setTimeout(() => {
+                router.push('/auth/login')
+                dispatch(resetStateResetPassword())
+            }, 3000)
+        } else if (status === 'failed') {
+            toast.current?.show({ severity: 'error', summary: 'Reset Failed', detail: 'Please try again later.' })
+        }
+    }, [status])
+
+    const handleResetPassword = () => {
+        if (formData.password && formData.tokenresetpassword) {
+            dispatch(
+                resetPassword({
+                    password: formData.password,
+                    tokenresetpassword: formData.tokenresetpassword,
+                    email: formData.email
+                })
+            )
+        }
+    }
+
     const { layoutConfig } = useContext(LayoutContext)
 
     // Set tokenresetpassword and email in formData on component mount
@@ -77,7 +120,8 @@ const ResetPasswordPage = () => {
                                 label="Reset Password"
                                 className="w-full p-3 text-xl"
                                 onClick={handleResetPassword}
-                            ></Button>
+                                loading={status === 'loading'}
+                            />
                         </div>
                     </div>
                 </div>

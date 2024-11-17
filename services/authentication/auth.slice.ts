@@ -39,6 +39,30 @@ export const initialForgotPasswordState: ForgotPasswordState = {
     error: null
 }
 
+export interface ResetPasswordState {
+    status: 'idle' | 'loading' | 'successed' | 'failed'
+    data: string | null
+    error: string | null
+}
+
+export const initialResetPasswordState: ResetPasswordState = {
+    status: 'idle',
+    data: null,
+    error: null
+}
+
+export interface LogoutState {
+    status: 'idle' | 'loading' | 'successed' | 'failed'
+    data: string | null
+    error: string | null
+}
+
+export const initialLogoutState: LogoutState = {
+    status: 'idle',
+    data: null,
+    error: null
+}
+
 export const registerUser = createAsyncThunk(
     'auth/registerUser',
     async (userData: { email: string; password: string }, { rejectWithValue }) => {
@@ -117,7 +141,7 @@ export const forgotPassword = createAsyncThunk('auth/forgotPassword', async (ema
 // Reset Password
 export const resetPassword = createAsyncThunk(
     'auth/resetPassword',
-    async (userData: { password: string; token: string }, { rejectWithValue }) => {
+    async (userData: { password: string; tokenresetpassword: string; email: string }, { rejectWithValue }) => {
         try {
             const response = await fetch(`${BASE_AUTH}/reset-password`, {
                 method: 'POST',
@@ -157,7 +181,7 @@ export const registerSlice = createSlice({
     name: 'register',
     initialState: initialRegisterState,
     reducers: {
-        resetState: (state) => {
+        resetStateRegister: (state) => {
             state.status = 'idle'
             state.data = null
             state.error = null
@@ -187,7 +211,13 @@ export const loginSlice = createSlice({
 export const forgotPasswordSlice = createSlice({
     name: 'forgot-password',
     initialState: initialForgotPasswordState,
-    reducers: {},
+    reducers: {
+        resetStateForgotPassword: (state) => {
+            state.status = 'idle'
+            state.data = null
+            state.error = null
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(forgotPassword.pending, handlePending<ForgotPasswordState>)
@@ -196,8 +226,42 @@ export const forgotPasswordSlice = createSlice({
     }
 })
 
-export const { resetState } = registerSlice.actions
+export const resetPasswordSlice = createSlice({
+    name: 'reset-password',
+    initialState: initialResetPasswordState,
+    reducers: {
+        resetStateResetPassword: (state) => {
+            state.status = 'idle'
+            state.data = null
+            state.error = null
+        }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(resetPassword.pending, handlePending<ResetPasswordState>)
+            .addCase(resetPassword.fulfilled, handleFulfilled<ResetPasswordState>)
+            .addCase(resetPassword.rejected, handlePending<ResetPasswordState>)
+    }
+})
+
+export const logoutSlice = createSlice({
+    name: 'logout',
+    initialState: initialLogoutState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(logoutUser.pending, handlePending<LogoutState>)
+            .addCase(logoutUser.fulfilled, handleFulfilled<LogoutState>)
+            .addCase(logoutUser.rejected, handleRejected<LogoutState>)
+    }
+})
+
+export const { resetStateRegister } = registerSlice.actions
+export const { resetStateForgotPassword } = forgotPasswordSlice.actions
+export const { resetStateResetPassword } = resetPasswordSlice.actions
 
 export const registerReducer = registerSlice.reducer
 export const loginReducer = loginSlice.reducer
 export const forgotPasswordReducer = forgotPasswordSlice.reducer
+export const resetPasswordReducer = resetPasswordSlice.reducer
+export const logoutReducer = logoutSlice.reducer
