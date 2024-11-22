@@ -1,0 +1,4 @@
+{
+    "BASE_AUTH": "http://localhost:8080/o/oauth/v1",
+    "BASE_MASTER": "http://localhost:8080/master/v1"
+}
