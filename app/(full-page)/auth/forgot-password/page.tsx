@@ -1,18 +1,16 @@
 'use client'
 import Link from 'next/link'
-import React, { useContext } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { Button } from 'primereact/button'
 import { LayoutContext } from '../../../../layout/context/layoutcontext'
 import { InputText } from 'primereact/inputtext'
 import { classNames } from 'primereact/utils'
 import { Toast } from 'primereact/toast'
-import { useAuthService } from '@/services/auth'
 
 const ForgotPasswordPage = () => {
-    /**
-     * use service
-     */
-    const { toast, router, formData, handleChange, handleForgotPassword } = useAuthService()
+    const toast = useRef<Toast>(null)
+    const [email, setEmail] = useState()
+
     const { layoutConfig } = useContext(LayoutContext)
 
     const containerClassName = classNames(
@@ -49,8 +47,8 @@ const ForgotPasswordPage = () => {
                                 id="email1"
                                 type="text"
                                 name="email"
-                                value={formData.email}
-                                onChange={handleChange}
+                                value={email}
+                                onChange={() => {}}
                                 placeholder="Email address"
                                 className="w-full md:w-30rem mb-5"
                                 style={{ padding: '1rem' }}
@@ -60,7 +58,7 @@ const ForgotPasswordPage = () => {
                             <Button
                                 label="Send Reset Password"
                                 className="w-full p-3 text-xl"
-                                onClick={handleForgotPassword}
+                                onClick={() => {}}
                             ></Button>
                             <div className="flex justify-content-center mt-3">
                                 <span className="text-600 font-medium line-height-3">Already have an account?</span>

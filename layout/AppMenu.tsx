@@ -6,13 +6,11 @@ import { LayoutContext } from './context/layoutcontext'
 import { MenuProvider } from './context/menucontext'
 import Link from 'next/link'
 import { AppMenuItem } from '@/types'
-import { UserService } from '@/services/master/users'
 
 const AppMenu = () => {
     const { layoutConfig } = useContext(LayoutContext)
-    const { permission } = UserService()
 
-    const model: AppMenuItem[] = permission
+    const model: AppMenuItem[] = []
 
     return (
         <MenuProvider>

@@ -7,13 +7,12 @@ import { LayoutContext } from '../../../../layout/context/layoutcontext'
 import { InputText } from 'primereact/inputtext'
 import { classNames } from 'primereact/utils'
 import { Toast } from 'primereact/toast'
-import { useAuthService } from '@/services/auth'
 
 const RegisterPage = () => {
-    /**
-     * use service
-     */
-    const { toast, router, formData, handleChange, handleRegister } = useAuthService()
+    const toast = useRef<Toast>(null)
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
+
     const { layoutConfig } = useContext(LayoutContext)
 
     const containerClassName = classNames(
@@ -50,8 +49,8 @@ const RegisterPage = () => {
                                 id="email1"
                                 type="text"
                                 name="email"
-                                value={formData.email}
-                                onChange={handleChange}
+                                value={email}
+                                onChange={() => {}}
                                 placeholder="Email address"
                                 className="w-full md:w-30rem mb-5"
                                 style={{ padding: '1rem' }}
@@ -63,9 +62,9 @@ const RegisterPage = () => {
                             <Password
                                 inputId="password1"
                                 name="password"
-                                value={formData.password}
+                                value={password}
                                 feedback={false}
-                                onChange={handleChange}
+                                onChange={() => {}}
                                 placeholder="Password"
                                 toggleMask
                                 className="w-full mb-5"
@@ -82,7 +81,7 @@ const RegisterPage = () => {
                                     Forgot password?
                                 </Link>
                             </div>
-                            <Button label="Sign Up" className="w-full p-3 text-xl" onClick={handleRegister}></Button>
+                            <Button label="Sign Up" className="w-full p-3 text-xl" onClick={() => {}}></Button>
                             <div className="flex justify-content-center mt-3">
                                 <span className="text-600 font-medium line-height-3">Already have an account?</span>
                                 <Link

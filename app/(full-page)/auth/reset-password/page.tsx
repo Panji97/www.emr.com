@@ -1,34 +1,20 @@
 'use client'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Button } from 'primereact/button'
 import { Password } from 'primereact/password'
 import { LayoutContext } from '../../../../layout/context/layoutcontext'
 import { classNames } from 'primereact/utils'
 import { Toast } from 'primereact/toast'
-import { useAuthService } from '@/services/auth'
 import { useSearchParams } from 'next/navigation'
 
 const ResetPasswordPage = () => {
+    const toast = useRef<Toast>(null)
     const searchParams = useSearchParams()
     const tokenresetpassword = searchParams.get('tokenresetpassword')
     const email = searchParams.get('email')
+    const [password, setPassword] = useState()
 
-    /**
-     * use service
-     */
-    const { toast, formData, setFormData, handleChange, handleResetPassword } = useAuthService()
     const { layoutConfig } = useContext(LayoutContext)
-
-    // Set tokenresetpassword and email in formData on component mount
-    useEffect(() => {
-        if (tokenresetpassword && email) {
-            setFormData((prevFormData) => ({
-                ...prevFormData,
-                email,
-                tokenresetpassword
-            }))
-        }
-    }, [tokenresetpassword, email, setFormData])
 
     const containerClassName = classNames(
         'surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden',
@@ -63,9 +49,9 @@ const ResetPasswordPage = () => {
                             <Password
                                 inputId="password1"
                                 name="password"
-                                value={formData.password}
+                                value={password}
                                 feedback={false}
-                                onChange={handleChange}
+                                onChange={() => {}}
                                 placeholder="Password"
                                 toggleMask
                                 className="w-full mb-5"
@@ -73,11 +59,7 @@ const ResetPasswordPage = () => {
                             />
 
                             <div className="flex align-items-center justify-content-between mb-5 gap-5"></div>
-                            <Button
-                                label="Reset Password"
-                                className="w-full p-3 text-xl"
-                                onClick={handleResetPassword}
-                            ></Button>
+                            <Button label="Reset Password" className="w-full p-3 text-xl" onClick={() => {}}></Button>
                         </div>
                     </div>
                 </div>

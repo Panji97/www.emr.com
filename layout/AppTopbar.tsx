@@ -5,14 +5,10 @@ import { classNames } from 'primereact/utils'
 import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react'
 import { AppTopbarRef } from '@/types'
 import { LayoutContext } from './context/layoutcontext'
-import { useAuthService } from '@/services/auth'
 import { Toast } from 'primereact/toast'
 
 const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
-    /**
-     * use service
-     */
-    const { toast, handleLogout } = useAuthService()
+    const toast = useRef<Toast>(null)
     const { layoutConfig, layoutState, onMenuToggle, showProfileSidebar } = useContext(LayoutContext)
     const menubuttonRef = useRef(null)
     const topbarmenuRef = useRef(null)
@@ -69,7 +65,7 @@ const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
                     <i className="pi pi-user"></i>
                     <span>Profile</span>
                 </button>
-                <button type="button" className="p-link layout-topbar-button" onClick={handleLogout}>
+                <button type="button" className="p-link layout-topbar-button" onClick={() => {}}>
                     <i className="pi pi-sign-out"></i>
                     <span>Logout</span>
                 </button>
